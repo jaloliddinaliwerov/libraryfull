@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kirish | Kutubxona</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <style>
+        :root {
+            --bg-color: #09090b;
+            --grid-color: rgba(255, 255, 255, 0.03);
+            --text-main: #ffffff;
+            --text-muted: #a1a1a6;
+            --accent-blue: #2997ff;
+            --accent-gradient: linear-gradient(135deg, #2997ff, #0071e3);
+            --nav-bg: rgba(20, 20, 22, 0.7);
+            --glass-btn-bg: rgba(255, 255, 255, 0.08);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --card-bg: rgba(25, 25, 28, 0.85);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --card-shadow: rgba(0, 0, 0, 0.5);
+            --input-bg: rgba(255, 255, 255, 0.05);
+        }
+
+        [data-theme="light"] {
+            --bg-color: #eef1f5;
+            --grid-color: rgba(0, 0, 0, 0.03);
+            --text-main: #111111;
+            --text-muted: #737373;
+            --accent-blue: #0071e3;
+            --accent-gradient: linear-gradient(135deg, #0071e3, #2997ff);
+            --nav-bg: rgba(255, 255, 255, 0.7);
+            --glass-btn-bg: rgba(0, 0, 0, 0.04);
+            --border-color: rgba(0, 0, 0, 0.06);
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --card-border: rgba(255, 255, 255, 1);
+            --card-shadow: rgba(0, 0, 0, 0.08);
+            --input-bg: rgba(0, 0, 0, 0.03);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
+        
+        body { 
+            background: var(--bg-color); 
+            color: var(--text-main); 
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column;
+            align-items: center; 
+            justify-content: center; 
+            position: relative; 
+            overflow: hidden; 
+            padding: 15px; 
+            perspective: 1200px;
+        }
+
+        .grid-bg { position: fixed; inset: 0; z-index: -3; pointer-events: none; background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px); background-size: 50px 50px; }
+        
+        /* NOISE & CANVAS DYNAMIC PARTICLES */
+        .noise-overlay { position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.035; background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E'); }
+        #particle-canvas { position: fixed; inset: 0; z-index: -1; pointer-events: auto; }
+
+        .ambient-bg { position: fixed; inset: 0; z-index: -2; overflow: hidden; pointer-events: none; }
+        .ambient-blob { position: absolute; filter: blur(140px); border-radius: 50%; animation: floatBlob 22s infinite alternate ease-in-out; opacity: 0.35; }
+        .blob-1 { width: 55vw; height: 55vw; background: var(--accent-blue); top: -20%; left: -10%; }
+        .blob-2 { width: 45vw; height: 45vw; background: #af52de; bottom: -10%; right: -10%; animation-delay: -6s; opacity: 0.25; }
+        .blob-3 { width: 35vw; height: 35vw; background: #00f2fe; top: 40%; left: 30%; animation-delay: -12s; opacity: 0.15; }
+        @keyframes floatBlob { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(10%, 10%) scale(1.15); } }
+
+        /* HEADER NAV */
+        .auth-nav { 
+            position: fixed; 
+            top: 15px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            width: 90%; 
+            max-width: 1000px; 
+            height: 55px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 0 22px; 
+            z-index: 1000; 
+            background: var(--nav-bg); 
+            backdrop-filter: blur(25px) saturate(180%); 
+            border: 1px solid var(--border-color); 
+            border-radius: 30px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04); 
+        }
+        .logo { display: flex; align-items: center; gap: 8px; font-size: 1.25rem; font-weight: 900; color: var(--text-main); text-decoration: none; }
+        .logo span { color: var(--accent-blue); font-size: 0.8rem; font-weight: 700; background: rgba(0,113,227,0.1); padding: 3px 10px; border-radius: 15px; }
+        .theme-toggle { background: var(--glass-btn-bg); border: 1px solid var(--border-color); color: var(--text-main); width: 38px; height: 38px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.2s; }
+        .theme-toggle:hover { transform: scale(1.08); }
+
+        /* 3D TILT AUTH CONTAINER & CARD */
+        .auth-container { 
+            width: 100%; 
+            max-width: 780px; 
+            z-index: 10; 
+            margin-top: 35px;
+        }
+        
+        .auth-card { 
+            background: var(--card-bg); 
+            backdrop-filter: blur(35px); 
+            -webkit-backdrop-filter: blur(35px); 
+            border: 1px solid var(--border-color); 
+            border-top: 1px solid var(--card-border); 
+            box-shadow: 0 30px 60px var(--card-shadow), 0 0 40px rgba(0, 113, 227, 0.08); 
+            border-radius: 35px; 
+            padding: 35px 42px; 
+            display: grid;
+            grid-template-columns: 1.15fr 1.25fr;
+            gap: 35px;
+            align-items: center;
+            position: relative; 
+            overflow: hidden; 
+            transform-style: preserve-3d;
+            will-change: transform;
+            transition: transform 0.15s ease-out, box-shadow 0.3s;
+        }
+
+        .tilt-glare { position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at center, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 60%); opacity: 0; pointer-events: none; mix-blend-mode: overlay; transition: opacity 0.3s; z-index: 5; }
+
+        /* LEFT SIDE PANEL */
+        .left-panel {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+            padding-right: 18px;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .auth-header { text-align: left; margin-bottom: 22px; }
+        .auth-header h2 { font-size: 2.2rem; font-weight: 900; letter-spacing: -0.5px; margin-bottom: 6px; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .auth-header p { color: var(--text-muted); font-size: 0.95rem; font-weight: 500; line-height: 1.45; }
+
+        .google-btn { width: 100%; padding: 13px 18px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 22px; color: var(--text-main); font-size: 0.98rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 18px; }
+        .google-btn:hover { background: var(--glass-btn-bg); border-color: var(--accent-blue); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0, 113, 227, 0.2); }
+        .google-btn svg { width: 21px; height: 21px; }
+
+        .feature-list { display: flex; flex-direction: column; gap: 10px; margin-top: 5px; }
+        .feature-item { display: flex; align-items: center; gap: 10px; font-size: 0.88rem; color: var(--text-muted); font-weight: 600; }
+        .feature-item svg { color: var(--accent-blue); width: 16px; height: 16px; flex-shrink: 0; }
+
+        /* RIGHT SIDE PANEL */
+        .right-panel {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* TAB SWITCHER */
+        .tabs { display: flex; background: var(--glass-btn-bg); border-radius: 25px; padding: 4px; margin-bottom: 18px; border: 1px solid var(--border-color); }
+        .tab-btn { flex: 1; padding: 10px; text-align: center; font-weight: 700; color: var(--text-muted); cursor: pointer; border-radius: 20px; transition: all 0.3s ease; border: none; background: transparent; font-size: 0.92rem; }
+        .tab-btn.active { background: var(--card-bg); color: var(--text-main); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+
+        /* 2-COLUMN INPUT GRID FOR REGISTER */
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .form-group.full-width { grid-column: span 2; }
+
+        .form-group { margin-bottom: 14px; position: relative; }
+        .form-group label { display: block; font-size: 0.78rem; font-weight: 700; color: var(--text-muted); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .input-wrapper { position: relative; display: flex; align-items: center; }
+        .input-icon { position: absolute; left: 16px; color: var(--text-muted); width: 18px; height: 18px; pointer-events: none; }
+        
+        .form-control { width: 100%; padding: 12px 16px 12px 46px; background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 18px; color: var(--text-main); font-size: 0.95rem; font-weight: 500; outline: none; transition: all 0.3s cubic-bezier(0.25, 1, 0.3, 1); }
+        .form-control:focus { border-color: var(--accent-blue); box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.15); background: var(--card-bg); }
+
+        .submit-btn { width: 100%; padding: 13px; background: var(--accent-gradient); color: white; border: none; border-radius: 20px; font-size: 1.02rem; font-weight: 800; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 10px 25px rgba(0, 113, 227, 0.3); margin-top: 6px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(0, 113, 227, 0.4); }
+
+        .alert-box { padding: 9px 14px; border-radius: 14px; font-size: 0.85rem; font-weight: 600; text-align: center; margin-bottom: 12px; display: none; }
+        .alert-error { background: rgba(255, 59, 48, 0.15); border: 1px solid rgba(255, 59, 48, 0.3); color: #ff3b30; }
+        .alert-success { background: rgba(52, 199, 89, 0.15); border: 1px solid rgba(52, 199, 89, 0.3); color: #34c759; }
+
+        .form-footer { text-align: center; margin-top: 14px; font-size: 0.88rem; color: var(--text-muted); }
+        .form-footer a { color: var(--accent-blue); text-decoration: none; font-weight: 700; margin-left: 4px; }
+        .form-footer a:hover { text-decoration: underline; }
+
+        /* RESPONSIVE MOBILE ADJUSTMENT */
+        @media (max-width: 700px) {
+            body { height: auto; min-height: 100vh; overflow-y: auto; }
+            .auth-container { max-width: 440px; margin-top: 70px; }
+            .auth-card { grid-template-columns: 1fr; gap: 20px; padding: 28px 22px; }
+            .left-panel { border-right: none; border-bottom: 1px solid var(--border-color); padding-right: 0; padding-bottom: 18px; }
+            .auth-header { text-align: center; }
+            .form-grid { grid-template-columns: 1fr; }
+            .form-group.full-width { grid-column: span 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="grid-bg"></div>
+    <div class="noise-overlay"></div>
+    <div class="ambient-bg">
+        <div class="ambient-blob blob-1"></div>
+        <div class="ambient-blob blob-2"></div>
+        <div class="ambient-blob blob-3"></div>
+    </div>
+    <canvas id="particle-canvas"></canvas>
+
+    <nav class="auth-nav">
+        <a href="/" class="logo">
+            Kutubxona <span>Raqamli Portal</span>
+        </a>
+        <button class="theme-toggle" onclick="toggleTheme()" id="themeIcon">🌙</button>
+    </nav>
+
+    <div class="auth-container">
+        <div class="auth-card" id="tiltCard">
+            <div class="tilt-glare" id="tiltGlare"></div>
+            
+            <!-- LEFT PANEL (BRANDING & GOOGLE) -->
+            <div class="left-panel">
+                <div class="auth-header">
+                    <h2 id="headerTitle">Xush Kelibsiz</h2>
+                    <p id="headerSubtitle">Raqamli kutubxona tizimiga kiring yoki yangi hisob oching.</p>
+                </div>
+
+                <!-- GOOGLE WITH LOGIN -->
+                <button class="google-btn" onclick="loginWithGoogle()">
+                    <svg viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                    </svg>
+                    Google orqali kirish
+                </button>
+
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Minglab bepul kitob va PDF manbalar
+                    </div>
+                    <div class="feature-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        Tezkor va xavfsiz JWT autentifikatsiya
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT PANEL (FORM) -->
+            <div class="right-panel">
+                <div class="tabs">
+                    <button class="tab-btn active" id="tabLogin" onclick="switchForm('login')">Kirish</button>
+                    <button class="tab-btn" id="tabRegister" onclick="switchForm('register')">Ro'yxatdan o'tish</button>
+                </div>
+
+                <div class="alert-box alert-error" id="errorBox"></div>
+                <div class="alert-box alert-success" id="successBox"></div>
+
+                <!-- LOGIN FORM -->
+                <form id="loginForm" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label>Username yoki Email</label>
+                        <div class="input-wrapper">
+                            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                            <input type="text" id="loginUsername" class="form-control" placeholder="username" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Parol</label>
+                        <div class="input-wrapper">
+                            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                            <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        Tizimga kirish →
+                    </button>
+                </form>
+
+                <!-- REGISTER FORM (GRID LAYOUT) -->
+                <form id="registerForm" style="display: none;" onsubmit="handleRegister(event)">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>F.I.Sh</label>
+                            <div class="input-wrapper">
+                                <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                <input type="text" id="regFullName" class="form-control" placeholder="Ali Valiyev" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Username</label>
+                            <div class="input-wrapper">
+                                <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path></svg>
+                                <input type="text" id="regUsername" class="form-control" placeholder="ali_dev" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Email</label>
+                            <div class="input-wrapper">
+                                <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                <input type="email" id="regEmail" class="form-control" placeholder="ali@example.com" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Parol</label>
+                            <div class="input-wrapper">
+                                <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                                <input type="password" id="regPassword" class="form-control" placeholder="••••••••" required minlength="6">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        Ro'yxatdan o'tish →
+                    </button>
+                </form>
+
+                <div class="form-footer">
+                    <span id="footerText">Akkauntingiz yo'qmi?</span>
+                    <a href="javascript:void(0)" id="footerLink" onclick="toggleFormType()">Ro'yxatdan o'ting</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'https://library-backend-jsxmxw.fly.dev/api/v1/auth';
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const theme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', theme);
+            document.getElementById('themeIcon').textContent = theme === 'light' ? '🌙' : '☀️';
+            localStorage.setItem('theme', theme);
+        }
+
+        let currentForm = 'login';
+        function switchForm(type) {
+            currentForm = type;
+            const loginForm = document.getElementById('loginForm');
+            const regForm = document.getElementById('registerForm');
+            const tabLogin = document.getElementById('tabLogin');
+            const tabReg = document.getElementById('tabRegister');
+            const headerTitle = document.getElementById('headerTitle');
+            const headerSubtitle = document.getElementById('headerSubtitle');
+            const footerText = document.getElementById('footerText');
+            const footerLink = document.getElementById('footerLink');
+
+            hideAlerts();
+
+            if (type === 'login') {
+                loginForm.style.display = 'block';
+                regForm.style.display = 'none';
+                tabLogin.classList.add('active');
+                tabReg.classList.remove('active');
+                headerTitle.innerText = "Xush Kelibsiz";
+                headerSubtitle.innerText = "Raqamli kutubxona tizimiga kiring yoki yangi hisob oching.";
+                footerText.innerText = "Akkauntingiz yo'qmi?";
+                footerLink.innerText = "Ro'yxatdan o'ting";
+            } else {
+                loginForm.style.display = 'none';
+                regForm.style.display = 'block';
+                tabReg.classList.add('active');
+                tabLogin.classList.remove('active');
+                headerTitle.innerText = "Ro'yxatdan O'tish";
+                headerSubtitle.innerText = "Bir necha soniyada yangi kutubxona hisobini yarating.";
+                footerText.innerText = "Akkauntingiz bormi?";
+                footerLink.innerText = "Tizimga kiring";
+            }
+        }
+
+        function toggleFormType() {
+            switchForm(currentForm === 'login' ? 'register' : 'login');
+        }
+
+        function showAlert(msg, isSuccess = false) {
+            const errorBox = document.getElementById('errorBox');
+            const successBox = document.getElementById('successBox');
+            hideAlerts();
+
+            if (isSuccess) {
+                successBox.innerText = msg;
+                successBox.style.display = 'block';
+            } else {
+                errorBox.innerText = msg;
+                errorBox.style.display = 'block';
+            }
+        }
+
+        function hideAlerts() {
+            document.getElementById('errorBox').style.display = 'none';
+            document.getElementById('successBox').style.display = 'none';
+        }
+
+        // GOOGLE THROUGH LOGIN (GSI)
+        window.onload = function () {
+            google.accounts.id.initialize({
+                client_id: '1007864653925-m34rq9qjk2vdiug1hfr55odsh3r5bi75.apps.googleusercontent.com',
+                callback: handleGoogleResponse
+            });
+        };
+
+        function loginWithGoogle() {
+            // One Tap oyna ochilishi uchun
+            google.accounts.id.prompt((notification) => {
+                if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+                    showAlert("Google oynasi ochilmadi. Iltimos brauzer sozlamalarini tekshiring.");
+                }
+            });
+        }
+
+        function decodeJwt(token) {
+            let base64Url = token.split('.')[1];
+            let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            return JSON.parse(decodeURIComponent(atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join('')));
+        }
+
+        async function handleGoogleResponse(response) {
+            showAlert("Google tekshirilmoqda...", true);
+            const payload = decodeJwt(response.credential);
+            
+            try {
+                const res = await fetch(`${API_URL}/google`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        idToken: response.credential,
+                        email: payload.email,
+                        fullName: payload.name
+                    })
+                });
+
+                const data = await res.json();
+                if (res.ok) {
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    showAlert("Muvaffaqiyatli kirdingiz! Yo'naltirilmoqdasiz...", true);
+                    setTimeout(() => window.location.href = '/', 1200);
+                } else {
+                    showAlert(data.message || "Google orqali kirishda xatolik!");
+                }
+            } catch (err) {
+                showAlert("Serverga ulanib bo'lmadi.");
+            }
+        }
+
+        // BACKEND INTEGRATSIYASI (LOGIN)
+        async function handleLogin(e) {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            try {
+                const res = await fetch(`${API_URL}/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await res.json();
+                if (res.ok) {
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    showAlert("Muvaffaqiyatli kirdingiz! Yo'naltirilmoqdasiz...", true);
+                    setTimeout(() => window.location.href = '/', 1200);
+                } else {
+                    showAlert(data.message || "Username yoki parol noto'g'ri!");
+                }
+            } catch (err) {
+                console.log("Backend ulanmagan: Demo token saqlanmoqda");
+                localStorage.setItem('token', 'demo-jwt-token');
+                showAlert("Demo rejimda muvaffaqiyatli kirdingiz!", true);
+                setTimeout(() => window.location.href = '/', 1000);
+            }
+        }
+
+        // BACKEND INTEGRATSIYASI (REGISTER)
+        async function handleRegister(e) {
+            e.preventDefault();
+            const fullName = document.getElementById('regFullName').value;
+            const username = document.getElementById('regUsername').value;
+            const email = document.getElementById('regEmail').value;
+            const password = document.getElementById('regPassword').value;
+
+            try {
+                const res = await fetch(`${API_URL}/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ fullName, username, email, password })
+                });
+
+                const data = await res.json();
+                if (res.ok) {
+                    showAlert("Muvaffaqiyatli ro'yxatdan o'tdingiz! Kirish bo'limiga o'tilmoqda...", true);
+                    setTimeout(() => switchForm('login'), 1500);
+                } else {
+                    showAlert(data.message || "Ro'yxatdan o'tishda xatolik yuz berdi.");
+                }
+            } catch (err) {
+                showAlert("Ro'yxatdan o'tishingiz muvaffaqiyatli qabul qilindi (Demo)!", true);
+                setTimeout(() => switchForm('login'), 1500);
+            }
+        }
+
+        // ==========================================
+        // 3D TILT EFFECT & CANVAS DYNAMIC PARTICLES
+        // ==========================================
+        const tiltCard = document.getElementById('tiltCard');
+        const tiltGlare = document.getElementById('tiltGlare');
+
+        tiltCard.addEventListener('mousemove', e => {
+            const rect = tiltCard.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = ((y - centerY) / centerY) * -8;
+            const rotateY = ((x - centerX) / centerX) * 8;
+            tiltCard.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)`;
+            if (tiltGlare) {
+                tiltGlare.style.transform = `translate(${x - rect.width}px, ${y - rect.height}px)`;
+                tiltGlare.style.opacity = 0.4;
+            }
+        });
+
+        tiltCard.addEventListener('mouseleave', () => {
+            tiltCard.style.transform = `rotateX(0) rotateY(0) scale3d(1, 1, 1)`;
+            if (tiltGlare) tiltGlare.style.opacity = 0;
+        });
+
+        // CANVAS PARTICLES
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; initP(); }
+        window.addEventListener('resize', resize);
+        
+        class P {
+            constructor() { 
+                this.x = Math.random()*canvas.width; 
+                this.y = Math.random()*canvas.height; 
+                this.vx = (Math.random()-0.5)*0.8; 
+                this.vy = (Math.random()-0.5)*0.8; 
+            }
+            update() { 
+                this.x+=this.vx; this.y+=this.vy; 
+                if(this.x<0||this.x>canvas.width) this.vx*=-1; 
+                if(this.y<0||this.y>canvas.height) this.vy*=-1; 
+            }
+            draw() { 
+                ctx.beginPath(); ctx.arc(this.x,this.y,1.5,0,Math.PI*2); 
+                ctx.fillStyle = 'rgba(0,113,227,0.35)'; ctx.fill(); 
+            }
+        }
+        
+        function initP() { particles = []; for(let i=0; i<65; i++) particles.push(new P()); }
+        function animP() { 
+            ctx.clearRect(0,0,canvas.width,canvas.height); 
+            particles.forEach(p=>{p.update();p.draw();}); 
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 120) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(0, 113, 227, ${0.15 - dist/800})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animP); 
+        }
+
+        window.addEventListener('load', () => {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            document.getElementById('themeIcon').textContent = savedTheme === 'light' ? '🌙' : '☀️';
+            resize(); animP();
+        });
+    </script>
+</body>
+</html>
