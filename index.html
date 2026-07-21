@@ -354,18 +354,18 @@ img{display:block;}
 /* ─────────────────────────────────────────
    LEADERBOARD + BADGES SECTION
 ───────────────────────────────────────── */
-.gami-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:26px;}
-.gami-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-card);padding:28px;box-shadow:var(--shadow);}
+.gami-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:26px;width:100%;max-width:100%;}
+.gami-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-card);padding:28px;box-shadow:var(--shadow);min-width:0;}
 .gami-card-title{font-size:1.25rem;font-weight:900;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;}
-.lb-list{display:flex;flex-direction:column;gap:10px;}
-.lb-item{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:18px;transition:.3s;}
+.lb-list{display:flex;flex-direction:column;gap:10px;width:100%;}
+.lb-item{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:18px;transition:.3s;min-width:0;}
 .lb-item:hover{border-color:var(--border-hover);transform:translateX(4px);}
-.lb-left{display:flex;align-items:center;gap:10px;}
-.lb-rank{font-size:1.1rem;font-weight:900;width:28px;}
-.lb-name{font-weight:800;font-size:.9rem;}
-.lb-pts{color:var(--blue);font-weight:900;font-size:.98rem;}
-.badges-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
-.badge-box{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:18px;padding:14px;text-align:center;transition:.3s;cursor:pointer;}
+.lb-left{display:flex;align-items:center;gap:10px;min-width:0;flex:1;}
+.lb-rank{font-size:1.1rem;font-weight:900;width:28px;flex-shrink:0;}
+.lb-name{font-weight:800;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.lb-pts{color:var(--blue);font-weight:900;font-size:.98rem;flex-shrink:0;margin-left:10px;}
+.badges-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;width:100%;max-width:100%;}
+.badge-box{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:18px;padding:14px;text-align:center;transition:.3s;cursor:pointer;min-width:0;}
 .badge-box:hover{border-color:var(--blue);transform:scale(1.04);}
 .badge-ico{font-size:2rem;margin-bottom:5px;}
 .badge-nm{font-weight:800;font-size:.84rem;margin-bottom:2px;}
