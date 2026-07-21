@@ -38,17 +38,134 @@
 }
 [data-theme="light"] {
     --bg:           #f0f2f6;
-    --surface:      rgba(255,255,255,.95);
-    --surface2:     rgba(245,246,250,.9);
-    --border:       rgba(0,0,0,.07);
+    --surface:      rgba(255,255,255,.98);
+    --surface2:     rgba(240,242,248,.95);
+    --border:       rgba(0,0,0,.09);
     --text:         #111;
-    --muted:        #666;
+    --muted:        #555;
     --blue:         #0071e3;
     --blue-dark:    #0055c1;
     --grad:         linear-gradient(135deg,#0071e3,#2997ff);
     --grid:         rgba(0,0,0,.025);
     --shadow:       0 20px 50px rgba(0,0,0,.08);
+    --shadow-blue:  0 12px 30px rgba(0,113,227,.2);
 }
+
+/* ── LIGHT TEMA: muammoli elementlar override ── */
+[data-theme="light"] .nav{
+    background:rgba(255,255,255,.88);
+    border-color:rgba(0,0,0,.1);
+}
+[data-theme="light"] .nav-links a{color:#444;}
+[data-theme="light"] .nav-links a:hover{color:#000;}
+[data-theme="light"] .icon-btn{
+    background:rgba(0,0,0,.06);
+    border-color:rgba(0,0,0,.09);
+    color:#111;
+}
+[data-theme="light"] .icon-btn:hover{background:rgba(0,0,0,.1);}
+[data-theme="light"] .hamburger{
+    background:rgba(0,0,0,.06);
+    border-color:rgba(0,0,0,.09);
+}
+[data-theme="light"] .hamburger span{background:#111;}
+[data-theme="light"] .mobile-drawer-panel{
+    background:rgba(255,255,255,.99);
+    border-color:rgba(0,0,0,.1);
+}
+[data-theme="light"] .drawer-link{color:#444;}
+[data-theme="light"] .drawer-link:hover,
+[data-theme="light"] .drawer-link.active{background:rgba(0,0,0,.05);border-color:rgba(0,0,0,.1);color:#111;}
+[data-theme="light"] .bottom-nav{
+    background:rgba(255,255,255,.94);
+    border-color:rgba(0,0,0,.1);
+}
+[data-theme="light"] .bnav-btn{color:#888;}
+[data-theme="light"] .bnav-btn.active{color:var(--blue);}
+[data-theme="light"] .cat-pill{
+    background:rgba(0,0,0,.05);
+    border-color:rgba(0,0,0,.08);
+    color:#555;
+}
+[data-theme="light"] .book-card,
+[data-theme="light"] .audio-card,
+[data-theme="light"] .gami-card,
+[data-theme="light"] .notif-item,
+[data-theme="light"] .faq-item,
+[data-theme="light"] .plan-card,
+[data-theme="light"] .author-card,
+[data-theme="light"] .stat-chip,
+[data-theme="light"] .goal-section,
+[data-theme="light"] .reminder-card,
+[data-theme="light"] .profile-hero,
+[data-theme="light"] .quote-box,
+[data-theme="light"] .featured-card{
+    background:rgba(255,255,255,.98);
+    border-color:rgba(0,0,0,.08);
+}
+[data-theme="light"] .lb-item{
+    background:rgba(0,0,0,.03);
+    border-color:rgba(0,0,0,.08);
+}
+[data-theme="light"] .badge-box{
+    background:rgba(0,0,0,.03);
+    border-color:rgba(0,0,0,.08);
+}
+[data-theme="light"] .pstat-box{
+    background:rgba(0,0,0,.04);
+    border-color:rgba(0,0,0,.08);
+}
+[data-theme="light"] .progress-bar{
+    background:rgba(0,0,0,.07);
+}
+[data-theme="light"] .goal-bar-wrap{
+    background:rgba(0,0,0,.07);
+}
+[data-theme="light"] .search-box{
+    background:rgba(255,255,255,.95);
+    border-color:rgba(0,0,0,.1);
+    color:#111;
+}
+[data-theme="light"] .ai-panel{
+    background:rgba(255,255,255,.98);
+    border-color:rgba(0,0,0,.1);
+}
+[data-theme="light"] .ai-head{
+    background:rgba(0,0,0,.03);
+    border-color:rgba(0,0,0,.08);
+}
+[data-theme="light"] .ai-input{
+    background:rgba(0,0,0,.05);
+    border-color:rgba(0,0,0,.1);
+    color:#111;
+}
+[data-theme="light"] .ai-msg.bot{
+    background:rgba(0,113,227,.08);
+    border-color:rgba(0,113,227,.18);
+}
+[data-theme="light"] .modal{
+    background:#f5f6fa;
+}
+[data-theme="light"] .star{color:rgba(0,0,0,.12);}
+[data-theme="light"] .toast{
+    background:rgba(255,255,255,.98);
+    border-color:var(--blue);
+    color:#111;
+}
+[data-theme="light"] .recom-banner{
+    background:rgba(0,113,227,.06);
+}
+[data-theme="light"] .btn-ghost{
+    background:rgba(0,0,0,.06);
+    border-color:rgba(0,0,0,.1);
+    color:#111;
+}
+[data-theme="light"] .read-btn{
+    background:#111;
+    color:#fff;
+}
+[data-theme="light"] .mobile-drawer-bg{background:rgba(0,0,0,.4);}
+[data-theme="light"] .hcell{background:rgba(0,0,0,.06);}
 
 /* ─────────────────────────────────────────
    RESET & BASE
@@ -618,7 +735,104 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:46px
 .footer-col a{display:block;color:var(--muted);font-size:.85rem;font-weight:600;margin-bottom:8px;transition:.25s;}
 .footer-col a:hover{color:var(--text);}
 .footer-bottom{max-width:1260px;margin:28px auto 0;padding-top:22px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:.82rem;color:var(--muted);font-weight:600;}
-
+/* ─────────────────────────────────────────
+   TELEGRAM COMMUNITY BANNER
+───────────────────────────────────────── */
+.tg-banner{
+    background:linear-gradient(135deg,rgba(0,120,255,.12),rgba(41,151,255,.06));
+    border:1px solid rgba(41,151,255,.25);
+    border-radius:var(--radius-card);
+    padding:32px 36px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:28px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+}
+.tg-banner::before{
+    content:'';
+    position:absolute;
+    top:-40%;right:-10%;
+    width:320px;height:320px;
+    background:radial-gradient(circle,rgba(41,151,255,.18),transparent 70%);
+    pointer-events:none;
+}
+.tg-banner::after{
+    content:'✈️';
+    position:absolute;
+    right:20px;top:20px;
+    font-size:5rem;
+    opacity:.06;
+    pointer-events:none;
+    transform:rotate(-20deg);
+}
+.tg-left{display:flex;gap:20px;align-items:flex-start;flex:1;}
+.tg-icon{font-size:2.8rem;margin-top:2px;flex-shrink:0;}
+.tg-title{font-size:1.4rem;font-weight:900;margin-bottom:6px;letter-spacing:-.3px;}
+.tg-sub{font-size:.88rem;color:var(--muted);font-weight:600;line-height:1.5;margin-bottom:18px;}
+.tg-items{display:flex;gap:12px;flex-wrap:wrap;}
+.tg-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 20px;
+    border-radius:var(--radius-pill);
+    font-weight:800;
+    font-size:.9rem;
+    transition:.3s;
+    text-decoration:none;
+    border:1px solid transparent;
+}
+.tg-bot{
+    background:linear-gradient(135deg,#0088cc,#006aad);
+    color:#fff;
+    box-shadow:0 8px 20px rgba(0,136,204,.3);
+}
+.tg-bot:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,136,204,.45);}
+.tg-channel{
+    background:rgba(41,151,255,.12);
+    border-color:rgba(41,151,255,.3);
+    color:var(--blue);
+}
+.tg-channel:hover{background:var(--blue);color:#fff;transform:translateY(-3px);}
+.tg-tag{
+    background:rgba(255,255,255,.25);
+    padding:2px 8px;
+    border-radius:20px;
+    font-size:.7rem;
+    font-weight:900;
+    letter-spacing:.4px;
+    text-transform:uppercase;
+}
+.tg-channel .tg-tag{background:rgba(41,151,255,.2);color:var(--blue);}
+.tg-channel:hover .tg-tag{background:rgba(255,255,255,.2);color:#fff;}
+.tg-right{flex-shrink:0;}
+.tg-stats{display:flex;gap:24px;}
+.tg-stat{text-align:center;}
+.tg-snum{font-size:1.6rem;font-weight:900;color:var(--blue);}
+.tg-slbl{font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-top:3px;}
+/* Light theme for tg banner */
+[data-theme="light"] .tg-banner{background:linear-gradient(135deg,rgba(0,113,227,.07),rgba(0,113,227,.03));}
+[data-theme="light"] .tg-channel{background:rgba(0,113,227,.08);border-color:rgba(0,113,227,.2);}
+/* Responsive */
+@media(max-width:900px){
+    .tg-banner{flex-direction:column;padding:24px 20px;gap:20px;}
+    .tg-right{width:100%;}
+    .tg-stats{justify-content:space-around;}
+    .tg-snum{font-size:1.3rem;}
+}
+@media(max-width:600px){
+    .tg-left{flex-direction:column;gap:12px;}
+    .tg-icon{font-size:2rem;}
+    .tg-title{font-size:1.15rem;}
+    .tg-items{flex-direction:column;gap:10px;}
+    .tg-btn{width:100%;justify-content:center;}
+    .tg-stats{gap:14px;}
+    .tg-snum{font-size:1.1rem;}
+    .tg-slbl{font-size:.66rem;}
+}
 
     </style>
 </head>
@@ -725,7 +939,46 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:46px
         </div>
     </section>
 
-    <!-- FEATURED BOOK OF THE WEEK -->
+    <!-- TELEGRAM COMMUNITY SECTION -->
+    <section class="section" style="padding-top:0;">
+        <div class="section-inner">
+            <div class="tg-banner">
+                <div class="tg-left">
+                    <div class="tg-icon">✈️</div>
+                    <div>
+                        <div class="tg-title">Bizning Telegram Hamjamiyatimiz</div>
+                        <div class="tg-sub">Yangi kitoblar, chegirmalar va eksklyuziv kontentlar — barchasi Telegramda!</div>
+                        <div class="tg-items">
+                            <a href="https://t.me/kutubxona_uz" target="_blank" class="tg-btn tg-bot">
+                                🤖 <span>@Kutubxona Bot</span>
+                                <span class="tg-tag">Bot</span>
+                            </a>
+                            <a href="https://t.me/kutubxona_kanal" target="_blank" class="tg-btn tg-channel">
+                                📢 <span>@Kutubxona Kanal</span>
+                                <span class="tg-tag">Kanal</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="tg-right">
+                    <div class="tg-stats">
+                        <div class="tg-stat">
+                            <div class="tg-snum">12K+</div>
+                            <div class="tg-slbl">Bot Foydalanuvchi</div>
+                        </div>
+                        <div class="tg-stat">
+                            <div class="tg-snum">8.5K+</div>
+                            <div class="tg-slbl">Kanal A'zosi</div>
+                        </div>
+                        <div class="tg-stat">
+                            <div class="tg-snum">Har Kun</div>
+                            <div class="tg-slbl">Yangi Kitoblar</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <section class="section">
         <div class="section-inner">
             <div class="featured-card">
