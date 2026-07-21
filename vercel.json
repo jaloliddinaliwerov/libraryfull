@@ -1,4 +1,14 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/login",
+      "destination": "https://login.797.uz"
+    },
+    {
+      "source": "/login/(.*)",
+      "destination": "https://login.797.uz/$1"
+    }
+  ]
 }
