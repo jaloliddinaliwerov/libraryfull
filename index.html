@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kutubxona | Raqamli Kitoblar Portali</title>
+    <title>Kutubxona | Raqamli Kitoblar va Audio Standart Portali</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,6 +60,10 @@
         .logo { display: flex; align-items: center; gap: 10px; font-size: 1.35rem; font-weight: 900; color: var(--text-main); text-decoration: none; }
         .logo span { color: var(--accent-blue); font-size: 0.82rem; font-weight: 700; background: rgba(0,113,227,0.1); padding: 4px 12px; border-radius: 18px; }
 
+        .nav-links { display: flex; gap: 25px; list-style: none; }
+        .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: 0.3s; }
+        .nav-links a:hover { color: var(--text-main); }
+
         .nav-right { display: flex; align-items: center; gap: 15px; }
         
         .user-profile-badge { display: flex; align-items: center; gap: 10px; background: var(--glass-btn-bg); border: 1px solid var(--border-color); padding: 6px 16px 6px 8px; border-radius: 30px; font-weight: 700; font-size: 0.92rem; color: var(--text-main); }
@@ -73,7 +77,7 @@
         .theme-toggle:hover { transform: scale(1.08); }
 
         /* HERO SECTION */
-        .hero { min-height: 55vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 130px 20px 40px; position: relative; z-index: 5; }
+        .hero { min-height: 50vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 130px 20px 40px; position: relative; z-index: 5; }
         .hero-badge { font-size: 0.95rem; font-weight: 700; color: var(--accent-blue); margin-bottom: 20px; letter-spacing: 0.5px; background: rgba(0, 113, 227, 0.1); padding: 8px 24px; border-radius: 30px; border: 1px solid rgba(0, 113, 227, 0.15); display: inline-flex; align-items: center; gap: 8px; }
         .hero h1 { font-size: clamp(2.8rem, 6vw, 5.2rem); font-weight: 900; letter-spacing: -2px; line-height: 1.1; margin-bottom: 20px; }
         .hero h1 span { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
@@ -91,8 +95,29 @@
         .stat-num { font-size: 1.8rem; font-weight: 900; color: var(--text-main); }
         .stat-label { font-size: 0.85rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
 
+        /* FEATURED BOOK OF THE WEEK BANNER */
+        .featured-banner-section { padding: 40px 5vw; max-width: 1200px; margin: 0 auto; z-index: 5; position: relative; }
+        .featured-card { background: var(--card-bg); backdrop-filter: blur(30px); border: 1px solid var(--border-color); border-radius: 35px; padding: 40px 45px; display: grid; grid-template-columns: 240px 1fr; gap: 40px; align-items: center; box-shadow: 0 25px 60px var(--card-shadow); position: relative; overflow: hidden; }
+        .featured-badge { position: absolute; top: 25px; right: 25px; background: var(--accent-gradient); color: white; padding: 6px 16px; border-radius: 20px; font-weight: 800; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 1px; }
+        .featured-cover { width: 100%; height: 320px; border-radius: 22px; object-fit: cover; box-shadow: 0 15px 35px rgba(0,0,0,0.3); }
+        .featured-info h3 { font-size: 2.2rem; font-weight: 900; margin-bottom: 10px; line-height: 1.2; }
+        .featured-author { font-size: 1.1rem; color: var(--accent-blue); font-weight: 700; margin-bottom: 16px; }
+        .featured-quote { font-size: 1rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 25px; font-style: italic; }
+        .featured-actions { display: flex; gap: 15px; }
+
+        /* AUDIOBOOKS WIDGET SECTION */
+        .audio-section { padding: 60px 5vw; max-width: 1200px; margin: 0 auto; z-index: 5; position: relative; }
+        .audio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin-top: 25px; }
+        .audio-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 28px; padding: 22px; display: flex; align-items: center; gap: 20px; box-shadow: 0 15px 35px var(--card-shadow); transition: 0.3s; }
+        .audio-card:hover { transform: translateY(-5px); border-color: var(--accent-blue); }
+        .audio-icon-btn { width: 55px; height: 55px; background: var(--accent-gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; border: none; cursor: pointer; flex-shrink: 0; box-shadow: 0 8px 20px rgba(0, 113, 227, 0.3); transition: 0.3s; }
+        .audio-icon-btn:hover { transform: scale(1.1); }
+        .audio-info h4 { font-size: 1.15rem; font-weight: 800; margin-bottom: 4px; }
+        .audio-info p { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; }
+        .audio-duration { font-size: 0.8rem; color: var(--accent-blue); font-weight: 700; margin-top: 4px; }
+
         /* MAIN CATALOG SECTION */
-        .catalog-section { padding: 40px 5vw 100px; max-width: 1300px; margin: 0 auto; position: relative; z-index: 5; }
+        .catalog-section { padding: 60px 5vw 80px; max-width: 1300px; margin: 0 auto; position: relative; z-index: 5; }
         
         .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 20px; }
         .section-title { font-size: 2rem; font-weight: 900; letter-spacing: -0.5px; }
@@ -142,6 +167,31 @@
         .read-btn { background: var(--text-main); color: var(--bg-color); padding: 8px 18px; border-radius: 20px; font-weight: 800; font-size: 0.85rem; border: none; cursor: pointer; transition: 0.3s; }
         .book-card:hover .read-btn { background: var(--accent-blue); color: white; box-shadow: 0 5px 15px rgba(0, 113, 227, 0.3); }
 
+        /* AUTHORS SECTION */
+        .authors-section { padding: 60px 5vw; max-width: 1200px; margin: 0 auto; z-index: 5; position: relative; }
+        .authors-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; margin-top: 25px; }
+        .author-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 28px; padding: 25px; text-align: center; box-shadow: 0 15px 35px var(--card-shadow); transition: 0.3s; }
+        .author-card:hover { transform: translateY(-5px); border-color: var(--accent-blue); }
+        .author-img { width: 90px; height: 90px; border-radius: 50%; object-fit: cover; margin: 0 auto 15px; border: 2px solid var(--accent-blue); }
+        .author-card h4 { font-size: 1.15rem; font-weight: 800; margin-bottom: 4px; }
+        .author-card p { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; }
+
+        /* FAQ SECTION */
+        .faq-section { padding: 60px 5vw 100px; max-width: 900px; margin: 0 auto; z-index: 5; position: relative; }
+        .faq-list { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; }
+        .faq-item { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 22px; padding: 20px 25px; cursor: pointer; transition: 0.3s; }
+        .faq-question { font-size: 1.1rem; font-weight: 800; display: flex; justify-content: space-between; align-items: center; }
+        .faq-answer { font-size: 0.95rem; color: var(--text-muted); margin-top: 12px; line-height: 1.6; display: none; }
+        .faq-item.open .faq-answer { display: block; }
+        .faq-item.open .faq-toggle-icon { transform: rotate(180deg); color: var(--accent-blue); }
+
+        /* FOOTER */
+        footer { background: var(--card-bg); border-top: 1px solid var(--border-color); padding: 50px 5vw 30px; text-align: center; position: relative; z-index: 5; }
+        .footer-logo { font-size: 1.6rem; font-weight: 900; margin-bottom: 12px; }
+        .footer-logo span { color: var(--accent-blue); }
+        .footer-desc { color: var(--text-muted); font-size: 0.95rem; max-width: 500px; margin: 0 auto 25px; }
+        .footer-copy { color: var(--text-muted); font-size: 0.85rem; border-top: 1px solid var(--border-color); padding-top: 25px; margin-top: 25px; }
+
         /* MODAL READ BOOK DETAIL */
         .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(12px); z-index: 9999; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; padding: 20px; }
         .modal-overlay.show { opacity: 1; pointer-events: all; }
@@ -161,7 +211,10 @@
         .btn-action-primary { flex: 1; padding: 14px; background: var(--accent-gradient); color: white; border: none; border-radius: 22px; font-weight: 800; font-size: 1rem; cursor: pointer; text-align: center; text-decoration: none; box-shadow: 0 10px 25px rgba(0, 113, 227, 0.3); }
         .btn-action-secondary { padding: 14px 22px; background: var(--glass-btn-bg); border: 1px solid var(--border-color); color: var(--text-main); border-radius: 22px; font-weight: 700; font-size: 0.95rem; cursor: pointer; text-decoration: none; }
 
-        @media (max-width: 650px) {
+        @media (max-width: 750px) {
+            .featured-card { grid-template-columns: 1fr; gap: 20px; text-align: center; padding: 30px 20px; }
+            .featured-cover { height: 260px; }
+            .nav-links { display: none; }
             .modal-card { grid-template-columns: 1fr; gap: 20px; padding: 25px; }
             .modal-cover-img { height: 240px; }
         }
@@ -177,22 +230,31 @@
     </div>
     <canvas id="particle-canvas"></canvas>
 
+    <!-- NAVBAR -->
     <nav>
         <a href="index.html" class="logo">
             Kutubxona <span>Raqamli Portal</span>
         </a>
+        <ul class="nav-links">
+            <li><a href="#featured">Hafta Kitobi</a></li>
+            <li><a href="#audio">Audio Kitoblar</a></li>
+            <li><a href="#catalog">Katalog</a></li>
+            <li><a href="#authors">Mualliflar</a></li>
+            <li><a href="#faq">FAQ</a></li>
+        </ul>
         <div class="nav-right">
             <div id="userInfoContainer"></div>
             <button class="theme-toggle" onclick="toggleTheme()" id="themeIcon">🌙</button>
         </div>
     </nav>
 
+    <!-- HERO SECTION -->
     <section class="hero">
         <div class="hero-badge">
-            <span>📚</span> Chegarasiz Elektron Kutubxona
+            <span>📚</span> Chegarasiz Elektron va Audio Kutubxona
         </div>
         <h1>Bilimlar Ummoniga <br><span>Xush Kelibsiz.</span></h1>
-        <p>Minglab elektron kitoblar, ilmiy qo'llanmalar va badiiy asarlarni bepul o'qing va yuklab oling.</p>
+        <p>Minglab elektron kitoblar, ilmiy qo'llanmalar va audio darsliklarni bepul o'qing hamda tinglang.</p>
 
         <!-- SEARCH BAR -->
         <div class="search-box-wrapper">
@@ -206,6 +268,10 @@
                 <div class="stat-label">Elektron Kitoblar</div>
             </div>
             <div class="stat-item">
+                <div class="stat-num">350+</div>
+                <div class="stat-label">Audio Kitoblar</div>
+            </div>
+            <div class="stat-item">
                 <div class="stat-num">8,200+</div>
                 <div class="stat-label">Aktiv Kitobxonlar</div>
             </div>
@@ -216,8 +282,56 @@
         </div>
     </section>
 
-    <!-- CATALOG SECTION -->
-    <section class="catalog-section">
+    <!-- FEATURED BOOK OF THE WEEK BANNER -->
+    <section class="featured-banner-section" id="featured">
+        <div class="featured-card">
+            <span class="featured-badge">🔥 Hafta Tanlovi</span>
+            <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80" class="featured-cover" alt="Featured Book">
+            <div class="featured-info">
+                <h3>Clean Code: Pokiza Kod Sirlari</h3>
+                <div class="featured-author">Robert C. Martin (Uncle Bob) • IT & Dasturlash</div>
+                <p class="featured-quote">"Yomon dasturchi ham kompyuter tushunadigan kod yozishi mumkin. Yaxshi dasturchi esa insonlar tushunadigan kod yozadi."</p>
+                <div class="featured-actions">
+                    <button class="btn-action-primary" onclick="openBookModal(2)">Kitobni O'qish 📖</button>
+                    <button class="btn-action-secondary" onclick="downloadPdf()">PDF Yuklash 📥</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AUDIOBOOKS SECTION -->
+    <section class="audio-section" id="audio">
+        <h2 class="section-title">🎙 Mashhur Audio Kitoblar</h2>
+        <div class="audio-grid">
+            <div class="audio-card">
+                <button class="audio-icon-btn" onclick="playAudio('Atom Odatlari')">▶</button>
+                <div class="audio-info">
+                    <h4>Atom Odatlari</h4>
+                    <p>James Clear • O'zbek tilida</p>
+                    <div class="audio-duration">⏱ 5 soat 40 daqiqa</div>
+                </div>
+            </div>
+            <div class="audio-card">
+                <button class="audio-icon-btn" onclick="playAudio('Boy Ota Kambag\'al Ota')">▶</button>
+                <div class="audio-info">
+                    <h4>Boy Ota, Kambag'al Ota</h4>
+                    <p>Robert Kiyosaki • Audio Darslik</p>
+                    <div class="audio-duration">⏱ 4 soat 15 daqiqa</div>
+                </div>
+            </div>
+            <div class="audio-card">
+                <button class="audio-icon-btn" onclick="playAudio('O\'tkan Kunlar')">▶</button>
+                <div class="audio-info">
+                    <h4>O'tkan Kunlar (Radiospektakl)</h4>
+                    <p>Abdulla Qodiriy • Professional Ovoz</p>
+                    <div class="audio-duration">⏱ 8 soat 20 daqiqa</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CATALOG SECTION -->
+    <section class="catalog-section" id="catalog">
         <div class="section-header">
             <h2 class="section-title">Kitoblar Katalogi</h2>
             <div class="categories-wrapper">
@@ -231,6 +345,68 @@
 
         <div class="books-grid" id="booksGrid"></div>
     </section>
+
+    <!-- POPULAR AUTHORS SECTION -->
+    <section class="authors-section" id="authors">
+        <h2 class="section-title">✍️ Sevimli Mualliflar</h2>
+        <div class="authors-grid">
+            <div class="author-card">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80" class="author-img" alt="Author">
+                <h4>Abdulla Qodiriy</h4>
+                <p>12 ta asar • Klassika</p>
+            </div>
+            <div class="author-card">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80" class="author-img" alt="Author">
+                <h4>Robert Kiyosaki</h4>
+                <p>8 ta kitob • Moliya</p>
+            </div>
+            <div class="author-card">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80" class="author-img" alt="Author">
+                <h4>James Clear</h4>
+                <p>5 ta kitob • Odatlar</p>
+            </div>
+            <div class="author-card">
+                <img src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=400&q=80" class="author-img" alt="Author">
+                <h4>Jaloliddin Qodirov</h4>
+                <p>6 ta darslik • Java & AI</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="faq-section" id="faq">
+        <h2 class="section-title" style="text-align: center;">Ko'p Beriladigan Savollar (FAQ)</h2>
+        <div class="faq-list">
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <span>Kitoblarni yuklab olish bepulmi?</span>
+                    <span class="faq-toggle-icon">▼</span>
+                </div>
+                <div class="faq-answer">Ha! Tizimdagi barcha elektron kitoblar va manbalarni bepul onlayn o'qishingiz yoki PDF formatida yuklab olishingiz mumkin.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <span>Saytda audio kitoblarni qanday tinglash mumkin?</span>
+                    <span class="faq-toggle-icon">▼</span>
+                </div>
+                <div class="faq-answer">Audio kitoblar bo'limida "Play ▶" tugmasini bosishingiz bilan pleyer ishga tushadi va orqa fonda tinglashingiz mumkin.</div>
+            </div>
+            <div class="faq-item" onclick="toggleFaq(this)">
+                <div class="faq-question">
+                    <span>Ro'yxatdan o'tish majburiymi?</span>
+                    <span class="faq-toggle-icon">▼</span>
+                </div>
+                <div class="faq-answer">Kitoblarni onlayn ko'rish uchun majburiy emas. Lekin shaxsiy javoningizni saqlab borish va sharh qoldirish uchun tizimga kirish tavsiya etiladi.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo">Kutubxona <span>Raqamli Portal</span></div>
+        <div class="footer-desc">Zamon bilan hamnafas raqamli bilim va audio kitoblar markazi.</div>
+        <div class="footer-copy">© 2026 Kutubxona. Barcha huquqlar himoyalangan.</div>
+    </footer>
 
     <!-- BOOK DETAIL MODAL -->
     <div class="modal-overlay" id="bookModal">
@@ -250,7 +426,6 @@
     </div>
 
     <script>
-        // DEMO KITOBLAR MA'LUMOTI (BACKEND ULANISHDAN OLDIN)
         const sampleBooks = [
             {
                 id: 1,
@@ -366,14 +541,21 @@
         }
 
         function readOnline() {
-            alert(`"${activeBook.title}" kitobi onlayn readerda ochilmoqda...`);
+            alert(`"${activeBook ? activeBook.title : 'Kitob'}" onlayn readerda ochilmoqda...`);
         }
 
         function downloadPdf() {
-            alert(`"${activeBook.title}" PDF fayli yuklanmoqda...`);
+            alert(`"${activeBook ? activeBook.title : 'Kitob'}" PDF fayli yuklanmoqda...`);
         }
 
-        // USER AUTH STATE CHECK
+        function playAudio(title) {
+            alert(`"${title}" audio kitobi ijro etilmoqda... 🎧`);
+        }
+
+        function toggleFaq(el) {
+            el.classList.toggle('open');
+        }
+
         function checkUserAuth() {
             const container = document.getElementById('userInfoContainer');
             const userStr = localStorage.getItem('user');
