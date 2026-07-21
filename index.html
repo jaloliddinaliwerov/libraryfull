@@ -735,6 +735,14 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:46px
 .footer-col a{display:block;color:var(--muted);font-size:.85rem;font-weight:600;margin-bottom:8px;transition:.25s;}
 .footer-col a:hover{color:var(--text);}
 .footer-bottom{max-width:1260px;margin:28px auto 0;padding-top:22px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:.82rem;color:var(--muted);font-weight:600;}
+@media(max-width:900px){
+    .footer-inner{grid-template-columns:1fr 1fr;gap:28px;}
+    .footer-bottom{flex-direction:column;text-align:center;gap:12px;}
+}
+@media(max-width:600px){
+    .footer-inner{grid-template-columns:1fr;gap:24px;}
+    footer{padding:30px 4vw 90px;} /* Bottom nav space */
+}
 /* ─────────────────────────────────────────
    TELEGRAM COMMUNITY BANNER
 ───────────────────────────────────────── */
@@ -2057,6 +2065,16 @@ function drawParticles() {
 }
 window.addEventListener('resize', resizeCanvas);
 
+/* ── TELEGRAM POPUP ── */
+function closeTgPopup() {
+    const p = document.getElementById('tgPopup');
+    if(p) {
+        p.style.opacity = '0';
+        setTimeout(() => p.style.display = 'none', 400);
+    }
+    localStorage.setItem('tgPopupSeen', 'true');
+}
+
 /* ── INIT ── */
 window.addEventListener('load', () => {
     const t = localStorage.getItem('theme') || 'dark';
@@ -2071,6 +2089,15 @@ window.addEventListener('load', () => {
     renderTrending();
     resizeCanvas();
     drawParticles();
+    
+    // Telegram Popup Logic
+    if (!localStorage.getItem('tgPopupSeen')) {
+        setTimeout(() => {
+            const popup = document.getElementById('tgPopup');
+            if (popup) popup.style.display = 'flex';
+        }, 2500); // 2.5s after load
+    }
+
     // show welcome toast after 1.5s
     setTimeout(() => showToast('📚 Kutubxonaga Xush Kelibsiz!'), 1500);
 });
