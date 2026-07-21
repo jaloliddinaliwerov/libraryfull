@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="uz" data-theme="dark">
 <head>
     <meta charset="UTF-8">
@@ -1043,14 +1043,14 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:46px
         <div class="tg-popup-btns">
             <a href="https://t.me/kutubxona_bot" target="_blank" class="tg-popup-btn tg-popup-btn-bot" onclick="closeTgPopup()">
                 <span><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><rect x="3" y="11" width="18" height="10" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path><line x1="8" y1="16" x2="8" y2="16"></line><line x1="16" y1="16" x2="16" y2="16"></line></svg> Telegram Botga Kirish</span>
-                <span>â†’</span>
+                <span><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span>
             </a>
             <a href="https://t.me/kutubxona_kanal" target="_blank" class="tg-popup-btn tg-popup-btn-chan" onclick="closeTgPopup()">
-                <span>ðŸ“¢ Kanalga Obuna Bo'lish</span>
+                <span><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg> Kanalga Obuna Bo'lish</span>
                 <span>â†’</span>
             </a>
         </div>
-        <button class="tg-popup-skip" onclick="closeTgPopup()">Hozircha o'tkazib yuborish â†’</button>
+        <button class="tg-popup-skip" onclick="closeTgPopup()">Hozircha o'tkazib yuborish <svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
     </div>
 </div>
 
@@ -2069,7 +2069,7 @@ function checkUserAuth() {
             <a href="/login" class="auth-btn-short" title="Kirish"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></a>`;
     }
 }
-function logout() { localStorage.removeItem('token'); localStorage.removeItem('user'); checkUserAuth(); showToast('ðŸ‘‹ Tizimdan chiqildi.'); }
+function logout() { localStorage.removeItem('token'); localStorage.removeItem('user'); checkUserAuth(); showToast('<svg width=\"1.1em\" height=\"1.1em\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" style=\"vertical-align: -0.125em;\"><path d=\"M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4\"></path><polyline points=\"16 17 21 12 16 7\"></polyline><line x1=\"21\" y1=\"12\" x2=\"9\" y2=\"12\"></line></svg> Tizimdan chiqildi.'); }
 
 /* â”€â”€ THEME â”€â”€ */
 function toggleTheme() {
