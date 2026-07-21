@@ -3,586 +3,1322 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kutubxona | Gamification, AI va Raqamli Portal</title>
-    
+    <title>Kutubxona – Raqamli Bilim Portali</title>
+    <meta name="description" content="Kutubxona – minglab kitoblar, AI tavsiyalar, gamifikatsiya va audio kitoblar bitta joyda.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
     <style>
-        :root {
-            --bg-color: #09090b;
-            --grid-color: rgba(255, 255, 255, 0.03);
-            --text-main: #ffffff;
-            --text-muted: #a1a1a6;
-            --accent-blue: #2997ff;
-            --accent-gradient: linear-gradient(135deg, #2997ff, #0071e3);
-            --nav-bg: rgba(20, 20, 22, 0.75);
-            --glass-btn-bg: rgba(255, 255, 255, 0.08);
-            --border-color: rgba(255, 255, 255, 0.08);
-            --card-bg: rgba(25, 25, 28, 0.85);
-            --card-border: rgba(255, 255, 255, 0.08);
-            --card-shadow: rgba(0, 0, 0, 0.5);
-            --input-bg: rgba(255, 255, 255, 0.05);
-        }
+/* ─────────────────────────────────────────
+   DESIGN TOKENS
+───────────────────────────────────────── */
+:root {
+    --bg:           #09090b;
+    --surface:      rgba(25,25,28,.9);
+    --surface2:     rgba(35,35,40,.8);
+    --border:       rgba(255,255,255,.08);
+    --border-hover: rgba(41,151,255,.45);
+    --text:         #fff;
+    --muted:        #a1a1a6;
+    --blue:         #2997ff;
+    --blue-dark:    #0071e3;
+    --grad:         linear-gradient(135deg,#2997ff,#0071e3);
+    --gold:         #ffcc00;
+    --orange:       #ff9500;
+    --red:          #ff3b30;
+    --green:        #30d158;
+    --purple:       #bf5af2;
+    --grid:         rgba(255,255,255,.03);
+    --nav-h:        72px;
+    --radius-card:  26px;
+    --radius-pill:  50px;
+    --shadow:       0 20px 50px rgba(0,0,0,.5);
+    --shadow-blue:  0 12px 30px rgba(0,113,227,.25);
+}
+[data-theme="light"] {
+    --bg:           #f0f2f6;
+    --surface:      rgba(255,255,255,.95);
+    --surface2:     rgba(245,246,250,.9);
+    --border:       rgba(0,0,0,.07);
+    --text:         #111;
+    --muted:        #666;
+    --blue:         #0071e3;
+    --blue-dark:    #0055c1;
+    --grad:         linear-gradient(135deg,#0071e3,#2997ff);
+    --grid:         rgba(0,0,0,.025);
+    --shadow:       0 20px 50px rgba(0,0,0,.08);
+}
 
-        [data-theme="light"] {
-            --bg-color: #eef1f5;
-            --grid-color: rgba(0, 0, 0, 0.03);
-            --text-main: #111111;
-            --text-muted: #737373;
-            --accent-blue: #0071e3;
-            --accent-gradient: linear-gradient(135deg, #0071e3, #2997ff);
-            --nav-bg: rgba(255, 255, 255, 0.75);
-            --glass-btn-bg: rgba(0, 0, 0, 0.04);
-            --border-color: rgba(0, 0, 0, 0.06);
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --card-border: rgba(255, 255, 255, 1);
-            --card-shadow: rgba(0, 0, 0, 0.08);
-            --input-bg: rgba(0, 0, 0, 0.03);
-        }
+/* ─────────────────────────────────────────
+   RESET & BASE
+───────────────────────────────────────── */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Outfit',sans-serif;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);overflow-x:hidden;min-height:100vh;transition:background .35s,color .35s;}
+a{color:inherit;text-decoration:none;}
+button{cursor:pointer;}
+img{display:block;}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
-        body { background: var(--bg-color); color: var(--text-main); overflow-x: hidden; min-height: 100vh; position: relative; }
+/* ─────────────────────────────────────────
+   LAYERED BACKGROUND
+───────────────────────────────────────── */
+.grid-bg{position:fixed;inset:0;z-index:-4;pointer-events:none;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:55px 55px;}
+.ambient-bg{position:fixed;inset:0;z-index:-3;overflow:hidden;pointer-events:none;}
+.blob{position:absolute;filter:blur(150px);border-radius:50%;animation:blobFloat 20s infinite alternate ease-in-out;opacity:.28;}
+.blob-1{width:60vw;height:60vw;background:var(--blue);top:-25%;left:-15%;}
+.blob-2{width:50vw;height:50vw;background:var(--purple);bottom:-15%;right:-15%;animation-delay:-9s;opacity:.18;}
+.blob-3{width:35vw;height:35vw;background:var(--orange);top:40%;left:35%;animation-delay:-15s;opacity:.12;}
+@keyframes blobFloat{to{transform:translate(12%,12%) scale(1.15);}}
+#particle-canvas{position:fixed;inset:0;z-index:-2;pointer-events:none;}
+.noise{position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:.032;background-image:url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)"/%3E%3C/svg%3E');}
 
-        .grid-bg { position: fixed; inset: 0; z-index: -3; pointer-events: none; background-image: linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px); background-size: 50px 50px; }
-        .noise-overlay { position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: 0.035; background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E'); }
-        #particle-canvas { position: fixed; inset: 0; z-index: -1; pointer-events: auto; }
+/* ─────────────────────────────────────────
+   NAVBAR
+───────────────────────────────────────── */
+.nav{position:fixed;top:18px;left:50%;transform:translateX(-50%);width:94%;max-width:1280px;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 24px;z-index:2000;background:rgba(20,20,22,.72);backdrop-filter:blur(28px) saturate(180%);border:1px solid var(--border);border-radius:var(--radius-pill);box-shadow:0 8px 24px rgba(0,0,0,.08);}
+.logo{font-size:1.3rem;font-weight:900;letter-spacing:-.5px;display:flex;align-items:center;gap:10px;}
+.logo-badge{background:rgba(41,151,255,.14);color:var(--blue);padding:4px 12px;border-radius:20px;font-size:.78rem;font-weight:700;}
+.nav-links{display:flex;gap:22px;list-style:none;}
+.nav-links a{color:var(--muted);font-weight:600;font-size:.88rem;transition:.25s;padding:4px 0;}
+.nav-links a:hover{color:var(--text);}
+.nav-right{display:flex;align-items:center;gap:10px;}
+.streak-pill{background:rgba(255,149,0,.14);border:1px solid rgba(255,149,0,.3);color:var(--orange);padding:6px 14px;border-radius:var(--radius-pill);font-weight:800;font-size:.82rem;display:flex;align-items:center;gap:5px;}
+.icon-btn{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.07);border:1px solid var(--border);color:var(--text);font-size:1.05rem;display:flex;align-items:center;justify-content:center;transition:.25s;}
+.icon-btn:hover{background:rgba(255,255,255,.13);}
+.user-badge{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.07);border:1px solid var(--border);padding:5px 14px 5px 6px;border-radius:var(--radius-pill);font-weight:700;font-size:.88rem;}
+.avatar{width:32px;height:32px;background:var(--grad);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:.9rem;flex-shrink:0;}
+.auth-btn{background:var(--grad);color:#fff;padding:9px 20px;border-radius:var(--radius-pill);font-weight:800;font-size:.9rem;box-shadow:var(--shadow-blue);transition:.25s;}
+.auth-btn:hover{transform:translateY(-2px);box-shadow:0 16px 35px rgba(0,113,227,.35);}
+.logout-link{background:none;border:none;color:var(--red);font-weight:700;font-size:.82rem;margin-left:6px;}
 
-        .ambient-bg { position: fixed; inset: 0; z-index: -2; overflow: hidden; pointer-events: none; }
-        .ambient-blob { position: absolute; filter: blur(140px); border-radius: 50%; animation: floatBlob 22s infinite alternate ease-in-out; opacity: 0.3; }
-        .blob-1 { width: 55vw; height: 55vw; background: var(--accent-blue); top: -20%; left: -10%; }
-        .blob-2 { width: 45vw; height: 45vw; background: #af52de; bottom: -10%; right: -10%; animation-delay: -6s; opacity: 0.2; }
+/* hamburger (mobile) */
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:4px;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:.3s;}
 
-        /* NAVBAR */
-        nav { position: fixed; top: 18px; left: 50%; transform: translateX(-50%); width: 92%; max-width: 1240px; height: 68px; display: flex; justify-content: space-between; align-items: center; padding: 0 28px; z-index: 1000; background: var(--nav-bg); backdrop-filter: blur(25px) saturate(180%); border: 1px solid var(--border-color); border-radius: 35px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); }
-        .logo { display: flex; align-items: center; gap: 10px; font-size: 1.35rem; font-weight: 900; color: var(--text-main); text-decoration: none; }
-        .logo span { color: var(--accent-blue); font-size: 0.82rem; font-weight: 700; background: rgba(0,113,227,0.1); padding: 4px 12px; border-radius: 18px; }
+/* ─────────────────────────────────────────
+   PAGE ROUTING (SPA-style sections)
+───────────────────────────────────────── */
+.page{display:none;}
+.page.active{display:block;}
 
-        .nav-links { display: flex; gap: 20px; list-style: none; }
-        .nav-links a { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.92rem; transition: 0.3s; }
-        .nav-links a:hover { color: var(--text-main); }
+/* ─────────────────────────────────────────
+   HERO — HOME
+───────────────────────────────────────── */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:calc(var(--nav-h) + 60px) 5vw 60px;position:relative;z-index:5;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(41,151,255,.1);border:1px solid rgba(41,151,255,.18);color:var(--blue);padding:7px 22px;border-radius:var(--radius-pill);font-weight:700;font-size:.9rem;margin-bottom:22px;}
+.hero h1{font-size:clamp(2.8rem,6vw,5.4rem);font-weight:900;letter-spacing:-2.5px;line-height:1.07;margin-bottom:20px;}
+.hero h1 .grad-text{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
 
-        .nav-right { display: flex; align-items: center; gap: 12px; }
-        .streak-badge { background: rgba(255, 149, 0, 0.15); border: 1px solid rgba(255, 149, 0, 0.3); color: #ff9500; padding: 6px 14px; border-radius: 20px; font-weight: 800; font-size: 0.85rem; display: flex; align-items: center; gap: 6px; }
-        
-        .user-profile-badge { display: flex; align-items: center; gap: 10px; background: var(--glass-btn-bg); border: 1px solid var(--border-color); padding: 6px 16px 6px 8px; border-radius: 30px; font-weight: 700; font-size: 0.92rem; color: var(--text-main); }
-        .user-avatar { width: 34px; height: 34px; background: var(--accent-gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 0.95rem; }
-        .logout-btn { background: none; border: none; color: #ff3b30; font-weight: 700; font-size: 0.85rem; cursor: pointer; margin-left: 8px; }
-        
-        .auth-nav-btn { background: var(--accent-gradient); color: white; padding: 10px 22px; border-radius: 25px; font-weight: 800; font-size: 0.95rem; text-decoration: none; transition: 0.3s; box-shadow: 0 8px 20px rgba(0, 113, 227, 0.3); }
-        .theme-toggle { background: var(--glass-btn-bg); border: 1px solid var(--border-color); color: var(--text-main); width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.05rem; }
+/* QUOTE ROTATOR */
+.quote-box{background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:22px 32px;max-width:680px;margin:0 auto 32px;position:relative;overflow:hidden;}
+.quote-box::before{content:'';position:absolute;inset:0;border-radius:22px;background:var(--grad);opacity:.04;}
+.quote-text{font-size:1.12rem;font-weight:600;line-height:1.55;margin-bottom:8px;font-style:italic;color:var(--text);}
+.quote-author{font-size:.82rem;font-weight:700;color:var(--blue);}
+.quote-dots{display:flex;gap:6px;justify-content:center;margin-top:14px;}
+.quote-dot{width:7px;height:7px;border-radius:50%;background:var(--border);transition:.3s;cursor:pointer;}
+.quote-dot.active{background:var(--blue);transform:scale(1.3);}
 
-        /* HERO SECTION */
-        .hero { min-height: 45vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 130px 20px 20px; position: relative; z-index: 5; }
-        .hero-badge { font-size: 0.95rem; font-weight: 700; color: var(--accent-blue); margin-bottom: 18px; background: rgba(0, 113, 227, 0.1); padding: 8px 24px; border-radius: 30px; border: 1px solid rgba(0, 113, 227, 0.15); display: inline-flex; align-items: center; gap: 8px; }
-        .hero h1 { font-size: clamp(2.5rem, 5.5vw, 4.8rem); font-weight: 900; letter-spacing: -2px; line-height: 1.1; margin-bottom: 16px; }
-        .hero h1 span { background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+/* SEARCH */
+.search-wrap{position:relative;width:100%;max-width:640px;margin:0 auto 36px;}
+.search-box{width:100%;padding:17px 24px 17px 56px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-pill);color:var(--text);font-size:1rem;font-weight:500;outline:none;box-shadow:var(--shadow);transition:.3s;}
+.search-box:focus{border-color:var(--blue);box-shadow:0 20px 50px rgba(0,113,227,.18);}
+.search-ico{position:absolute;left:20px;top:50%;transform:translateY(-50%);color:var(--blue);width:20px;height:20px;pointer-events:none;}
 
-        /* SEARCH BAR */
-        .search-box-wrapper { width: 100%; max-width: 650px; position: relative; margin-bottom: 25px; }
-        .search-box { width: 100%; padding: 18px 25px 18px 58px; background: var(--card-bg); backdrop-filter: blur(25px); border: 1px solid var(--border-color); border-radius: 35px; color: var(--text-main); font-size: 1.05rem; font-weight: 500; outline: none; box-shadow: 0 20px 40px var(--card-shadow); transition: all 0.3s; }
-        .search-box:focus { border-color: var(--accent-blue); box-shadow: 0 20px 50px rgba(0, 113, 227, 0.2); }
-        .search-icon { position: absolute; left: 22px; top: 50%; transform: translateY(-50%); color: var(--accent-blue); width: 22px; height: 22px; pointer-events: none; }
+/* HERO STATS */
+.hero-stats{display:flex;gap:22px;flex-wrap:wrap;justify-content:center;margin-bottom:40px;}
+.stat-chip{background:var(--surface);border:1px solid var(--border);padding:14px 26px;border-radius:22px;text-align:center;box-shadow:var(--shadow);}
+.stat-num{font-size:1.75rem;font-weight:900;}
+.stat-lbl{font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-top:2px;}
 
-        /* GAMIFICATION & LEADERBOARD SECTION */
-        .gamification-section { padding: 40px 5vw; max-width: 1240px; margin: 0 auto; z-index: 5; position: relative; }
-        .gami-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 30px; }
-        .gami-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 32px; padding: 30px; box-shadow: 0 20px 50px var(--card-shadow); }
-        .gami-title { font-size: 1.4rem; font-weight: 900; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; }
-        
-        /* LEADERBOARD LIST */
-        .lb-list { display: flex; flex-direction: column; gap: 12px; }
-        .lb-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; background: var(--glass-btn-bg); border: 1px solid var(--border-color); border-radius: 20px; transition: 0.3s; }
-        .lb-item:hover { border-color: var(--accent-blue); transform: translateX(4px); }
-        .lb-left { display: flex; align-items: center; gap: 12px; }
-        .lb-rank { font-size: 1.2rem; font-weight: 900; }
-        .lb-name { font-weight: 800; font-size: 0.95rem; }
-        .lb-pts { color: var(--accent-blue); font-weight: 900; font-size: 1.05rem; }
+/* HERO CTA BUTTONS */
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;}
+.btn-primary{padding:14px 30px;background:var(--grad);color:#fff;border:none;border-radius:var(--radius-pill);font-weight:800;font-size:1rem;box-shadow:var(--shadow-blue);transition:.3s;}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(0,113,227,.38);}
+.btn-ghost{padding:14px 30px;background:rgba(255,255,255,.07);color:var(--text);border:1px solid var(--border);border-radius:var(--radius-pill);font-weight:800;font-size:1rem;transition:.3s;}
+.btn-ghost:hover{background:rgba(255,255,255,.12);}
 
-        /* BADGES GRID */
-        .badges-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-        .badge-box { background: var(--glass-btn-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 15px; text-align: center; transition: 0.3s; cursor: pointer; }
-        .badge-box:hover { transform: scale(1.05); border-color: var(--accent-blue); }
-        .badge-icon { font-size: 2.2rem; margin-bottom: 6px; }
-        .badge-name { font-weight: 800; font-size: 0.88rem; margin-bottom: 2px; }
-        .badge-desc { font-size: 0.75rem; color: var(--text-muted); }
+/* ─────────────────────────────────────────
+   SECTION WRAPPER
+───────────────────────────────────────── */
+.section{padding:80px 5vw;position:relative;z-index:5;}
+.section-inner{max-width:1260px;margin:0 auto;}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:32px;}
+.section-title{font-size:1.9rem;font-weight:900;letter-spacing:-.5px;}
+.section-sub{color:var(--muted);font-size:.9rem;font-weight:600;margin-top:4px;}
+.see-all{color:var(--blue);font-weight:800;font-size:.9rem;background:none;border:none;}
 
-        /* ACTIVITY HEATMAP (GITHUB STYLE) */
-        .heatmap-container { margin-top: 20px; border-top: 1px solid var(--border-color); padding-top: 20px; }
-        .heatmap-title { font-size: 0.9rem; font-weight: 800; color: var(--text-muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .heatmap-grid { display: flex; gap: 4px; overflow-x: auto; padding-bottom: 6px; }
-        .heat-col { display: flex; flex-direction: column; gap: 4px; }
-        .heat-cell { width: 14px; height: 14px; border-radius: 3px; background: rgba(255,255,255,0.05); }
-        .heat-cell.l1 { background: #0e4429; }
-        .heat-cell.l2 { background: #006d32; }
-        .heat-cell.l3 { background: #26a641; }
-        .heat-cell.l4 { background: #39d353; }
+/* ─────────────────────────────────────────
+   CATEGORY PILLS
+───────────────────────────────────────── */
+.cat-bar{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none;margin-bottom:30px;}
+.cat-bar::-webkit-scrollbar{display:none;}
+.cat-pill{padding:9px 20px;background:rgba(255,255,255,.07);border:1px solid var(--border);border-radius:var(--radius-pill);font-weight:700;font-size:.88rem;color:var(--muted);white-space:nowrap;transition:.3s;}
+.cat-pill.active,.cat-pill:hover{background:var(--grad);color:#fff;border-color:transparent;box-shadow:var(--shadow-blue);}
 
-        /* AI RECOMMENDATION BANNER */
-        .recom-section { padding: 30px 5vw; max-width: 1240px; margin: 0 auto; z-index: 5; position: relative; }
-        .recom-card { background: rgba(0, 113, 227, 0.08); border: 1px solid rgba(0, 113, 227, 0.25); border-radius: 30px; padding: 25px 35px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
-        .recom-info h3 { font-size: 1.3rem; font-weight: 900; margin-bottom: 6px; }
-        .recom-info p { color: var(--text-muted); font-size: 0.92rem; }
+/* ─────────────────────────────────────────
+   BOOK CARDS
+───────────────────────────────────────── */
+.books-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:26px;}
+.book-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-card);padding:18px;display:flex;flex-direction:column;box-shadow:var(--shadow);transition:transform .4s cubic-bezier(.25,1,.3,1),box-shadow .4s,border-color .4s;position:relative;overflow:hidden;}
+.book-card:hover{transform:translateY(-8px);box-shadow:0 32px 65px var(--shadow),0 10px 28px rgba(0,113,227,.14);border-color:var(--border-hover);}
+.cover-wrap{position:relative;width:100%;height:265px;border-radius:18px;overflow:hidden;margin-bottom:14px;background:rgba(0,0,0,.12);flex-shrink:0;}
+.cover-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+.book-card:hover .cover-wrap img{transform:scale(1.06);}
+.cat-badge{position:absolute;top:10px;left:10px;background:rgba(0,0,0,.62);backdrop-filter:blur(8px);color:#fff;font-size:.72rem;font-weight:800;padding:4px 11px;border-radius:14px;border:1px solid rgba(255,255,255,.12);}
+.fav-btn{position:absolute;top:10px;right:10px;width:33px;height:33px;background:rgba(0,0,0,.62);backdrop-filter:blur(8px);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;border:1px solid rgba(255,255,255,.12);transition:.3s;z-index:2;}
+.fav-btn.active{color:#ff2d55;background:rgba(255,45,85,.25);border-color:#ff2d55;}
+.trend-badge{position:absolute;bottom:10px;left:10px;background:rgba(255,149,0,.85);color:#fff;font-size:.7rem;font-weight:800;padding:3px 10px;border-radius:12px;}
+.book-title{font-size:1.15rem;font-weight:800;line-height:1.3;margin-bottom:5px;}
+.book-auth{font-size:.85rem;color:var(--muted);font-weight:600;margin-bottom:10px;}
+.progress-wrap{margin-bottom:12px;}
+.progress-lbl{font-size:.75rem;color:var(--muted);font-weight:700;margin-bottom:5px;}
+.progress-bar{width:100%;height:5px;background:rgba(255,255,255,.06);border-radius:10px;overflow:hidden;}
+.progress-fill{height:100%;background:var(--grad);border-radius:10px;transition:width .6s cubic-bezier(.25,1,.3,1);}
+.book-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:12px;border-top:1px solid var(--border);}
+.rating{font-weight:800;font-size:.88rem;color:var(--gold);}
+.read-btn{background:var(--text);color:var(--bg);padding:7px 16px;border-radius:var(--radius-pill);font-weight:800;font-size:.82rem;border:none;transition:.3s;}
+.book-card:hover .read-btn{background:var(--blue);color:#fff;}
 
-        /* CATALOG & BOOKS */
-        .catalog-section { padding: 40px 5vw 80px; max-width: 1300px; margin: 0 auto; position: relative; z-index: 5; }
-        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 20px; }
-        .section-title { font-size: 2rem; font-weight: 900; letter-spacing: -0.5px; }
+/* ─────────────────────────────────────────
+   SKELETON LOADER
+───────────────────────────────────────── */
+.skeleton{border-radius:var(--radius-card);padding:18px;background:var(--surface);border:1px solid var(--border);animation:pulse 1.6s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.45;}}
+.skel-cover{height:265px;background:var(--border);border-radius:18px;margin-bottom:14px;}
+.skel-line{height:14px;background:var(--border);border-radius:8px;margin-bottom:8px;}
+.skel-line.short{width:60%;}
 
-        .categories-wrapper { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; }
-        .cat-pill { padding: 10px 22px; background: var(--glass-btn-bg); border: 1px solid var(--border-color); border-radius: 30px; font-weight: 700; font-size: 0.92rem; color: var(--text-muted); cursor: pointer; transition: all 0.3s; white-space: nowrap; }
-        .cat-pill.active { background: var(--accent-gradient); color: white; border-color: transparent; }
+/* ─────────────────────────────────────────
+   FEATURED BOOK BANNER
+───────────────────────────────────────── */
+.featured-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-card);padding:40px 44px;display:grid;grid-template-columns:220px 1fr;gap:36px;align-items:center;box-shadow:var(--shadow);position:relative;overflow:hidden;}
+.featured-card::before{content:'';position:absolute;inset:0;background:var(--grad);opacity:.045;}
+.featured-badge{position:absolute;top:20px;right:20px;background:var(--grad);color:#fff;padding:5px 14px;border-radius:var(--radius-pill);font-weight:800;font-size:.78rem;text-transform:uppercase;letter-spacing:1px;}
+.featured-img{width:100%;height:300px;border-radius:18px;object-fit:cover;box-shadow:0 14px 30px rgba(0,0,0,.3);}
+.featured-quote{font-style:italic;color:var(--muted);font-size:.95rem;line-height:1.58;margin:12px 0 22px;}
+.featured-actions{display:flex;gap:14px;flex-wrap:wrap;}
 
-        .books-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 30px; }
-        
-        .book-card { background: var(--card-bg); backdrop-filter: blur(25px); border: 1px solid var(--border-color); border-top: 1px solid var(--card-border); border-radius: 28px; padding: 20px; display: flex; flex-direction: column; position: relative; overflow: hidden; box-shadow: 0 20px 40px var(--card-shadow); transition: transform 0.4s, box-shadow 0.4s; cursor: pointer; }
-        .book-card:hover { transform: translateY(-8px); box-shadow: 0 30px 60px var(--card-shadow), 0 10px 30px rgba(0, 113, 227, 0.15); border-color: rgba(0, 113, 227, 0.4); }
+/* ─────────────────────────────────────────
+   AUDIO SECTION
+───────────────────────────────────────── */
+.audio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:22px;}
+.audio-card{background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:20px;display:flex;align-items:center;gap:16px;box-shadow:var(--shadow);transition:.3s;}
+.audio-card:hover{border-color:var(--border-hover);transform:translateY(-4px);}
+.play-btn{width:52px;height:52px;background:var(--grad);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#fff;border:none;flex-shrink:0;box-shadow:var(--shadow-blue);transition:.3s;}
+.play-btn:hover{transform:scale(1.1);}
+.audio-info h4{font-size:1.08rem;font-weight:800;margin-bottom:3px;}
+.audio-meta{font-size:.82rem;color:var(--muted);font-weight:600;}
+.audio-dur{font-size:.78rem;color:var(--blue);font-weight:700;margin-top:3px;}
 
-        .book-cover-box { width: 100%; height: 280px; border-radius: 20px; overflow: hidden; position: relative; margin-bottom: 16px; background: rgba(0,0,0,0.1); }
-        .book-cover-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-        .book-card:hover .book-cover-box img { transform: scale(1.06); }
-        
-        .fav-heart-btn { position: absolute; top: 12px; right: 12px; width: 34px; height: 34px; background: rgba(0,0,0,0.65); backdrop-filter: blur(10px); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; color: white; border: 1px solid rgba(255,255,255,0.15); transition: 0.3s; z-index: 2; }
-        .fav-heart-btn.active { color: #ff2d55; background: rgba(255, 45, 85, 0.2); border-color: #ff2d55; }
+/* ─────────────────────────────────────────
+   LEADERBOARD + BADGES SECTION
+───────────────────────────────────────── */
+.gami-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:26px;}
+.gami-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-card);padding:28px;box-shadow:var(--shadow);}
+.gami-card-title{font-size:1.25rem;font-weight:900;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;}
+.lb-list{display:flex;flex-direction:column;gap:10px;}
+.lb-item{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:18px;transition:.3s;}
+.lb-item:hover{border-color:var(--border-hover);transform:translateX(4px);}
+.lb-left{display:flex;align-items:center;gap:10px;}
+.lb-rank{font-size:1.1rem;font-weight:900;width:28px;}
+.lb-name{font-weight:800;font-size:.9rem;}
+.lb-pts{color:var(--blue);font-weight:900;font-size:.98rem;}
+.badges-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+.badge-box{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:18px;padding:14px;text-align:center;transition:.3s;cursor:pointer;}
+.badge-box:hover{border-color:var(--blue);transform:scale(1.04);}
+.badge-ico{font-size:2rem;margin-bottom:5px;}
+.badge-nm{font-weight:800;font-size:.84rem;margin-bottom:2px;}
+.badge-ds{font-size:.72rem;color:var(--muted);}
 
-        .progress-bar-container { width: 100%; height: 6px; background: var(--glass-btn-bg); border-radius: 10px; margin: 10px 0; overflow: hidden; }
-        .progress-bar-fill { height: 100%; background: var(--accent-gradient); border-radius: 10px; transition: width 0.4s; }
+/* HEATMAP */
+.heatmap-wrap{margin-top:18px;padding-top:18px;border-top:1px solid var(--border);}
+.heatmap-lbl{font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;}
+.heatmap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;}
+.heatmap::-webkit-scrollbar{display:none;}
+.hcol{display:flex;flex-direction:column;gap:4px;}
+.hcell{width:13px;height:13px;border-radius:3px;background:rgba(255,255,255,.05);}
+.hcell.l1{background:#0e4429;}
+.hcell.l2{background:#006d32;}
+.hcell.l3{background:#26a641;}
+.hcell.l4{background:#39d353;}
 
-        .book-cat-badge { position: absolute; top: 12px; left: 12px; background: rgba(0,0,0,0.65); backdrop-filter: blur(10px); color: white; font-size: 0.75rem; font-weight: 800; padding: 4px 12px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.15); }
-        .book-info h3 { font-size: 1.25rem; font-weight: 800; margin-bottom: 6px; color: var(--text-main); line-height: 1.3; }
-        .book-author { font-size: 0.9rem; color: var(--text-muted); font-weight: 600; margin-bottom: 12px; }
-        .book-footer { display: flex; justify-content: space-between; align-items: center; margin-top: auto; border-top: 1px solid var(--border-color); padding-top: 14px; }
-        .read-btn { background: var(--text-main); color: var(--bg-color); padding: 8px 18px; border-radius: 20px; font-weight: 800; font-size: 0.85rem; border: none; cursor: pointer; transition: 0.3s; }
+/* ─────────────────────────────────────────
+   PROFILE PAGE
+───────────────────────────────────────── */
+.profile-hero{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-card);padding:36px;box-shadow:var(--shadow);margin-bottom:28px;}
+.profile-avatar{width:100px;height:100px;background:var(--grad);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2.8rem;font-weight:900;color:#fff;flex-shrink:0;}
+.profile-name{font-size:1.8rem;font-weight:900;margin-bottom:4px;}
+.profile-level{display:inline-flex;align-items:center;gap:6px;background:rgba(41,151,255,.1);border:1px solid rgba(41,151,255,.2);color:var(--blue);padding:4px 14px;border-radius:var(--radius-pill);font-weight:700;font-size:.85rem;}
+.profile-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:22px;}
+.pstat-box{background:var(--surface2);border:1px solid var(--border);border-radius:18px;padding:16px;text-align:center;}
+.pstat-num{font-size:1.6rem;font-weight:900;}
+.pstat-lbl{font-size:.75rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.4px;margin-top:3px;}
+.goal-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-card);padding:28px;box-shadow:var(--shadow);margin-bottom:22px;}
+.goal-section h3{font-size:1.2rem;font-weight:900;margin-bottom:16px;}
+.goal-bar-wrap{background:rgba(255,255,255,.05);border-radius:12px;height:12px;overflow:hidden;margin-top:8px;}
+.goal-bar{height:100%;background:var(--grad);border-radius:12px;transition:width .8s cubic-bezier(.25,1,.3,1);}
+.goal-lbl{display:flex;justify-content:space-between;font-size:.82rem;color:var(--muted);font-weight:700;margin-top:6px;}
 
-        /* FLOATING TOAST NOTIFICATION */
-        .toast-container { position: fixed; top: 100px; right: 30px; z-index: 99999; display: flex; flex-direction: column; gap: 10px; }
-        .toast { background: var(--card-bg); backdrop-filter: blur(25px); border: 1px solid var(--accent-blue); padding: 14px 20px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); display: flex; align-items: center; gap: 12px; font-size: 0.92rem; font-weight: 700; animation: slideInRight 0.4s forwards; }
-        @keyframes slideInRight { from { opacity: 0; transform: translateX(100px); } to { opacity: 1; transform: translateX(0); } }
+/* ─────────────────────────────────────────
+   SUBSCRIPTION PLANS PAGE
+───────────────────────────────────────── */
+.plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:26px;}
+.plan-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-card);padding:36px 28px;text-align:center;position:relative;display:flex;flex-direction:column;box-shadow:var(--shadow);transition:.3s;}
+.plan-card:hover{transform:translateY(-5px);}
+.plan-card.popular{border-color:var(--blue);box-shadow:0 25px 60px rgba(0,113,227,.22);transform:scale(1.03);}
+.popular-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--grad);color:#fff;padding:4px 16px;border-radius:var(--radius-pill);font-size:.76rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;}
+.plan-name{font-size:1.3rem;font-weight:900;margin-bottom:8px;}
+.plan-price{font-size:2.4rem;font-weight:900;margin-bottom:4px;}
+.plan-price small{font-size:.9rem;font-weight:600;color:var(--muted);}
+.plan-features{list-style:none;text-align:left;flex-grow:1;display:flex;flex-direction:column;gap:11px;margin:22px 0;}
+.plan-features li{display:flex;align-items:center;gap:9px;font-size:.9rem;color:var(--muted);font-weight:600;}
+.plan-features li .ck{color:var(--blue);font-weight:900;font-size:1.1rem;}
+.plan-btn{padding:13px;border-radius:22px;font-weight:800;font-size:.95rem;border:1px solid var(--border);background:rgba(255,255,255,.07);color:var(--text);transition:.3s;}
+.plan-card.popular .plan-btn{background:var(--grad);color:#fff;border:none;box-shadow:var(--shadow-blue);}
 
-        /* FLOATING AI CHAT WIDGET */
-        .ai-widget-btn { position: fixed; bottom: 30px; right: 30px; background: var(--accent-gradient); color: white; border: none; border-radius: 35px; padding: 14px 24px; font-weight: 800; font-size: 1rem; cursor: pointer; box-shadow: 0 15px 35px rgba(0, 113, 227, 0.4); z-index: 999; display: flex; align-items: center; gap: 10px; transition: transform 0.3s; }
-        
-        .ai-chat-modal { position: fixed; bottom: 95px; right: 30px; width: 380px; height: 480px; background: var(--card-bg); backdrop-filter: blur(35px); border: 1px solid var(--border-color); border-radius: 30px; box-shadow: 0 30px 70px rgba(0,0,0,0.5); z-index: 1000; display: none; flex-direction: column; overflow: hidden; }
-        .ai-chat-modal.open { display: flex; }
-        .ai-chat-header { background: var(--glass-btn-bg); padding: 16px 20px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; font-weight: 800; }
-        .ai-chat-body { flex-grow: 1; padding: 18px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
-        .ai-msg { padding: 12px 16px; border-radius: 20px; font-size: 0.9rem; max-width: 85%; line-height: 1.45; }
-        .ai-msg.bot { background: rgba(0, 113, 227, 0.15); border: 1px solid rgba(0, 113, 227, 0.2); align-self: flex-start; }
-        .ai-msg.user { background: var(--accent-gradient); color: white; align-self: flex-end; }
-        .ai-chat-footer { padding: 14px; border-top: 1px solid var(--border-color); display: flex; gap: 10px; }
-        .ai-input { flex-grow: 1; background: var(--input-bg); border: 1px solid var(--border-color); padding: 10px 16px; border-radius: 20px; color: var(--text-main); outline: none; font-size: 0.9rem; }
-        .ai-send-btn { background: var(--accent-blue); color: white; border: none; width: 38px; height: 38px; border-radius: 50%; cursor: pointer; font-weight: 800; }
+/* ─────────────────────────────────────────
+   FAQ SECTION
+───────────────────────────────────────── */
+.faq-list{display:flex;flex-direction:column;gap:12px;max-width:860px;margin:0 auto;}
+.faq-item{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:18px 22px;cursor:pointer;transition:.3s;}
+.faq-q{font-size:1rem;font-weight:800;display:flex;justify-content:space-between;align-items:center;gap:12px;}
+.faq-a{font-size:.9rem;color:var(--muted);margin-top:12px;line-height:1.6;display:none;}
+.faq-item.open .faq-a{display:block;}
+.faq-arr{transition:.3s;font-size:1.1rem;flex-shrink:0;}
+.faq-item.open .faq-arr{transform:rotate(180deg);color:var(--blue);}
 
-        /* MODAL READ BOOK DETAIL & QR CODE */
-        .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(12px); z-index: 9999; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; padding: 20px; }
-        .modal-overlay.show { opacity: 1; pointer-events: all; }
-        
-        .modal-card { background: var(--bg-color); width: 100%; max-width: 780px; border-radius: 35px; padding: 40px; position: relative; border: 1px solid var(--border-color); box-shadow: 0 40px 80px rgba(0,0,0,0.5); max-height: 90vh; overflow-y: auto; display: grid; grid-template-columns: 240px 1fr; gap: 30px; }
-        .close-modal { position: absolute; top: 20px; right: 20px; width: 38px; height: 38px; background: var(--glass-btn-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 1px solid var(--border-color); color: var(--text-main); font-size: 1.2rem; }
+/* ─────────────────────────────────────────
+   AUTHORS
+───────────────────────────────────────── */
+.authors-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:22px;}
+.author-card{background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:22px;text-align:center;transition:.3s;}
+.author-card:hover{border-color:var(--border-hover);transform:translateY(-4px);}
+.author-img{width:80px;height:80px;border-radius:50%;object-fit:cover;margin:0 auto 12px;border:2px solid var(--blue);}
+.author-name{font-size:1rem;font-weight:800;margin-bottom:3px;}
+.author-meta{font-size:.8rem;color:var(--muted);font-weight:600;}
 
-        .modal-cover-img { width: 100%; height: 300px; border-radius: 20px; object-fit: cover; }
-        .qr-box { margin-top: 15px; display: flex; align-items: center; gap: 10px; background: var(--glass-btn-bg); padding: 10px 15px; border-radius: 18px; font-size: 0.8rem; font-weight: 700; color: var(--text-muted); }
-        #qrcode { background: white; padding: 5px; border-radius: 8px; }
+/* ─────────────────────────────────────────
+   MODAL
+───────────────────────────────────────── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(14px);z-index:9000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .35s;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal{background:var(--bg);border:1px solid var(--border);border-radius:32px;padding:36px;width:100%;max-width:760px;max-height:90vh;overflow-y:auto;position:relative;box-shadow:0 40px 80px rgba(0,0,0,.5);display:grid;grid-template-columns:230px 1fr;gap:28px;transform:translateY(30px) scale(.96);transition:transform .4s cubic-bezier(.175,.885,.32,1.275);}
+.modal-overlay.open .modal{transform:none;}
+.modal-close{position:absolute;top:16px;right:16px;width:36px;height:36px;background:rgba(255,255,255,.07);border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.15rem;color:var(--text);transition:.2s;}
+.modal-close:hover{background:var(--red);color:#fff;}
+.modal-cover{width:100%;height:280px;border-radius:18px;object-fit:cover;box-shadow:0 14px 30px rgba(0,0,0,.3);}
+.qr-wrap{margin-top:14px;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.05);padding:8px 12px;border-radius:14px;font-size:.75rem;font-weight:700;color:var(--muted);}
+#qrcode{background:#fff;padding:4px;border-radius:6px;}
+.modal-title{font-size:1.8rem;font-weight:900;line-height:1.2;margin-bottom:6px;}
+.modal-author{color:var(--blue);font-weight:700;font-size:1rem;margin-bottom:14px;}
+.modal-desc{color:var(--muted);font-size:.92rem;line-height:1.6;margin-bottom:20px;}
+.modal-stars{display:flex;gap:4px;margin-bottom:18px;}
+.star{font-size:1.4rem;color:rgba(255,255,255,.15);cursor:pointer;transition:.2s;}
+.star.active,.star:hover~.star{color:var(--gold);}
+.modal-actions{display:flex;gap:12px;flex-wrap:wrap;}
+.modal-actions .btn-primary{flex:1;}
+.modal-actions .btn-ghost{padding:13px 18px;}
+.modal-tag{display:inline-block;background:rgba(41,151,255,.1);border:1px solid rgba(41,151,255,.18);color:var(--blue);padding:3px 11px;border-radius:12px;font-size:.76rem;font-weight:700;margin:0 4px 8px 0;}
 
-        .modal-actions { display: flex; gap: 12px; margin-top: 20px; }
-        .btn-action-primary { flex: 1; padding: 14px; background: var(--accent-gradient); color: white; border: none; border-radius: 22px; font-weight: 800; font-size: 0.95rem; cursor: pointer; text-align: center; text-decoration: none; }
-        .btn-action-secondary { padding: 14px 20px; background: var(--glass-btn-bg); border: 1px solid var(--border-color); color: var(--text-main); border-radius: 22px; font-weight: 700; font-size: 0.9rem; cursor: pointer; }
+/* ─────────────────────────────────────────
+   AI CHAT
+───────────────────────────────────────── */
+.ai-fab{position:fixed;bottom:28px;right:28px;background:var(--grad);color:#fff;border:none;border-radius:36px;padding:13px 22px;font-weight:800;font-size:.95rem;display:flex;align-items:center;gap:9px;box-shadow:0 14px 35px rgba(0,113,227,.42);z-index:1500;transition:.3s;}
+.ai-fab:hover{transform:scale(1.05) translateY(-2px);}
+.ai-panel{position:fixed;bottom:82px;right:28px;width:365px;height:470px;background:var(--surface);backdrop-filter:blur(30px);border:1px solid var(--border);border-radius:26px;box-shadow:0 28px 65px rgba(0,0,0,.45);z-index:1499;display:none;flex-direction:column;overflow:hidden;}
+.ai-panel.open{display:flex;}
+.ai-head{background:rgba(255,255,255,.05);padding:14px 18px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:1rem;}
+.ai-body{flex-grow:1;padding:16px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;}
+.ai-msg{padding:11px 15px;border-radius:18px;font-size:.88rem;max-width:88%;line-height:1.45;}
+.ai-msg.bot{background:rgba(41,151,255,.14);border:1px solid rgba(41,151,255,.2);align-self:flex-start;}
+.ai-msg.user{background:var(--grad);color:#fff;align-self:flex-end;}
+.typing{display:flex;gap:5px;align-items:center;padding:11px 15px;background:rgba(41,151,255,.1);border-radius:18px;align-self:flex-start;}
+.typing span{width:7px;height:7px;background:var(--blue);border-radius:50%;animation:dot 1.2s infinite;}
+.typing span:nth-child(2){animation-delay:.2s;}
+.typing span:nth-child(3){animation-delay:.4s;}
+@keyframes dot{0%,80%,100%{transform:scale(0);}40%{transform:scale(1);}}
+.ai-foot{padding:12px;border-top:1px solid var(--border);display:flex;gap:9px;}
+.ai-input{flex-grow:1;background:rgba(255,255,255,.06);border:1px solid var(--border);padding:10px 14px;border-radius:var(--radius-pill);color:var(--text);outline:none;font-size:.88rem;}
+.ai-send{background:var(--blue);color:#fff;border:none;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 
-        footer { background: var(--card-bg); border-top: 1px solid var(--border-color); padding: 40px 5vw 30px; text-align: center; z-index: 5; }
+/* ─────────────────────────────────────────
+   TOAST NOTIFICATIONS
+───────────────────────────────────────── */
+.toast-stack{position:fixed;top:90px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:9px;pointer-events:none;}
+.toast{background:var(--surface);backdrop-filter:blur(20px);border:1px solid var(--blue);padding:12px 18px;border-radius:18px;box-shadow:0 12px 30px rgba(0,0,0,.35);display:flex;align-items:center;gap:10px;font-size:.88rem;font-weight:700;animation:toastIn .35s forwards;pointer-events:all;}
+@keyframes toastIn{from{opacity:0;transform:translateX(100%);}to{opacity:1;transform:translateX(0);}}
 
-        @media (max-width: 850px) {
-            .gami-grid { grid-template-columns: 1fr; }
-            .modal-card { grid-template-columns: 1fr; }
-            .nav-links { display: none; }
-        }
+/* ─────────────────────────────────────────
+   RECOMMENDATION BANNER
+───────────────────────────────────────── */
+.recom-banner{background:rgba(41,151,255,.08);border:1px solid rgba(41,151,255,.22);border-radius:var(--radius-card);padding:24px 32px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;}
+.recom-pills{display:flex;gap:9px;flex-wrap:wrap;margin-top:10px;}
+.recom-pill{background:rgba(41,151,255,.12);border:1px solid rgba(41,151,255,.2);color:var(--blue);padding:5px 14px;border-radius:var(--radius-pill);font-size:.82rem;font-weight:700;cursor:pointer;transition:.25s;}
+.recom-pill:hover{background:var(--blue);color:#fff;}
+
+/* ─────────────────────────────────────────
+   NOTIFICATION CENTER
+───────────────────────────────────────── */
+.notif-list{display:flex;flex-direction:column;gap:12px;}
+.notif-item{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:16px 20px;display:flex;gap:14px;align-items:flex-start;transition:.3s;}
+.notif-item:hover{border-color:var(--border-hover);}
+.notif-icon{font-size:1.5rem;flex-shrink:0;margin-top:2px;}
+.notif-text{font-size:.88rem;font-weight:600;color:var(--muted);}
+.notif-text strong{color:var(--text);}
+.notif-time{font-size:.75rem;color:var(--muted);margin-top:3px;}
+.notif-dot{width:9px;height:9px;background:var(--blue);border-radius:50%;flex-shrink:0;margin-top:4px;}
+
+/* ─────────────────────────────────────────
+   READING REMINDER
+───────────────────────────────────────── */
+.reminder-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-card);padding:28px;box-shadow:var(--shadow);display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center;}
+.reminder-input{padding:11px 18px;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:var(--radius-pill);color:var(--text);font-size:.9rem;outline:none;width:100%;margin-top:10px;}
+
+/* ─────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────── */
+footer{background:var(--surface);border-top:1px solid var(--border);padding:46px 5vw 28px;position:relative;z-index:5;}
+.footer-inner{max-width:1260px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:36px;}
+.footer-logo{font-size:1.4rem;font-weight:900;margin-bottom:10px;}
+.footer-desc{color:var(--muted);font-size:.85rem;line-height:1.6;}
+.footer-col h4{font-size:.9rem;font-weight:800;margin-bottom:14px;}
+.footer-col a{display:block;color:var(--muted);font-size:.85rem;font-weight:600;margin-bottom:8px;transition:.25s;}
+.footer-col a:hover{color:var(--text);}
+.footer-bottom{max-width:1260px;margin:28px auto 0;padding-top:22px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-size:.82rem;color:var(--muted);font-weight:600;}
+
+/* ─────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────── */
+@media(max-width:900px){
+    .nav-links{display:none;}
+    .gami-grid{grid-template-columns:1fr;}
+    .modal{grid-template-columns:1fr;}
+    .featured-card{grid-template-columns:1fr;}
+    .featured-img{height:230px;}
+    .footer-inner{grid-template-columns:1fr 1fr;}
+    .profile-hero{grid-template-columns:1fr;text-align:center;}
+    .profile-stats{grid-template-columns:repeat(2,1fr);}
+    .hamburger{display:flex;}
+}
+@media(max-width:600px){
+    .hero h1{letter-spacing:-1.5px;}
+    .hero-stats{gap:12px;}
+    .stat-chip{padding:10px 18px;}
+    .books-grid{grid-template-columns:repeat(auto-fill,minmax(210px,1fr));}
+    .ai-panel{width:calc(100% - 40px);right:20px;}
+    .footer-inner{grid-template-columns:1fr;}
+    .profile-stats{grid-template-columns:repeat(2,1fr);}
+}
     </style>
 </head>
 <body>
+<div class="grid-bg"></div>
+<div class="ambient-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+</div>
+<canvas id="particle-canvas"></canvas>
+<div class="noise"></div>
 
-    <div class="grid-bg"></div>
-    <div class="noise-overlay"></div>
-    <div class="ambient-bg">
-        <div class="ambient-blob blob-1"></div>
-        <div class="ambient-blob blob-2"></div>
+<!-- TOAST STACK -->
+<div class="toast-stack" id="toastStack"></div>
+
+<!-- ───────── NAVBAR ───────── -->
+<nav class="nav">
+    <a href="javascript:void(0)" class="logo" onclick="showPage('home')">
+        Kutubxona <span class="logo-badge">Beta</span>
+    </a>
+    <ul class="nav-links">
+        <li><a href="javascript:void(0)" onclick="showPage('home')">🏠 Bosh Sahifa</a></li>
+        <li><a href="javascript:void(0)" onclick="showPage('catalog')">📚 Katalog</a></li>
+        <li><a href="javascript:void(0)" onclick="showPage('audio')">🎧 Audio</a></li>
+        <li><a href="javascript:void(0)" onclick="showPage('gamification')">🏆 Reyting</a></li>
+        <li><a href="javascript:void(0)" onclick="showPage('profile')">👤 Profil</a></li>
+        <li><a href="javascript:void(0)" onclick="showPage('pricing')">💳 Tariflar</a></li>
+    </ul>
+    <div class="nav-right">
+        <div class="streak-pill">🔥 <span id="streakNum">12</span> Kun</div>
+        <button class="icon-btn" onclick="showPage('notifications')" title="Bildirishnomalar">🔔</button>
+        <div id="userInfoContainer"></div>
+        <button class="icon-btn theme-toggle" onclick="toggleTheme()" id="themeIcon">🌙</button>
     </div>
-    <canvas id="particle-canvas"></canvas>
+</nav>
 
-    <div class="toast-container" id="toastContainer"></div>
+<!-- ═══════════════════════════════════
+     PAGE: HOME
+════════════════════════════════════ -->
+<div class="page active" id="page-home">
 
-    <!-- NAVBAR -->
-    <nav>
-        <a href="index.html" class="logo">
-            Kutubxona <span>Raqamli Portal</span>
-        </a>
-        <ul class="nav-links">
-            <li><a href="#gamification">Gamifikatsiya & Leaderboard</a></li>
-            <li><a href="#recommendations">AI Tavsiyalar</a></li>
-            <li><a href="#catalog">Katalog</a></li>
-        </ul>
-        <div class="nav-right">
-            <div class="streak-badge" title="Ketma-ket kunlik o'qish">
-                🔥 <span id="streakDays">12</span> Kun Streak
-            </div>
-            <div id="userInfoContainer"></div>
-            <button class="theme-toggle" onclick="toggleTheme()" id="themeIcon">🌙</button>
-        </div>
-    </nav>
-
-    <!-- HERO SECTION -->
+    <!-- HERO -->
     <section class="hero">
-        <div class="hero-badge">
-            <span>🏆</span> Gamifikatsiya, AQLLI TAVSIYA VA RAQAMLI KUTUBXONA
+        <div class="hero-badge">📚 O'zbekistonning Eng Zamonaviy Raqamli Kutubxonasi</div>
+        <h1>Kitob O'qing, Fikr Yuring,<br><span class="grad-text">Dunyo O'zgaring.</span></h1>
+
+        <!-- MOTIVATIONAL QUOTES ROTATOR -->
+        <div class="quote-box" id="quoteBox">
+            <div class="quote-text" id="quoteText"></div>
+            <div class="quote-author" id="quoteAuthor"></div>
+            <div class="quote-dots" id="quoteDots"></div>
         </div>
-        <h1>Kitob O'qing, Ball Yiging va <br><span>Top Dasturiy Yetakchiga Aylaning!</span></h1>
-        
-        <!-- SEARCH BAR -->
-        <div class="search-box-wrapper">
-            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            <input type="text" id="searchInput" class="search-box" placeholder="Smart Search: Kitob nomi, muallif (masalan: Atomic, Rowling)..." oninput="filterBooks()">
+
+        <!-- SEARCH -->
+        <div class="search-wrap">
+            <svg class="search-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" class="search-box" id="homeSearch" placeholder="Smart Search: Kitob nomi, muallif, mavzu..." oninput="handleHomeSearch()">
         </div>
-    </section>
 
-    <!-- GAMIFICATION & LEADERBOARD SECTION -->
-    <section class="gamification-section" id="gamification">
-        <div class="gami-grid">
-            
-            <!-- LEADERBOARD CARD -->
-            <div class="gami-card">
-                <div class="gami-title">
-                    <span>🏆 Top Kitobxonlar (Leaderboard)</span>
-                    <span style="font-size: 0.85rem; color: var(--accent-blue);">Oylik Reyting</span>
-                </div>
-                <div class="lb-list">
-                    <div class="lb-item">
-                        <div class="lb-left">
-                            <span class="lb-rank">🥇</span>
-                            <span class="lb-name">Ali Valiyev (Expert Reader)</span>
-                        </div>
-                        <span class="lb-pts">3,200 ball</span>
-                    </div>
-                    <div class="lb-item">
-                        <div class="lb-left">
-                            <span class="lb-rank">🥈</span>
-                            <span class="lb-name">Vali Jasurov (Intermediate)</span>
-                        </div>
-                        <span class="lb-pts">2,800 ball</span>
-                    </div>
-                    <div class="lb-item">
-                        <div class="lb-left">
-                            <span class="lb-rank">🥉</span>
-                            <span class="lb-name">Hasan Umarov (Pro Reader)</span>
-                        </div>
-                        <span class="lb-pts">2,500 ball</span>
-                    </div>
-                </div>
+        <!-- STATS -->
+        <div class="hero-stats">
+            <div class="stat-chip"><div class="stat-num" id="cnt1">0</div><div class="stat-lbl">Elektron Kitoblar</div></div>
+            <div class="stat-chip"><div class="stat-num" id="cnt2">0</div><div class="stat-lbl">Audio Kitoblar</div></div>
+            <div class="stat-chip"><div class="stat-num" id="cnt3">0</div><div class="stat-lbl">Aktiv Kitobxonlar</div></div>
+            <div class="stat-chip"><div class="stat-num" id="cnt4">0</div><div class="stat-lbl">Yuklab Olishlar</div></div>
+        </div>
 
-                <!-- CONTRIBUTION HEATMAP -->
-                <div class="heatmap-container">
-                    <div class="heatmap-title">📅 Kunlik O'qish Faolligi (Reading Activity Calendar)</div>
-                    <div class="heatmap-grid" id="heatmapGrid"></div>
-                </div>
-            </div>
-
-            <!-- BADGES CARD -->
-            <div class="gami-card">
-                <div class="gami-title">
-                    <span>🎖 Yutuq va Badgelar</span>
-                    <span style="font-size: 0.85rem; color: var(--accent-blue);">4 / 12 Olingan</span>
-                </div>
-                <div class="badges-grid">
-                    <div class="badge-box" onclick="showToast('📘 Birinchi Kitob badge olindi!')">
-                        <div class="badge-icon">📘</div>
-                        <div class="badge-name">Birinchi Kitob</div>
-                        <div class="badge-desc">1-kitobni bitirganda</div>
-                    </div>
-                    <div class="badge-box" onclick="showToast('📚 10 ta Kitob badge olindi!')">
-                        <div class="badge-icon">📚</div>
-                        <div class="badge-name">Kutobxon</div>
-                        <div class="badge-desc">10 ta kitob o'qilganda</div>
-                    </div>
-                    <div class="badge-box" onclick="showToast('🔥 30 Kunlik Streak olindi!')">
-                        <div class="badge-icon">🔥</div>
-                        <div class="badge-name">Matonatli</div>
-                        <div class="badge-desc">30 kun ketma-ket</div>
-                    </div>
-                    <div class="badge-box" onclick="showToast('🏆 Top Reader badge olindi!')">
-                        <div class="badge-icon">🏆</div>
-                        <div class="badge-name">Top Reader</div>
-                        <div class="badge-desc">Top 3 talikka kirganda</div>
-                    </div>
-                </div>
-            </div>
-
+        <!-- CTA -->
+        <div class="hero-cta">
+            <button class="btn-primary" onclick="showPage('catalog')">📚 Kitoblarni Ko'rish</button>
+            <button class="btn-ghost" onclick="showPage('audio')">🎧 Audio Kutubxona</button>
         </div>
     </section>
 
-    <!-- AI RECOMMENDATION SECTION -->
-    <section class="recom-section" id="recommendations">
-        <div class="recom-card">
-            <div class="recom-info">
-                <h3>🤖 Aqlli AI Tavsiya Tizimi</h3>
-                <p>Siz <b>"Atomic Habits"</b> kitobini o'qigansiz. Shunga o'xshash tavsiyalarimiz: <b>Deep Work</b>, <b>The Power of Habit</b>, <b>Essentialism</b>.</p>
+    <!-- FEATURED BOOK OF THE WEEK -->
+    <section class="section">
+        <div class="section-inner">
+            <div class="featured-card">
+                <span class="featured-badge">🔥 Hafta Tanlovi</span>
+                <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=800&q=80" class="featured-img" alt="Featured">
+                <div>
+                    <div class="modal-tag">IT & Dasturlash</div>
+                    <div class="modal-tag">⭐ 5.0</div>
+                    <h2 style="font-size:2rem;font-weight:900;margin:10px 0 6px;">Clean Code: Pokiza Kod Sirlari</h2>
+                    <div style="color:var(--blue);font-weight:700;margin-bottom:12px;">Robert C. Martin (Uncle Bob)</div>
+                    <p class="featured-quote">"Yomon dasturchi ham kompyuter tushunadigan kod yozishi mumkin. Yaxshi dasturchi esa insonlar tushunadigan kod yozadi."</p>
+                    <div class="featured-actions">
+                        <button class="btn-primary" onclick="openBookModal(2)">Kitobni O'qish 📖</button>
+                        <button class="btn-ghost" onclick="showToast('📥 PDF yuklanmoqda...')">PDF Yuklab Olish</button>
+                    </div>
+                </div>
             </div>
-            <button class="auth-nav-btn" onclick="toggleAiChat()">AI bilan Suhbatlashish 💬</button>
         </div>
     </section>
 
-    <!-- CATALOG SECTION -->
-    <section class="catalog-section" id="catalog">
-        <div class="section-header">
-            <h2 class="section-title">Kitoblar Katalogi</h2>
-            <div class="categories-wrapper">
-                <button class="cat-pill active" onclick="setCategory('all', this)">Barchasi</button>
-                <button class="cat-pill" onclick="setCategory('IT & Dasturlash', this)">IT & Dasturlash</button>
-                <button class="cat-pill" onclick="setCategory('Badiiy', this)">Badiiy Adabiyot</button>
-                <button class="cat-pill" onclick="setCategory('Biznes', this)">Biznes & Moliya</button>
+    <!-- AI RECOMMENDATION -->
+    <section class="section" style="padding-top:0;">
+        <div class="section-inner">
+            <div class="recom-banner">
+                <div>
+                    <h3 style="font-size:1.2rem;font-weight:900;margin-bottom:4px;">🤖 AI Sizga Tavsiya Qiladi</h3>
+                    <p style="color:var(--muted);font-size:.88rem;">Siz <b>"Atomic Habits"</b>ni o'qigansiz. Shunga o'xshash kitoblar:</p>
+                    <div class="recom-pills">
+                        <span class="recom-pill" onclick="showPage('catalog')">Deep Work</span>
+                        <span class="recom-pill" onclick="showPage('catalog')">The Power of Habit</span>
+                        <span class="recom-pill" onclick="showPage('catalog')">Essentialism</span>
+                        <span class="recom-pill" onclick="showPage('catalog')">Flow</span>
+                    </div>
+                </div>
+                <button class="btn-primary" onclick="toggleAiChat()">AI bilan Gaplash 💬</button>
             </div>
         </div>
-
-        <div class="books-grid" id="booksGrid"></div>
     </section>
 
-    <!-- FLOATING AI CHAT WIDGET -->
-    <button class="ai-widget-btn" onclick="toggleAiChat()">
-        <span>🤖</span> AI Kitobxon Yordamchi
-    </button>
+    <!-- TRENDING BOOKS PREVIEW (3 cards) -->
+    <section class="section" style="padding-top:0;">
+        <div class="section-inner">
+            <div class="section-head">
+                <div>
+                    <div class="section-title">🔥 Trenddagi Kitoblar</div>
+                    <div class="section-sub">Bu hafta eng ko'p o'qilganlar</div>
+                </div>
+                <button class="see-all" onclick="showPage('catalog')">Barchasini ko'rish →</button>
+            </div>
+            <div class="books-grid" id="trendingGrid"></div>
+        </div>
+    </section>
 
-    <div class="ai-chat-modal" id="aiChatModal">
-        <div class="ai-chat-header">
-            <span>🤖 AI Assistant</span>
-            <span style="cursor: pointer;" onclick="toggleAiChat()">&times;</span>
+</div><!-- /page-home -->
+
+<!-- ═══════════════════════════════════
+     PAGE: CATALOG
+════════════════════════════════════ -->
+<div class="page" id="page-catalog">
+    <section class="section" style="padding-top:calc(var(--nav-h) + 50px);">
+        <div class="section-inner">
+            <div class="section-head">
+                <div>
+                    <div class="section-title">📚 Kitoblar Katalogi</div>
+                    <div class="section-sub">1,450+ elektron kitob va qo'llanmalar</div>
+                </div>
+            </div>
+
+            <!-- SEARCH -->
+            <div class="search-wrap" style="margin-bottom:24px;">
+                <svg class="search-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" class="search-box" id="catalogSearch" placeholder="Smart Search: atomic, rowling, java..." oninput="filterCatalog()">
+            </div>
+
+            <!-- CATEGORY PILLS -->
+            <div class="cat-bar" id="catBar">
+                <button class="cat-pill active" onclick="setCategory('all',this)">Barchasi</button>
+                <button class="cat-pill" onclick="setCategory('IT & Dasturlash',this)">💻 IT & Dasturlash</button>
+                <button class="cat-pill" onclick="setCategory('Badiiy',this)">📖 Badiiy Adabiyot</button>
+                <button class="cat-pill" onclick="setCategory('Biznes',this)">💼 Biznes & Moliya</button>
+                <button class="cat-pill" onclick="setCategory('Shaxsiy Rivojlanish',this)">🌱 Shaxsiy Rivojlanish</button>
+                <button class="cat-pill" onclick="setCategory('Psixologiya',this)">🧠 Psixologiya</button>
+                <button class="cat-pill" onclick="setCategory('Ilmiy',this)">🔬 Ilmiy</button>
+            </div>
+
+            <!-- SORT + FILTER ROW -->
+            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:26px;">
+                <button class="cat-pill active" id="sortNew" onclick="setSortMode('new',this)">🆕 Yangi</button>
+                <button class="cat-pill" id="sortTop" onclick="setSortMode('top',this)">🏆 Eng Ko'p O'qilgan</button>
+                <button class="cat-pill" id="sortRating" onclick="setSortMode('rating',this)">⭐ Reyting</button>
+                <button class="cat-pill" id="sortTrend" onclick="setSortMode('trend',this)">🔥 Trend</button>
+            </div>
+
+            <div class="books-grid" id="catalogGrid"></div>
         </div>
-        <div class="ai-chat-body" id="aiChatBody">
-            <div class="ai-msg bot">Salom! Men sizning AI Yordamchingizman. Qaysi janr yoki mavzudagi kitobni o'qimoqchisiz?</div>
+    </section>
+</div><!-- /page-catalog -->
+
+<!-- ═══════════════════════════════════
+     PAGE: AUDIO KITOBLAR
+════════════════════════════════════ -->
+<div class="page" id="page-audio">
+    <section class="section" style="padding-top:calc(var(--nav-h) + 50px);">
+        <div class="section-inner">
+            <div class="section-head">
+                <div>
+                    <div class="section-title">🎧 Audio Kutubxona</div>
+                    <div class="section-sub">350+ audio kitob — O'zbek va Jahon tillarida</div>
+                </div>
+            </div>
+            <div class="audio-grid" id="audioGrid"></div>
+
+            <!-- READING REMINDER -->
+            <div style="margin-top:40px;">
+                <div class="section-title" style="font-size:1.4rem;margin-bottom:20px;">⏰ Kunlik O'qish Eslatmasi</div>
+                <div class="reminder-card">
+                    <div>
+                        <h3 style="font-weight:800;margin-bottom:6px;">Har kuni o'qish vaqtini belgilang</h3>
+                        <p style="color:var(--muted);font-size:.88rem;">"Bugun 20 sahifa o'qishni unutmang!" degan eslatma vaqtingizga yuboriladi.</p>
+                        <input type="time" class="reminder-input" id="reminderTime" value="21:00">
+                    </div>
+                    <button class="btn-primary" onclick="setReminder()">⏰ Eslatmani Yoqish</button>
+                </div>
+            </div>
         </div>
-        <div class="ai-chat-footer">
-            <input type="text" id="aiInput" class="ai-input" placeholder="AI-ga savol bering..." onkeypress="if(event.key==='Enter') sendAiMessage()">
-            <button class="ai-send-btn" onclick="sendAiMessage()">➔</button>
+    </section>
+</div><!-- /page-audio -->
+
+<!-- ═══════════════════════════════════
+     PAGE: GAMIFICATION
+════════════════════════════════════ -->
+<div class="page" id="page-gamification">
+    <section class="section" style="padding-top:calc(var(--nav-h) + 50px);">
+        <div class="section-inner">
+            <div class="section-title" style="margin-bottom:28px;">🏆 Gamifikatsiya va Reyting Tizimi</div>
+            <div class="gami-grid">
+
+                <!-- LEADERBOARD -->
+                <div class="gami-card">
+                    <div class="gami-card-title">
+                        <span>🏆 Oylik Peshqadamlar (Leaderboard)</span>
+                        <span style="font-size:.8rem;color:var(--blue);">Iyul 2026</span>
+                    </div>
+                    <div class="lb-list" id="lbList"></div>
+
+                    <!-- HEATMAP -->
+                    <div class="heatmap-wrap">
+                        <div class="heatmap-lbl">📅 Kunlik O'qish Taqvimi (GitHub Style)</div>
+                        <div class="heatmap" id="heatmapGrid"></div>
+                    </div>
+                </div>
+
+                <!-- BADGES -->
+                <div class="gami-card">
+                    <div class="gami-card-title">
+                        <span>🎖 Yutuq va Badgelar</span>
+                        <span style="font-size:.8rem;color:var(--blue);">4 / 12 Olingan</span>
+                    </div>
+                    <div class="badges-grid" id="badgesGrid"></div>
+
+                    <!-- READING GOAL MINI -->
+                    <div style="margin-top:20px;padding-top:18px;border-top:1px solid var(--border);">
+                        <div style="font-size:.82rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:10px;">Yillik Maqsad (2026)</div>
+                        <div style="display:flex;justify-content:space-between;font-weight:800;font-size:.9rem;margin-bottom:6px;"><span>O'qilgan: <span style="color:var(--green);">32 ta</span></span><span>Maqsad: 50 ta</span></div>
+                        <div class="goal-bar-wrap"><div class="goal-bar" style="width:64%"></div></div>
+                        <div style="font-size:.78rem;color:var(--muted);margin-top:5px;">64% bajarildi — Maqsadga 18 ta kitob qoldi!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div><!-- /page-gamification -->
+
+<!-- ═══════════════════════════════════
+     PAGE: PROFILE
+════════════════════════════════════ -->
+<div class="page" id="page-profile">
+    <section class="section" style="padding-top:calc(var(--nav-h) + 50px);">
+        <div class="section-inner">
+            <div class="profile-hero">
+                <div class="profile-avatar" id="profileAvatar">A</div>
+                <div>
+                    <div class="profile-name" id="profileName">Foydalanuvchi</div>
+                    <div class="profile-level">⭐ Expert Reader (Level 12)</div>
+                    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;">
+                        <div class="streak-pill">🔥 12 Kun Streak</div>
+                        <div style="background:rgba(48,209,88,.12);border:1px solid rgba(48,209,88,.3);color:var(--green);padding:6px 14px;border-radius:var(--radius-pill);font-weight:800;font-size:.82rem;">📊 3,200 Ball</div>
+                        <div style="background:rgba(191,90,242,.12);border:1px solid rgba(191,90,242,.3);color:var(--purple);padding:6px 14px;border-radius:var(--radius-pill);font-weight:800;font-size:.82rem;">🏆 Top 3</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROFILE STATS -->
+            <div class="profile-stats">
+                <div class="pstat-box"><div class="pstat-num">32</div><div class="pstat-lbl">O'qilgan Kitoblar</div></div>
+                <div class="pstat-box"><div class="pstat-num">12</div><div class="pstat-lbl">Kunlik Streak</div></div>
+                <div class="pstat-box"><div class="pstat-num">47</div><div class="pstat-lbl">Yozilgan Sharhlar</div></div>
+                <div class="pstat-box"><div class="pstat-num">8</div><div class="pstat-lbl">Sevimli Kitoblar</div></div>
+            </div>
+
+            <!-- READING GOAL -->
+            <div class="goal-section" style="margin-top:22px;">
+                <h3>🎯 Yillik O'qish Maqsadi</h3>
+                <div style="display:flex;justify-content:space-between;color:var(--muted);font-size:.88rem;margin-bottom:4px;"><span>O'qilgan: 32 ta kitob</span><span>Maqsad: 50 ta kitob</span></div>
+                <div class="goal-bar-wrap"><div class="goal-bar" style="width:64%"></div></div>
+                <div class="goal-lbl"><span>64% bajarildi</span><span>18 ta qoldi 📚</span></div>
+
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px;">
+                    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:14px;text-align:center;">
+                        <div style="font-size:1.5rem;font-weight:900;color:var(--blue);">4,820</div>
+                        <div style="font-size:.75rem;color:var(--muted);font-weight:700;margin-top:3px;">O'qilgan Sahifalar</div>
+                    </div>
+                    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:14px;text-align:center;">
+                        <div style="font-size:1.5rem;font-weight:900;color:var(--orange);">48h 30m</div>
+                        <div style="font-size:.75rem;color:var(--muted);font-weight:700;margin-top:3px;">Umumiy Vaqt</div>
+                    </div>
+                    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:16px;padding:14px;text-align:center;">
+                        <div style="font-size:1.5rem;font-weight:900;color:var(--green);">6.2</div>
+                        <div style="font-size:.75rem;color:var(--muted);font-weight:700;margin-top:3px;">O'rtacha Reyting</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAVORITES LIST -->
+            <div class="goal-section">
+                <h3>❤️ Sevimli Kitoblar</h3>
+                <div style="margin-top:14px;display:flex;flex-direction:column;gap:10px;" id="favList">
+                    <div style="color:var(--muted);font-size:.9rem;">Hali sevimlilar ro'yxatiga kitob qo'shilmagan. Katalogdan kitob qo'shing!</div>
+                </div>
+            </div>
+
+            <!-- READING LIST -->
+            <div class="goal-section">
+                <h3>📑 Keyin O'qiyman (Reading List)</h3>
+                <div style="margin-top:14px;display:flex;flex-direction:column;gap:10px;" id="readLaterList">
+                    <div style="color:var(--muted);font-size:.9rem;">"Keyin o'qiyman" ro'yxatingiz bo'sh.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div><!-- /page-profile -->
+
+<!-- ═══════════════════════════════════
+     PAGE: NOTIFICATIONS
+════════════════════════════════════ -->
+<div class="page" id="page-notifications">
+    <section class="section" style="padding-top:calc(var(--nav-h) + 50px);">
+        <div class="section-inner" style="max-width:760px;">
+            <div class="section-title" style="margin-bottom:24px;">🔔 Bildirishnomalar Markazi</div>
+            <div class="notif-list" id="notifList"></div>
+        </div>
+    </section>
+</div><!-- /page-notifications -->
+
+<!-- ═══════════════════════════════════
+     PAGE: PRICING
+════════════════════════════════════ -->
+<div class="page" id="page-pricing">
+    <section class="section" style="padding-top:calc(var(--nav-h) + 50px);">
+        <div class="section-inner">
+            <div style="text-align:center;margin-bottom:40px;">
+                <div class="section-title">💳 Obuna Tariflari</div>
+                <p style="color:var(--muted);margin-top:10px;font-size:.95rem;">O'zingizga mos paketni tanlang va cheksiz imkoniyatlarga ega bo'ling.</p>
+            </div>
+            <div class="plans-grid" id="plansGrid"></div>
+
+            <!-- FAQ -->
+            <div style="margin-top:60px;">
+                <div class="section-title" style="text-align:center;margin-bottom:28px;">❓ Ko'p Beriladigan Savollar</div>
+                <div class="faq-list" id="faqList"></div>
+            </div>
+        </div>
+    </section>
+</div><!-- /page-pricing -->
+
+<!-- ═══════════════════════════════════
+     BOOK DETAIL MODAL
+════════════════════════════════════ -->
+<div class="modal-overlay" id="bookModal">
+    <div class="modal">
+        <button class="modal-close" onclick="closeBookModal()">&times;</button>
+        <div>
+            <img id="modalCover" src="" class="modal-cover" alt="">
+            <div class="qr-wrap">
+                <div id="qrcode"></div>
+                <span>QR kod bilan ulashing</span>
+            </div>
+        </div>
+        <div>
+            <div id="modalTags"></div>
+            <div class="modal-title" id="modalTitle">Kitob Nomi</div>
+            <div class="modal-author" id="modalAuthor">Muallif</div>
+            <p class="modal-desc" id="modalDesc">Kitob haqida ma'lumot...</p>
+
+            <!-- STARS RATING -->
+            <div style="font-size:.82rem;font-weight:700;color:var(--muted);margin-bottom:6px;">Sizning bahoyingiz:</div>
+            <div class="modal-stars" id="modalStars">
+                <span class="star" onclick="setModalRating(1)">★</span>
+                <span class="star" onclick="setModalRating(2)">★</span>
+                <span class="star" onclick="setModalRating(3)">★</span>
+                <span class="star" onclick="setModalRating(4)">★</span>
+                <span class="star" onclick="setModalRating(5)">★</span>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn-primary" onclick="readOnline()">📖 Onlayn O'qish</button>
+                <button class="btn-ghost" onclick="addFavorite()">❤️ Sevimli</button>
+                <button class="btn-ghost" onclick="addReadLater()">📑 Keyinroq</button>
+                <button class="btn-ghost" onclick="reserveBook()">📅 Bron</button>
+            </div>
+
+            <!-- COMMENT BOX -->
+            <div style="margin-top:18px;border-top:1px solid var(--border);padding-top:16px;">
+                <div style="font-size:.88rem;font-weight:800;margin-bottom:8px;">💬 Sharh Yozing</div>
+                <textarea id="commentInput" placeholder="Kitob haqida fikringiz..." style="width:100%;padding:10px 14px;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:14px;color:var(--text);font-size:.85rem;resize:vertical;min-height:72px;outline:none;"></textarea>
+                <button class="btn-primary" style="margin-top:8px;padding:10px 20px;font-size:.85rem;" onclick="submitComment()">Yuborish ✓</button>
+            </div>
         </div>
     </div>
+</div>
 
-    <!-- BOOK DETAIL & QR CODE MODAL -->
-    <div class="modal-overlay" id="bookModal">
-        <div class="modal-card">
-            <button class="close-modal" onclick="closeBookModal()">&times;</button>
-            <div>
-                <img id="modalCover" src="" class="modal-cover-img" alt="Cover">
-                <div class="qr-box">
-                    <div id="qrcode"></div>
-                    <span>QR Kod orqali do'stlar bilan ulashing</span>
-                </div>
-            </div>
-            <div class="modal-info">
-                <h2 id="modalTitle">Kitob Nomi</h2>
-                <div id="modalAuthor" style="color: var(--accent-blue); font-weight: 700; margin-bottom: 12px;">Muallif</div>
-                <p id="modalDesc" style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.5; margin-bottom: 20px;">Kitob haqida ma'lumot...</p>
-                <div class="modal-actions">
-                    <button class="btn-action-primary" onclick="readOnline()">Onlayn O'qish 📖</button>
-                    <button class="btn-action-secondary" onclick="reserveBook()">Bron qilish (Navbat) 📅</button>
-                </div>
-            </div>
+<!-- ═══════════════════════════════════
+     AI CHAT PANEL
+════════════════════════════════════ -->
+<button class="ai-fab" onclick="toggleAiChat()">🤖 AI Yordamchi</button>
+<div class="ai-panel" id="aiPanel">
+    <div class="ai-head">
+        <span>🤖 AI Kitobxon</span>
+        <span style="cursor:pointer;" onclick="toggleAiChat()">&times;</span>
+    </div>
+    <div class="ai-body" id="aiBody">
+        <div class="ai-msg bot">Salom! Men AI Kitobxon yordamchingizman 📚<br>Qaysi janr yoki mavzudagi kitob qidiryapsiz?</div>
+    </div>
+    <div class="ai-foot">
+        <input class="ai-input" id="aiInput" placeholder="Savol bering..." onkeypress="if(event.key==='Enter')sendAi()">
+        <button class="ai-send" onclick="sendAi()">➔</button>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-inner">
+        <div>
+            <div class="footer-logo">Kutubxona <span style="color:var(--blue)">Beta</span></div>
+            <div class="footer-desc">O'zbekistonning eng zamonaviy raqamli kutubxona platformasi. AI tavsiyalar, gamifikatsiya va premium kontent.</div>
+        </div>
+        <div class="footer-col">
+            <h4>Sahifalar</h4>
+            <a href="javascript:void(0)" onclick="showPage('home')">Bosh Sahifa</a>
+            <a href="javascript:void(0)" onclick="showPage('catalog')">Kitoblar Katalogi</a>
+            <a href="javascript:void(0)" onclick="showPage('audio')">Audio Kitoblar</a>
+            <a href="javascript:void(0)" onclick="showPage('gamification')">Reyting & Badges</a>
+        </div>
+        <div class="footer-col">
+            <h4>Xizmatlar</h4>
+            <a href="javascript:void(0)" onclick="showPage('pricing')">Obuna Tariflari</a>
+            <a href="javascript:void(0)" onclick="showPage('profile')">Mening Profilim</a>
+            <a href="javascript:void(0)" onclick="showPage('notifications')">Bildirishnomalar</a>
+            <a href="login/index.html">Tizimga Kirish</a>
+        </div>
+        <div class="footer-col">
+            <h4>Bog'lanish</h4>
+            <a href="#">📧 info@kutubxona.uz</a>
+            <a href="#">💬 Telegram: @kutubxona_bot</a>
+            <a href="#">📍 Toshkent, O'zbekiston</a>
         </div>
     </div>
+    <div class="footer-bottom">
+        <span>© 2026 Kutubxona. Barcha huquqlar himoyalangan.</span>
+        <span>Bilim chegarasiz — Kitob o'qing, dunyo o'zgaring. 📚</span>
+    </div>
+</footer>
 
-    <footer>
-        <div style="font-weight: 900; font-size: 1.5rem; margin-bottom: 8px;">Kutubxona <span>Raqamli Portal</span></div>
-        <div style="color: var(--text-muted); font-size: 0.9rem;">Gamifikatsiya, AI va Aqlli kitoblar tizimi. © 2026 Kutubxona.</div>
-    </footer>
+<!-- ═══════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════ -->
+<script>
+/* ── DATA ── */
+const BOOKS = [
+    { id:1, title:"Java Spring Boot Asoslari", author:"Jaloliddin Qodirov", category:"IT & Dasturlash", rating:4.9, progress:80, trend:true, isNew:true, cover:"https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=600&q=80", desc:"Spring Boot frameworkini 0 dan professional darajagacha o'rganish bo'yicha amaliy qo'llanma." },
+    { id:2, title:"Clean Code: Pokiza Kod", author:"Robert C. Martin", category:"IT & Dasturlash", rating:5.0, progress:45, trend:true, isNew:false, cover:"https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80", desc:"Professional dasturchilar uchun o'qilishi oson va toza kod yozish sirlari." },
+    { id:3, title:"Atomic Habits (Atom Odatlari)", author:"James Clear", category:"Shaxsiy Rivojlanish", rating:4.95, progress:90, trend:true, isNew:true, cover:"https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80", desc:"Kichik 1% o'zgarishlar orqali katta natijalarga erishish va ijobiy odatlar shakllantirish." },
+    { id:4, title:"O'tkan Kunlar", author:"Abdulla Qodiriy", category:"Badiiy", rating:4.9, progress:100, trend:false, isNew:false, cover:"https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&w=600&q=80", desc:"O'zbek adabiyotining eng mashhur tarixi romani. Otabek va Kumushning fojiali sevgisi." },
+    { id:5, title:"Boy Ota, Kambag'al Ota", author:"Robert Kiyosaki", category:"Biznes", rating:4.8, progress:55, trend:true, isNew:false, cover:"https://images.unsplash.com/photo-1592496431122-2349e0fbc666?auto=format&fit=crop&w=600&q=80", desc:"Moliyaviy savodxonlik, investitsiya va boylikni oshirish haqidagi jahon bestselleri." },
+    { id:6, title:"Algoritmlar va Ma'lumotlar Tuzilmasi", author:"Aditya Bhargava", category:"IT & Dasturlash", rating:4.85, progress:30, trend:false, isNew:true, cover:"https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=600&q=80", desc:"Visual va sodda usulda algoritmik fikrlashni shakllantiruvchi qo'llanma." },
+    { id:7, title:"Deep Work", author:"Cal Newport", category:"Shaxsiy Rivojlanish", rating:4.7, progress:0, trend:false, isNew:true, cover:"https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=600&q=80", desc:"Diqqatni jamlagan holda chuqur fikrlab ishlash usullari." },
+    { id:8, title:"Ikigai: Yaponcha Baxtning Siri", author:"Héctor García", category:"Psixologiya", rating:4.75, progress:0, trend:true, isNew:false, cover:"https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=600&q=80", desc:"Hayotdan zavq olish va o'z maqsadingizni topish haqidagi yapon falsafasi." },
+];
 
-    <script>
-        const sampleBooks = [
-            { id: 1, title: "Java Spring Boot Asoslari", author: "Jaloliddin Qodirov", category: "IT & Dasturlash", rating: "4.9", progress: 80, cover: "https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=600&q=80", desc: "Spring Boot frameworkini 0 dan mukammal o'rganish." },
-            { id: 2, title: "Clean Code: Pokiza Kod", author: "Robert C. Martin", category: "IT & Dasturlash", rating: "5.0", progress: 45, cover: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80", desc: "Professional dasturchilar uchun ideal kod yozish qo'llanmasi." },
-            { id: 3, title: "Atomic Habits (Atom Odatlari)", author: "James Clear", category: "Shaxsiy Rivojlanish", rating: "4.95", progress: 90, cover: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=600&q=80", desc: "Odatlarni shakllantirish va hayotni ijobiy tomonga o'zgartirish." },
-            { id: 4, title: "O'tkan Kunlar", author: "Abdulla Qodiriy", category: "Badiiy", rating: "4.9", progress: 100, cover: "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&w=600&q=80", desc: "Tarixiy o'zbek adabiyoti romani." }
-        ];
+const AUDIO_BOOKS = [
+    { id:1, title:"Atom Odatlari (Audio)", author:"James Clear • O'zbek tilida", dur:"5 soat 40 daqiqa", cover:"🎙" },
+    { id:2, title:"Boy Ota, Kambag'al Ota (Audio)", author:"Robert Kiyosaki • O'zbek tarjimasi", dur:"4 soat 15 daqiqa", cover:"🎧" },
+    { id:3, title:"O'tkan Kunlar (Radiospektakl)", author:"Abdulla Qodiriy • Professional Ovoz", dur:"8 soat 20 daqiqa", cover:"📻" },
+    { id:4, title:"Deep Work (Audio Darslik)", author:"Cal Newport • Ingliz tilida", dur:"6 soat 05 daqiqa", cover:"🔊" },
+    { id:5, title:"Ikigai (Audio Kitob)", author:"Héctor García • O'zbek tilida", dur:"3 soat 45 daqiqa", cover:"🎵" },
+    { id:6, title:"Clean Code (Audio)", author:"Robert C. Martin • Ingliz tilida", dur:"7 soat 15 daqiqa", cover:"💿" },
+];
 
-        let selectedCategory = 'all';
-        let activeBook = null;
-        const favorites = new Set();
+const QUOTES = [
+    { text:"Kitoblar eng yaxshi do'stlar. Ular seni hech qachon aldamaydi, hech qachon tark etmaydi.", author:"— Vladimir Lenin" },
+    { text:"Kuniga bir soat kitob o'qing. Bu sizni dunyodagi har qanday sohadagi ekspertga aylantiradi — 7 yil ichida.", author:"— Earl Nightingale" },
+    { text:"Kitob o'qimaydigan kishi o'qiy olmaydigan kishidan ko'ra afzalligiga ega emas.", author:"— Mark Twain" },
+    { text:"Bir kitob o'qigan yuz kishi bor, lekin uni his qilgan faqat bitta kishi.", author:"— Leo Tolstoy" },
+    { text:"O'qish — bu xotiraning mashqi, tafakkurning quroli va ruhning ozuqasi.", author:"— Francis Bacon" },
+    { text:"Eng yaxshi do'st — kitob. U doim haqiqatni aytadi va so'z qaytarmaydi.", author:"— Ernest Hemingway" },
+    { text:"Bitta kitob hayotingizni butunlay o'zgartirishi mumkin. O'shing.", author:"— Kutubxona" },
+];
 
-        function renderBooks() {
-            const grid = document.getElementById('booksGrid');
-            const search = document.getElementById('searchInput').value.toLowerCase();
-            
-            const filtered = sampleBooks.filter(book => {
-                const matchesCat = selectedCategory === 'all' || book.category === selectedCategory;
-                const matchesSearch = book.title.toLowerCase().includes(search) || book.author.toLowerCase().includes(search);
-                return matchesCat && matchesSearch;
-            });
+const LEADERBOARD = [
+    { rank:"🥇", name:"Ali Valiyev", level:"Expert Reader", pts:3200, streak:12 },
+    { rank:"🥈", name:"Vali Jasurov", level:"Intermediate", pts:2800, streak:8 },
+    { rank:"🥉", name:"Hasan Umarov", level:"Pro Reader", pts:2500, streak:15 },
+    { rank:"4️⃣", name:"Nodira Qosimova", level:"Advanced", pts:2200, streak:5 },
+    { rank:"5️⃣", name:"Sardor Toshmatov", level:"Beginner", pts:1900, streak:3 },
+];
 
-            grid.innerHTML = filtered.map(book => `
-                <div class="book-card">
-                    <button class="fav-heart-btn ${favorites.has(book.id)?'active':''}" onclick="toggleFav(event, ${book.id})">♥</button>
-                    <div class="book-cover-box" onclick="openBookModal(${book.id})">
-                        <span class="book-cat-badge">${book.category}</span>
-                        <img src="${book.cover}" alt="${book.title}">
-                    </div>
-                    <div class="book-info" onclick="openBookModal(${book.id})">
-                        <h3>${book.title}</h3>
-                        <div class="book-author">${book.author}</div>
-                        <div style="font-size: 0.8rem; color: var(--text-muted);">Jarayon: ${book.progress}%</div>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar-fill" style="width: ${book.progress}%"></div>
-                        </div>
-                    </div>
-                    <div class="book-footer">
-                        <div style="font-weight: 800; font-size: 0.9rem; color: #ffcc00;">⭐ ${book.rating}</div>
-                        <button class="read-btn" onclick="openBookModal(${book.id})">O'qish →</button>
-                    </div>
-                </div>
-            `).join('');
+const BADGES = [
+    { ico:"📘", nm:"Birinchi Qadam", ds:"1-kitobni bitirish", earned:true },
+    { ico:"📚", nm:"Kutubxonachi", ds:"10 ta kitob o'qish", earned:true },
+    { ico:"🔥", nm:"Matonatli", ds:"30 kun streak", earned:false },
+    { ico:"⭐", nm:"Sharh Ustasi", ds:"100 ta sharh yozish", earned:false },
+    { ico:"🏆", nm:"Top Reader", ds:"Top 3 talikka kirish", earned:true },
+    { ico:"🌙", nm:"Kechgi O'quvchi", ds:"Kechasi 50 sahifa", earned:true },
+    { ico:"🚀", nm:"Tezkor", ds:"1 kunda 100 sahifa", earned:false },
+    { ico:"💎", nm:"Premium", ds:"VIP a'zolik", earned:false },
+];
+
+const PLANS = [
+    { id:"free", name:"Bepul", price:"0", period:"so'm / oy", color:"", features:[
+        "5 ta elektron kitob o'qish","Kuniga 3 ta AI savol","Standart qidiruv","Asosiy statistika"
+    ], popular:false },
+    { id:"pro", name:"Pro Obuna", price:"29,000", period:"so'm / oy", color:"var(--blue)", features:[
+        "Cheksiz kitob va PDF yuklash","Cheksiz audio kitoblar","Kuniga 50 ta AI tavsiyasi","Reklamasiz tajriba","Badges va Leaderboard","Telegram bildirishnomalar"
+    ], popular:true },
+    { id:"vip", name:"VIP Unlimited", price:"49,000", period:"so'm / oy", color:"var(--purple)", features:[
+        "Cheksiz BARCHA imkoniyatlar","Shaxsiy AI Repetitor & Tutor","VIP Telegram yopiq guruh","Prioritet qo'llab-quvvatlash","Eksklyuziv yangi kitoblar","PDF Export va offline mode"
+    ], popular:false },
+];
+
+const FAQS = [
+    { q:"Kitoblarni yuklab olish bepulmi?", a:"Ha! Bepul tarifdagi foydalanuvchilar 5 ta kitobni bepul o'qishi mumkin. Pro va VIP obunachilari esa cheksiz yuklab olish imkoniyatiga ega bo'ladi." },
+    { q:"Audio kitoblarni qanday tinglash mumkin?", a:"Audio Kutubxona sahifasiga o'tib, play tugmasini bosing. Kitob to'g'ridan-to'g'ri saytda ijro etiladi va orqa fonda davom ettirish mumkin." },
+    { q:"Kitob bron qilish qanday ishlaydi?", a:"Agar siz istagan kitob boshqa kitobxonda bo'lsa, navbatga yozilasiz. Kitob qaytgach Telegram bot va email orqali xabar olasiz." },
+    { q:"Ro'yxatdan o'tish majburiymi?", a:"Yo'q. Bosh sahifani, katalogni va 5 ta kitobni ochish uchun ro'yxat shart emas. Lekin progress, favorites va AI tavsiyalar uchun kirish kerak." },
+    { q:"Badge va ball tizimi qanday ishlaydi?", a:"Har bir kitobni tugatganingizda ball yig'asiz. Maxsus shartlarni bajarib badge olasiz. Oylik leaderboard'da eng ko'p ball to'plagan 3 kishi sovg'a yutadi." },
+];
+
+const NOTIFICATIONS = [
+    { icon:"📚", title:"Yangi kitob qo'shildi", text:'"Deep Work" Cal Newport tomonidan kutubxonaga qo\'shildi.', time:"5 daqiqa oldin" },
+    { icon:"🔔", title:"Bron tasdiqlandi", text:'"Atomic Habits" bron qilingan kitob 3 kun ichida qaytadi.', time:"1 soat oldin" },
+    { icon:"🏆", title:"Badge olingdi!", text:'Siz "Top Reader" badge oldingiz! Tabriklaymiz 🎉', time:"Kecha" },
+    { icon:"⏰", title:"O'qish vaqti", text:"Bugun 20 sahifa o'qishni unutmang!", time:"2 soat oldin" },
+    { icon:"💳", title:"Obuna yangilandi", text:"Pro obunangiz yana 28 kun davom etadi.", time:"3 kun oldin" },
+];
+
+/* ── STATE ── */
+let currentCategory = 'all';
+let sortMode = 'new';
+let activeBook = null;
+const favorites = new Set();
+const readLater = new Set();
+let quoteIndex = 0;
+let quoteTimer = null;
+
+/* ── ROUTING (SPA Pages) ── */
+function showPage(name) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const page = document.getElementById('page-' + name);
+    if (page) {
+        page.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    // Lazy-init page content
+    if (name === 'gamification') { renderLeaderboard(); renderBadges(); renderHeatmap(); }
+    if (name === 'profile') { updateProfilePage(); }
+    if (name === 'notifications') { renderNotifications(); }
+    if (name === 'pricing') { renderPlans(); renderFaq(); }
+    if (name === 'audio') { renderAudio(); }
+    if (name === 'catalog') { renderCatalog(); }
+}
+
+/* ── QUOTE ROTATOR ── */
+function initQuotes() {
+    const dotsEl = document.getElementById('quoteDots');
+    dotsEl.innerHTML = QUOTES.map((_, i) => `<div class="quote-dot${i===0?' active':''}" onclick="goQuote(${i})"></div>`).join('');
+    showQuote(0);
+    quoteTimer = setInterval(() => { quoteIndex = (quoteIndex + 1) % QUOTES.length; showQuote(quoteIndex); }, 4500);
+}
+function showQuote(i) {
+    quoteIndex = i;
+    document.getElementById('quoteText').textContent = '"' + QUOTES[i].text + '"';
+    document.getElementById('quoteAuthor').textContent = QUOTES[i].author;
+    document.querySelectorAll('.quote-dot').forEach((d, idx) => d.classList.toggle('active', idx === i));
+}
+function goQuote(i) { clearInterval(quoteTimer); showQuote(i); quoteTimer = setInterval(() => { quoteIndex = (quoteIndex+1)%QUOTES.length; showQuote(quoteIndex); }, 4500); }
+
+/* ── COUNTER ANIMATION ── */
+function animCount(id, target, suffix='') {
+    let start = 0; const step = target / 60;
+    const el = document.getElementById(id);
+    const t = setInterval(() => {
+        start += step; if (start >= target) { start = target; clearInterval(t); }
+        el.textContent = Math.floor(start).toLocaleString('uz-UZ') + suffix;
+    }, 25);
+}
+
+/* ── BOOK CARD HTML ── */
+function bookCardHTML(book) {
+    return `
+    <div class="book-card" id="bcard-${book.id}">
+        <button class="fav-btn ${favorites.has(book.id)?'active':''}" onclick="toggleFav(event,${book.id})" title="Sevimlilarga qo'shish">♥</button>
+        <div class="cover-wrap" onclick="openBookModal(${book.id})">
+            ${book.category ? `<span class="cat-badge">${book.category}</span>` : ''}
+            ${book.trend ? `<span class="trend-badge">🔥 Trend</span>` : ''}
+            <img src="${book.cover}" alt="${book.title}" loading="lazy">
+        </div>
+        <div onclick="openBookModal(${book.id})">
+            <div class="book-title">${book.title}</div>
+            <div class="book-auth">${book.author}</div>
+            <div class="progress-wrap">
+                <div class="progress-lbl">${book.progress > 0 ? `O'qildi: ${book.progress}%` : 'Boshlanmagan'}</div>
+                <div class="progress-bar"><div class="progress-fill" style="width:${book.progress}%"></div></div>
+            </div>
+        </div>
+        <div class="book-footer">
+            <div class="rating">⭐ ${book.rating}</div>
+            <button class="read-btn" onclick="openBookModal(${book.id})">O'qish →</button>
+        </div>
+    </div>`;
+}
+
+/* ── HOME TRENDING ── */
+function renderTrending() {
+    const trend = BOOKS.filter(b => b.trend).slice(0, 3);
+    document.getElementById('trendingGrid').innerHTML = trend.map(bookCardHTML).join('');
+}
+
+/* ── CATALOG ── */
+function renderCatalog() {
+    const search = (document.getElementById('catalogSearch')?.value || '').toLowerCase();
+    let list = [...BOOKS];
+    if (currentCategory !== 'all') list = list.filter(b => b.category === currentCategory);
+    if (search) list = list.filter(b => b.title.toLowerCase().includes(search) || b.author.toLowerCase().includes(search));
+    if (sortMode === 'rating') list.sort((a,b) => b.rating - a.rating);
+    else if (sortMode === 'top') list.sort((a,b) => b.progress - a.progress);
+    else if (sortMode === 'trend') list = list.filter(b => b.trend);
+    const grid = document.getElementById('catalogGrid');
+    if (grid) grid.innerHTML = list.length ? list.map(bookCardHTML).join('') : '<p style="color:var(--muted);">Natija topilmadi.</p>';
+}
+function setCategory(cat, btn) {
+    currentCategory = cat;
+    document.querySelectorAll('.cat-pill').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderCatalog();
+}
+function setSortMode(mode, btn) {
+    sortMode = mode;
+    document.querySelectorAll('#page-catalog .cat-pill[id^="sort"]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderCatalog();
+}
+function filterCatalog() { renderCatalog(); }
+function handleHomeSearch() {
+    const q = document.getElementById('homeSearch').value;
+    if (q.length > 1) { showPage('catalog'); setTimeout(() => { const ci = document.getElementById('catalogSearch'); if(ci) ci.value = q; renderCatalog(); }, 100); }
+}
+
+/* ── AUDIO ── */
+function renderAudio() {
+    const grid = document.getElementById('audioGrid');
+    if (!grid) return;
+    grid.innerHTML = AUDIO_BOOKS.map(a => `
+    <div class="audio-card">
+        <button class="play-btn" onclick="playAudio('${a.title}')">${a.cover}</button>
+        <div class="audio-info">
+            <h4>${a.title}</h4>
+            <div class="audio-meta">${a.author}</div>
+            <div class="audio-dur">⏱ ${a.dur}</div>
+        </div>
+    </div>`).join('');
+}
+function playAudio(title) { showToast(`▶ "${title}" ijro etilmoqda... 🎧`); }
+
+/* ── LEADERBOARD ── */
+function renderLeaderboard() {
+    const el = document.getElementById('lbList');
+    if (!el) return;
+    el.innerHTML = LEADERBOARD.map(l => `
+    <div class="lb-item">
+        <div class="lb-left">
+            <span class="lb-rank">${l.rank}</span>
+            <div><div class="lb-name">${l.name}</div><div style="font-size:.76rem;color:var(--muted);">${l.level} • 🔥 ${l.streak} kun streak</div></div>
+        </div>
+        <span class="lb-pts">${l.pts.toLocaleString()} ball</span>
+    </div>`).join('');
+}
+
+/* ── BADGES ── */
+function renderBadges() {
+    const el = document.getElementById('badgesGrid');
+    if (!el) return;
+    el.innerHTML = BADGES.map(b => `
+    <div class="badge-box" style="${b.earned?'border-color:var(--blue);background:rgba(41,151,255,.08);':'opacity:.5;'}" onclick="showToast('${b.earned?'🎖 '+b.nm+' badge olingan!':'🔒 Hali olinmagan: '+b.ds}')">
+        <div class="badge-ico">${b.ico}</div>
+        <div class="badge-nm">${b.nm}</div>
+        <div class="badge-ds">${b.ds}</div>
+        ${b.earned?'<div style="font-size:.7rem;color:var(--green);font-weight:800;margin-top:4px;">✓ Olingan</div>':''}
+    </div>`).join('');
+}
+
+/* ── HEATMAP ── */
+function renderHeatmap() {
+    const el = document.getElementById('heatmapGrid');
+    if (!el) return;
+    let html = '';
+    for (let i = 0; i < 26; i++) {
+        html += '<div class="hcol">';
+        for (let j = 0; j < 5; j++) {
+            const r = Math.random();
+            const cls = r < .3 ? '' : r < .5 ? 'l1' : r < .7 ? 'l2' : r < .88 ? 'l3' : 'l4';
+            html += `<div class="hcell ${cls}"></div>`;
         }
+        html += '</div>';
+    }
+    el.innerHTML = html;
+}
 
-        function filterBooks() { renderBooks(); }
-        function setCategory(cat, btn) {
-            selectedCategory = cat;
-            document.querySelectorAll('.cat-pill').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            renderBooks();
-        }
+/* ── PROFILE ── */
+function updateProfilePage() {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const name = user.fullName || user.username || 'Mehmon Foydalanuvchi';
+    const el = document.getElementById('profileName');
+    if (el) el.textContent = name;
+    const av = document.getElementById('profileAvatar');
+    if (av) av.textContent = name.charAt(0).toUpperCase();
 
-        function toggleFav(e, id) {
-            e.stopPropagation();
-            if(favorites.has(id)) {
-                favorites.delete(id);
-                showToast("Kitob sevimlilardan olib tashlandi");
-            } else {
-                favorites.add(id);
-                showToast("❤️ Sevimlilar ro'yxatiga qo'shildi!");
-            }
-            renderBooks();
-        }
+    const favEl = document.getElementById('favList');
+    if (favEl) {
+        if (favorites.size === 0) { favEl.innerHTML = '<div style="color:var(--muted);font-size:.9rem;">Hali sevimlilar ro\'yxatiga kitob qo\'shilmagan.</div>'; }
+        else { favEl.innerHTML = [...favorites].map(id => { const b = BOOKS.find(x => x.id === id); return b ? `<div style="font-weight:700;padding:10px 14px;background:rgba(255,255,255,.04);border-radius:14px;border:1px solid var(--border);">❤️ ${b.title} — ${b.author}</div>` : ''; }).join(''); }
+    }
+    const rlEl = document.getElementById('readLaterList');
+    if (rlEl) {
+        if (readLater.size === 0) { rlEl.innerHTML = '<div style="color:var(--muted);font-size:.9rem;">"Keyin o\'qiyman" ro\'yxatingiz bo\'sh.</div>'; }
+        else { rlEl.innerHTML = [...readLater].map(id => { const b = BOOKS.find(x => x.id === id); return b ? `<div style="font-weight:700;padding:10px 14px;background:rgba(255,255,255,.04);border-radius:14px;border:1px solid var(--border);">📑 ${b.title} — ${b.author}</div>` : ''; }).join(''); }
+    }
+}
 
-        function openBookModal(id) {
-            activeBook = sampleBooks.find(b => b.id === id);
-            if (!activeBook) return;
+/* ── NOTIFICATIONS ── */
+function renderNotifications() {
+    const el = document.getElementById('notifList');
+    if (!el) return;
+    el.innerHTML = NOTIFICATIONS.map(n => `
+    <div class="notif-item">
+        <div class="notif-icon">${n.icon}</div>
+        <div style="flex:1">
+            <div style="font-weight:800;font-size:.92rem;margin-bottom:3px;">${n.title}</div>
+            <div class="notif-text">${n.text}</div>
+            <div class="notif-time">${n.time}</div>
+        </div>
+        <div class="notif-dot"></div>
+    </div>`).join('');
+}
 
-            document.getElementById('modalTitle').innerText = activeBook.title;
-            document.getElementById('modalAuthor').innerText = activeBook.author + " • " + activeBook.category;
-            document.getElementById('modalDesc').innerText = activeBook.desc;
-            document.getElementById('modalCover').src = activeBook.cover;
-            
-            // GENERATE QR CODE
-            const qrContainer = document.getElementById("qrcode");
-            qrContainer.innerHTML = "";
-            new QRCode(qrContainer, { text: window.location.origin + "/#book-" + id, width: 50, height: 50 });
+/* ── PLANS & FAQ ── */
+function renderPlans() {
+    const el = document.getElementById('plansGrid');
+    if (!el) return;
+    el.innerHTML = PLANS.map(p => `
+    <div class="plan-card ${p.popular?'popular':''}">
+        ${p.popular?'<span class="popular-badge">⭐ Eng Mashhur</span>':''}
+        <div class="plan-name">${p.name}</div>
+        <div class="plan-price">${p.price} <small>${p.period}</small></div>
+        <ul class="plan-features">
+            ${p.features.map(f => `<li><span class="ck">✓</span>${f}</li>`).join('')}
+        </ul>
+        <button class="plan-btn" onclick="subscribe('${p.id}','${p.name}')">${p.id==='free'?'Joriy Tarif':'Ulanish →'}</button>
+    </div>`).join('');
+}
+function subscribe(id, name) {
+    if (id === 'free') return showToast('Siz hozir bepul tariffdasiz!');
+    showToast(`💳 "${name}" tarifiga ulanish boshlandi...`);
+}
+function renderFaq() {
+    const el = document.getElementById('faqList');
+    if (!el) return;
+    el.innerHTML = FAQS.map(f => `
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+        <div class="faq-q"><span>${f.q}</span><span class="faq-arr">▼</span></div>
+        <div class="faq-a">${f.a}</div>
+    </div>`).join('');
+}
 
-            document.getElementById('bookModal').classList.add('show');
-        }
+/* ── BOOK MODAL ── */
+function openBookModal(id) {
+    activeBook = BOOKS.find(b => b.id === id);
+    if (!activeBook) return;
+    document.getElementById('modalTitle').textContent = activeBook.title;
+    document.getElementById('modalAuthor').textContent = activeBook.author + ' • ' + activeBook.category;
+    document.getElementById('modalDesc').textContent = activeBook.desc;
+    document.getElementById('modalCover').src = activeBook.cover;
+    document.getElementById('modalTags').innerHTML = `<span class="modal-tag">${activeBook.category}</span><span class="modal-tag">⭐ ${activeBook.rating}</span>`;
+    const qrEl = document.getElementById('qrcode');
+    qrEl.innerHTML = '';
+    try { new QRCode(qrEl, { text: window.location.origin + '/#book-' + id, width:52, height:52 }); } catch(e) {}
+    document.getElementById('bookModal').classList.add('open');
+}
+function closeBookModal() { document.getElementById('bookModal').classList.remove('open'); }
+function setModalRating(r) { document.querySelectorAll('.modal-stars .star').forEach((s,i) => s.classList.toggle('active', i < r)); showToast(`⭐ ${r} yulduz berildi!`); }
+function readOnline() { if(activeBook) showToast(`📖 "${activeBook.title}" PDF viewerda ochilmoqda...`); }
+function addFavorite() {
+    if (!activeBook) return;
+    if (favorites.has(activeBook.id)) { favorites.delete(activeBook.id); showToast('💔 Sevimlilardan olib tashlandi'); }
+    else { favorites.add(activeBook.id); showToast('❤️ Sevimlilarga qo\'shildi!'); }
+    document.querySelectorAll('.fav-btn').forEach(b => { const id = parseInt(b.closest('.book-card')?.id?.split('-')[1]); if (id) b.classList.toggle('active', favorites.has(id)); });
+}
+function addReadLater() {
+    if (!activeBook) return;
+    readLater.add(activeBook.id);
+    showToast(`📑 "${activeBook.title}" "Keyin o'qiyman" ro'yxatiga qo'shildi!`);
+}
+function reserveBook() { if(activeBook) showToast(`📅 "${activeBook.title}" bo'yicha navbatga yozildingiz! Kitob bo'shagach Telegram va Email orqali xabar olasiz.`); }
+function submitComment() {
+    const txt = document.getElementById('commentInput').value.trim();
+    if (!txt) return showToast('Iltimos sharh yozing!');
+    showToast('✅ Sharhingiz qabul qilindi!');
+    document.getElementById('commentInput').value = '';
+}
 
-        function closeBookModal() {
-            document.getElementById('bookModal').classList.remove('show');
-        }
+/* ── FAV TOGGLE (card btn) ── */
+function toggleFav(e, id) {
+    e.stopPropagation();
+    if (favorites.has(id)) { favorites.delete(id); showToast('💔 Sevimlilardan olib tashlandi'); }
+    else { favorites.add(id); showToast('❤️ Sevimlilarga qo\'shildi!'); }
+    e.currentTarget.classList.toggle('active', favorites.has(id));
+}
 
-        function readOnline() {
-            showToast(`"${activeBook.title}" kitobi PDF viewerda ochilmoqda...`);
-        }
+/* ── REMINDER ── */
+function setReminder() {
+    const t = document.getElementById('reminderTime').value;
+    showToast(`⏰ Kunlik eslatma ${t} uchun belgilandi! "Bugun o'qishni unutmang" 📚`);
+}
 
-        function reserveBook() {
-            showToast(`📅 "${activeBook.title}" bo'yicha navbatga yozildingiz! Kitob qaytganda bildirishnoma yuboriladi.`);
-        }
+/* ── AI CHAT ── */
+const aiReplies = [
+    b => `"${b}" mavzusida siz uchun "Deep Work" va "Atomic Habits" kitoblarini tavsiya qilaman! 📚`,
+    b => `"${b}" bo'yicha eng yaxshi tanlov: Clean Code yoki Algoritmlar qo'llanmasi!`,
+    b => `Sizga yoqadigan mavzu bo'yicha Kutubxonamizdagi "Boy Ota, Kambag'al Ota" kitobini o'qishni maslahat beraman!`,
+    b => `"${b}" haqida izlamoqchisiz? Unda Ikigai va Deep Work kitoblarini ko'rib chiqing!`,
+];
+let aiIdx = 0;
+function toggleAiChat() { document.getElementById('aiPanel').classList.toggle('open'); }
+function sendAi() {
+    const input = document.getElementById('aiInput');
+    const msg = input.value.trim();
+    if (!msg) return;
+    const body = document.getElementById('aiBody');
+    body.innerHTML += `<div class="ai-msg user">${msg}</div>`;
+    input.value = '';
+    body.innerHTML += `<div class="typing" id="aiTyping"><span></span><span></span><span></span></div>`;
+    body.scrollTop = body.scrollHeight;
+    setTimeout(() => {
+        document.getElementById('aiTyping')?.remove();
+        const reply = aiReplies[aiIdx % aiReplies.length](msg);
+        aiIdx++;
+        body.innerHTML += `<div class="ai-msg bot">${reply}</div>`;
+        body.scrollTop = body.scrollHeight;
+    }, 1200);
+}
 
-        function showToast(msg) {
-            const container = document.getElementById('toastContainer');
-            const toast = document.createElement('div');
-            toast.className = 'toast';
-            toast.innerHTML = `🔔 <span>${msg}</span>`;
-            container.appendChild(toast);
-            setTimeout(() => toast.remove(), 3000);
-        }
+/* ── TOAST ── */
+function showToast(msg) {
+    const stack = document.getElementById('toastStack');
+    const t = document.createElement('div');
+    t.className = 'toast';
+    t.innerHTML = `<span>${msg}</span>`;
+    stack.appendChild(t);
+    setTimeout(() => t.remove(), 3500);
+}
 
-        function toggleAiChat() { document.getElementById('aiChatModal').classList.toggle('open'); }
-        function sendAiMessage() {
-            const input = document.getElementById('aiInput');
-            const msg = input.value.trim();
-            if (!msg) return;
-            const chatBody = document.getElementById('aiChatBody');
-            chatBody.innerHTML += `<div class="ai-msg user">${msg}</div>`;
-            input.value = '';
-            setTimeout(() => {
-                chatBody.innerHTML += `<div class="ai-msg bot">"${msg}" bo'yicha sizga Deep Work va Atomic Habits kitoblarini o'qishni tavsiya qilaman! 🤖</div>`;
-                chatBody.scrollTop = chatBody.scrollHeight;
-            }, 500);
-        }
+/* ── AUTH ── */
+function checkUserAuth() {
+    const container = document.getElementById('userInfoContainer');
+    const user = JSON.parse(localStorage.getItem('user') || 'null');
+    if (user) {
+        const init = (user.fullName || user.username || 'U').charAt(0).toUpperCase();
+        container.innerHTML = `<div class="user-badge"><div class="avatar">${init}</div><span>${user.fullName || user.username}</span><button class="logout-link" onclick="logout()">Chiqish</button></div>`;
+    } else {
+        container.innerHTML = `<a href="login/index.html" class="auth-btn">Kirish / Ro'yxatdan o'tish</a>`;
+    }
+}
+function logout() { localStorage.removeItem('token'); localStorage.removeItem('user'); checkUserAuth(); showToast('👋 Tizimdan chiqildi.'); }
 
-        // GENERATE GITHUB-STYLE HEATMAP
-        function renderHeatmap() {
-            const container = document.getElementById('heatmapGrid');
-            let html = '';
-            for(let i=0; i<25; i++) {
-                html += '<div class="heat-col">';
-                for(let j=0; j<5; j++) {
-                    const rand = Math.floor(Math.random()*5);
-                    const cls = rand === 0 ? '' : 'l' + rand;
-                    html += `<div class="heat-cell ${cls}"></div>`;
-                }
-                html += '</div>';
-            }
-            container.innerHTML = html;
-        }
+/* ── THEME ── */
+function toggleTheme() {
+    const t = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', t);
+    document.getElementById('themeIcon').textContent = t === 'light' ? '🌙' : '☀️';
+    localStorage.setItem('theme', t);
+}
 
-        function checkUserAuth() {
-            const container = document.getElementById('userInfoContainer');
-            const userStr = localStorage.getItem('user');
-            if (userStr) {
-                const user = JSON.parse(userStr);
-                const initial = user.fullName ? user.fullName.charAt(0).toUpperCase() : 'U';
-                container.innerHTML = `
-                    <div class="user-profile-badge">
-                        <div class="user-avatar">${initial}</div>
-                        <span>${user.fullName || user.username}</span>
-                        <button class="logout-btn" onclick="logout()">Chiqish</button>
-                    </div>
-                `;
-            } else {
-                container.innerHTML = `<a href="login/index.html" class="auth-nav-btn">Kirish / A'zo bo'lish</a>`;
-            }
-        }
+/* ── CANVAS PARTICLES ── */
+const canvas = document.getElementById('particle-canvas');
+const ctx = canvas.getContext('2d');
+let pts = [];
+function resizeCanvas() { canvas.width = innerWidth; canvas.height = innerHeight; pts = Array.from({length:55}, () => ({ x:Math.random()*canvas.width, y:Math.random()*canvas.height, vx:(Math.random()-.5)*.7, vy:(Math.random()-.5)*.7 })); }
+function drawParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    pts.forEach(p => { p.x += p.vx; p.y += p.vy; if(p.x<0||p.x>canvas.width)p.vx*=-1; if(p.y<0||p.y>canvas.height)p.vy*=-1; ctx.beginPath(); ctx.arc(p.x,p.y,1.5,0,Math.PI*2); ctx.fillStyle='rgba(41,151,255,.28)'; ctx.fill(); });
+    for(let i=0;i<pts.length;i++) for(let j=i+1;j<pts.length;j++) {
+        const dx=pts[i].x-pts[j].x, dy=pts[i].y-pts[j].y, d=Math.sqrt(dx*dx+dy*dy);
+        if(d<115){ ctx.beginPath(); ctx.strokeStyle=`rgba(41,151,255,${.14-d/820})`; ctx.lineWidth=.5; ctx.moveTo(pts[i].x,pts[i].y); ctx.lineTo(pts[j].x,pts[j].y); ctx.stroke(); }
+    }
+    requestAnimationFrame(drawParticles);
+}
+window.addEventListener('resize', resizeCanvas);
 
-        function logout() { localStorage.removeItem('token'); localStorage.removeItem('user'); checkUserAuth(); }
-        function toggleTheme() {
-            const html = document.documentElement;
-            const theme = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-            html.setAttribute('data-theme', theme);
-            document.getElementById('themeIcon').textContent = theme === 'light' ? '🌙' : '☀️';
-            localStorage.setItem('theme', theme);
-        }
-
-        // CANVAS PARTICLES
-        const canvas = document.getElementById('particle-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; initP(); }
-        window.addEventListener('resize', resize);
-        class P {
-            constructor() { this.x = Math.random()*canvas.width; this.y = Math.random()*canvas.height; this.vx = (Math.random()-0.5)*0.8; this.vy = (Math.random()-0.5)*0.8; }
-            update() { this.x+=this.vx; this.y+=this.vy; if(this.x<0||this.x>canvas.width) this.vx*=-1; if(this.y<0||this.y>canvas.height) this.vy*=-1; }
-            draw() { ctx.beginPath(); ctx.arc(this.x,this.y,1.5,0,Math.PI*2); ctx.fillStyle = 'rgba(0,113,227,0.3)'; ctx.fill(); }
-        }
-        function initP() { particles = []; for(let i=0; i<60; i++) particles.push(new P()); }
-        function animP() { 
-            ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p=>{p.update();p.draw();}); 
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x; const dy = particles[i].y - particles[j].y; const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 120) { ctx.beginPath(); ctx.strokeStyle = `rgba(0, 113, 227, ${0.15 - dist/800})`; ctx.lineWidth = 0.5; ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke(); }
-                }
-            }
-            requestAnimationFrame(animP); 
-        }
-
-        window.addEventListener('load', () => {
-            const savedTheme = localStorage.getItem('theme') || 'dark';
-            document.documentElement.setAttribute('data-theme', savedTheme);
-            document.getElementById('themeIcon').textContent = savedTheme === 'light' ? '🌙' : '☀️';
-            checkUserAuth();
-            renderBooks();
-            renderHeatmap();
-            resize(); animP();
-        });
-    </script>
+/* ── INIT ── */
+window.addEventListener('load', () => {
+    const t = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', t);
+    document.getElementById('themeIcon').textContent = t === 'light' ? '🌙' : '☀️';
+    checkUserAuth();
+    initQuotes();
+    animCount('cnt1', 1450, '+');
+    animCount('cnt2', 350, '+');
+    animCount('cnt3', 8200, '+');
+    animCount('cnt4', 25000, '+');
+    renderTrending();
+    resizeCanvas();
+    drawParticles();
+    // show welcome toast after 1.5s
+    setTimeout(() => showToast('📚 Kutubxonaga Xush Kelibsiz!'), 1500);
+});
+</script>
 </body>
 </html>
