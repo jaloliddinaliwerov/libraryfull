@@ -2035,8 +2035,8 @@ function checkUserAuth() {
     } else {
         // Desktop: full text button | Mobile: icon-only circle button
         container.innerHTML = `
-            <a href="login/index.html" class="auth-btn">Kirish / Ro'yxatdan o'tish</a>
-            <a href="login/index.html" class="auth-btn-short" title="Kirish">👤</a>`;
+            <a href="/login" class="auth-btn">Kirish / Ro'yxatdan o'tish</a>
+            <a href="/login" class="auth-btn-short" title="Kirish">👤</a>`;
     }
 }
 function logout() { localStorage.removeItem('token'); localStorage.removeItem('user'); checkUserAuth(); showToast('👋 Tizimdan chiqildi.'); }
