@@ -1338,7 +1338,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:46px
 
      
 
-     BOOK DETAIL MODAL
+     <!-- BOOK DETAIL MODAL -->
 <div class="modal-overlay" id="bookModal">
     <div class="modal">
         <button class="modal-close" onclick="closeBookModal()">&times;</button>
@@ -1403,8 +1403,10 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:46px
     <!-- FOOTER -->
 <footer>
 
-    <div style="text-align: center; padding: 20px;">
-        <button onclick="toggleFooter()" id="footerToggleBtn" style="background:var(--blue); color:white; border:none; border-radius:30px; font-weight:600; padding:12px 24px; cursor:pointer;">Sayt ma'lumotlarini ko'rsatish</button>
+    <div style="margin: 0 auto 20px auto; max-width: 400px; padding: 24px; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-card); text-align: center; box-shadow: var(--shadow);">
+        <h3 style="margin-bottom: 12px; font-size: 1.15rem; font-weight: 800;">Sayt Haqida Ma'lumot</h3>
+        <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 18px; line-height: 1.5;">Kutubxona sahifalari, ijtimoiy tarmoqlar va qo'shimcha ma'lumotlar bilan to'liq tanishishingiz mumkin.</p>
+        <button onclick="toggleFooter()" id="footerToggleBtn" style="background:var(--blue); color:white; border:none; border-radius:30px; font-weight:700; padding:14px 24px; cursor:pointer; width:100%; display:flex; align-items:center; justify-content:center; gap:8px; font-size:0.95rem; box-shadow: 0 4px 15px rgba(41, 151, 255, 0.3); transition: 0.3s;">Sayt ma'lumotlarini ko'rsatish <span style="font-size: 0.8em;">&darr;</span></button>
     </div>
     <div id="footerContent" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out;">
         
@@ -1444,9 +1446,26 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:46px
 
 </footer>
 
-     JAVASCRIPT
+     <!-- JAVASCRIPT -->
 <script>
 /* &#x2500;&#x2500; DATA &#x2500;&#x2500; */
+
+function toggleFooter() {
+    const content = document.getElementById('footerContent');
+    const btn = document.getElementById('footerToggleBtn');
+    if (content.style.maxHeight === '0px' || content.style.maxHeight === '0' || !content.style.maxHeight) {
+        content.style.maxHeight = content.scrollHeight + 'px';
+        btn.innerHTML = 'Sayt ma\'lumotlarini yashirish <span style="font-size: 0.8em;">&uarr;</span>';
+        setTimeout(() => { content.style.maxHeight = 'none'; }, 400);
+    } else {
+        content.style.maxHeight = content.scrollHeight + 'px';
+        // force reflow
+        void content.offsetHeight;
+        content.style.maxHeight = '0px';
+        btn.innerHTML = 'Sayt ma\'lumotlarini ko\'rsatish <span style="font-size: 0.8em;">&darr;</span>';
+    }
+}
+
 const BOOKS = [
     { id:1, title:"Java Spring Boot Asoslari", author:"Jaloliddin Qodirov", category:"IT & Dasturlash", rating:4.9, progress:80, trend:true, isNew:true, cover:"https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=600&q=80", desc:"Spring Boot frameworkini 0 dan professional darajagacha o'rganish bo'yicha amaliy qo'llanma." },
     { id:2, title:"Clean Code: Pokiza Kod", author:"Robert C. Martin", category:"IT & Dasturlash", rating:5.0, progress:45, trend:true, isNew:false, cover:"https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80", desc:"Professional dasturchilar uchun o'qilishi oson va toza kod yozish sirlari." },
