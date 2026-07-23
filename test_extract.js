@@ -1,5 +1,5 @@
 
-/* â”€â”€ DATA â”€â”€ */
+/* &#x2500;&#x2500; DATA &#x2500;&#x2500; */
 const BOOKS = [
     { id:1, title:"Java Spring Boot Asoslari", author:"Jaloliddin Qodirov", category:"IT & Dasturlash", rating:4.9, progress:80, trend:true, isNew:true, cover:"https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=600&q=80", desc:"Spring Boot frameworkini 0 dan professional darajagacha o'rganish bo'yicha amaliy qo'llanma." },
     { id:2, title:"Clean Code: Pokiza Kod", author:"Robert C. Martin", category:"IT & Dasturlash", rating:5.0, progress:45, trend:true, isNew:false, cover:"https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80", desc:"Professional dasturchilar uchun o'qilishi oson va toza kod yozish sirlari." },
@@ -8,58 +8,26 @@ const BOOKS = [
     { id:5, title:"Boy Ota, Kambag'al Ota", author:"Robert Kiyosaki", category:"Biznes", rating:4.8, progress:55, trend:true, isNew:false, cover:"https://images.unsplash.com/photo-1592496431122-2349e0fbc666?auto=format&fit=crop&w=600&q=80", desc:"Moliyaviy savodxonlik, investitsiya va boylikni oshirish haqidagi jahon bestselleri." },
     { id:6, title:"Algoritmlar va Ma'lumotlar Tuzilmasi", author:"Aditya Bhargava", category:"IT & Dasturlash", rating:4.85, progress:30, trend:false, isNew:true, cover:"https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=600&q=80", desc:"Visual va sodda usulda algoritmik fikrlashni shakllantiruvchi qo'llanma." },
     { id:7, title:"Deep Work", author:"Cal Newport", category:"Shaxsiy Rivojlanish", rating:4.7, progress:0, trend:false, isNew:true, cover:"https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=600&q=80", desc:"Diqqatni jamlagan holda chuqur fikrlab ishlash usullari." },
-    { id:8, title:"Ikigai: Yaponcha Baxtning Siri", author:"Héctor García", category:"Psixologiya", rating:4.75, progress:0, trend:true, isNew:false, cover:"https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=600&q=80", desc:"Hayotdan zavq olish va o'z maqsadingizni topish haqidagi yapon falsafasi." },
+    { id:8, title:"Ikigai: Yaponcha Baxtning Siri", author:"H&eacute;ctor Garc&iacute;a", category:"Psixologiya", rating:4.75, progress:0, trend:true, isNew:false, cover:"https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=600&q=80", desc:"Hayotdan zavq olish va o'z maqsadingizni topish haqidagi yapon falsafasi." },
 ];
 
-const AUDIO_BOOKS = [
-    { id:1, title:"Atom Odatlari (Audio)", author:"James Clear •• O'zbek tilida", dur:"5 soat 40 daqiqa", cover:"[Audio]" },
-    { id:2, title:"Boy Ota, Kambag'al Ota (Audio)", author:"Robert Kiyosaki • O'zbek tarjimasi", dur:"4 soat 15 daqiqa", cover:'<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>' },
-    { id:3, title:"O'tkan Kunlar (Radiospektakl)", author:"Abdulla Qodiriy •• Professional Ovoz", dur:"8 soat 20 daqiqa", cover:"[Audio]" },
-    { id:4, title:"Deep Work (Audio Darslik)", author:"Cal Newport •• Ingliz tilida", dur:"6 soat 05 daqiqa", cover:"[Audio]" },
-    { id:5, title:"Ikigai (Audio Kitob)", author:"Héctor García •• O'zbek tilida", dur:"3 soat 45 daqiqa", cover:"[Audio]" },
-    { id:6, title:"Clean Code (Audio)", author:"Robert C. Martin •• Ingliz tilida", dur:"7 soat 15 daqiqa", cover:"[Audio]" },
-];
+
 
 const QUOTES = [
-    { text:"Kitoblar eng yaxshi do'stlar. Ular seni hech qachon aldamaydi, hech qachon tark etmaydi.", author:"â€” Vladimir Lenin" },
-    { text:"Kuniga bir soat kitob o'qing. Bu sizni dunyodagi har qanday sohadagi ekspertga aylantiradi â€” 7 yil ichida.", author:"â€” Earl Nightingale" },
-    { text:"Kitob o'qimaydigan kishi o'qiy olmaydigan kishidan ko'ra afzalligiga ega emas.", author:"â€” Mark Twain" },
-    { text:"Bir kitob o'qigan yuz kishi bor, lekin uni his qilgan faqat bitta kishi.", author:"â€” Leo Tolstoy" },
-    { text:"O'qish â€” bu xotiraning mashqi, tafakkurning quroli va ruhning ozuqasi.", author:"â€” Francis Bacon" },
-    { text:"Eng yaxshi do'st â€” kitob. U doim haqiqatni aytadi va so'z qaytarmaydi.", author:"â€” Ernest Hemingway" },
-    { text:"Bitta kitob hayotingizni butunlay o'zgartirishi mumkin. O'shing.", author:"â€” Kutubxona" },
+    { text:"Kitoblar eng yaxshi do'stlar. Ular seni hech qachon aldamaydi, hech qachon tark etmaydi.", author:"\u2014 Vladimir Lenin" },
+    { text:"Kuniga bir soat kitob o'qing. Bu sizni dunyodagi har qanday sohadagi ekspertga aylantiradi \u2014 7 yil ichida.", author:"\u2014 Earl Nightingale" },
+    { text:"Kitob o'qimaydigan kishi o'qiy olmaydigan kishidan ko'ra afzalligiga ega emas.", author:"\u2014 Mark Twain" },
+    { text:"Bir kitob o'qigan yuz kishi bor, lekin uni his qilgan faqat bitta kishi.", author:"\u2014 Leo Tolstoy" },
+    { text:"O'qish \u2014 bu xotiraning mashqi, tafakkurning quroli va ruhning ozuqasi.", author:"\u2014 Francis Bacon" },
+    { text:"Eng yaxshi do'st \u2014 kitob. U doim haqiqatni aytadi va so'z qaytarmaydi.", author:"\u2014 Ernest Hemingway" },
+    { text:"Bitta kitob hayotingizni butunlay o'zgartirishi mumkin. O'shing.", author:"\u2014 Kutubxona" },
 ];
 
-const LEADERBOARD = [
-    { rank:"ðŸ¥‡", name:"Ali Valiyev", level:"Expert Reader", pts:3200, streak:12 },
-    { rank:"ðŸ¥ˆ", name:"Vali Jasurov", level:"Intermediate", pts:2800, streak:8 },
-    { rank:"ðŸ¥‰", name:"Hasan Umarov", level:"Pro Reader", pts:2500, streak:15 },
-    { rank:`<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M14 16v-8l-4 5h5"/></svg>`, name:"Nodira Qosimova", level:"Advanced", pts:2200, streak:5 },
-    { rank:`<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M15 9H9v4h4a2 2 0 1 1 0 4H9"/></svg>`, name:"Sardor Toshmatov", level:"Beginner", pts:1900, streak:3 },
-];
 
-const BADGES = [
-    { ico:"ðŸ“˜", nm:"Birinchi Qadam", ds:"1-kitobni bitirish", earned:true },
-    { ico:'<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>', nm:"Kutubxonachi", ds:"10 ta kitob o'qish", earned:true },
-    { ico:'<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M8.5 1<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M14 16v-8l-4 5h5"/></svg>5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M14 16v-8l-4 5h5"/></svg>054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>', nm:"Matonatli", ds:"30 kun streak", earned:false },
-    { ico:'<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><polygon points="12 2 1<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M15 9H9v4h4a2 2 0 1 1 0 4H9"/></svg>09 8.26 22 9.27 17 1<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M14 16v-8l-4 5h5"/></svg>14 18.18 21.02 12 17.77 5.82 21.02 7 1<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M14 16v-8l-4 5h5"/></svg>14 2 9.27 8.91 8.26 12 2"></polygon></svg>', nm:"Sharh Ustasi", ds:"100 ta sharh yozish", earned:false },
-    { ico:'<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 1<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M15 9H9v4h4a2 2 0 1 1 0 4H9"/></svg>79 13.88"></polyline></svg>', nm:"Top Reader", ds:"Top 3 talikka kirish", earned:true },
-    { ico:'<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>', nm:"Kechgi O'quvchi", ds:"Kechasi 50 sahifa", earned:true },
-    { ico:'<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M13.5 2.5a8.7 8.7 0 0 1 8 8c0 6-8 11-8 11s-8-5-8-11a8.7 8.7 0 0 1 8-8z"></path><circle cx="13.5" cy="10.5" r="2.5"></circle></svg>', nm:"Tezkor", ds:"1 kunda 100 sahifa", earned:false },
-    { ico:"ðŸ’Ž", nm:"Premium", ds:"VIP a'zolik", earned:false },
-];
 
-const PLANS = [
-    { id:"free", name:"Bepul", price:"0", period:"so'm / oy", color:"", features:[
-        "5 ta elektron kitob o'qish","Kuniga 3 ta AI savol","Standart qidiruv","Asosiy statistika"
-    ], popular:false },
-    { id:"pro", name:"Pro Obuna", price:"29,000", period:"so'm / oy", color:"var(--blue)", features:[
-        "Cheksiz kitob va PDF yuklash","Cheksiz audio kitoblar","Kuniga 50 ta AI tavsiyasi","Reklamasiz tajriba","Badges va Leaderboard","Telegram bildirishnomalar"
-    ], popular:true },
-    { id:"vip", name:"VIP Unlimited", price:"49,000", period:"so'm / oy", color:"var(--purple)", features:[
-        "Cheksiz BARCHA imkoniyatlar","Shaxsiy AI Repetitor & Tutor","VIP Telegram yopiq guruh","Prioritet qo'llab-quvvatlash","Eksklyuziv yangi kitoblar","PDF Export va offline mode"
-    ], popular:false },
-];
+
+
+
 
 const FAQS = [
     { q:"Kitoblarni yuklab olish bepulmi?", a:"Ha! Bepul tarifdagi foydalanuvchilar 5 ta kitobni bepul o'qishi mumkin. Pro va VIP obunachilari esa cheksiz yuklab olish imkoniyatiga ega bo'ladi." },
@@ -72,12 +40,12 @@ const FAQS = [
 const NOTIFICATIONS = [
     { icon:`<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>`, title:"Yangi kitob qo'shildi", text:'"Deep Work" Cal Newport tomonidan kutubxonaga qo\'shildi.', time:"5 daqiqa oldin" },
     { icon:`<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>`, title:"Bron tasdiqlandi", text:'"Atomic Habits" bron qilingan kitob 3 kun ichida qaytadi.', time:"1 soat oldin" },
-    { icon:`<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 1<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M15 9H9v4h4a2 2 0 1 1 0 4H9"/></svg>79 13.88"></polyline></svg>`, title:"Badge olingdi!", text:'Siz "Top Reader" badge oldingiz! Tabriklaymiz ðŸŽ‰', time:"Kecha" },
-    { icon:"⏰", title:"O'qish vaqti", text:"Bugun 20 sahifa o'qishni unutmang!", time:"2 soat oldin" },
+    { icon:`<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>`, title:"Badge olingdi!", text:'Siz "Top Reader" badge oldingiz! Tabriklaymiz <svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>', time:"Kecha" },
+    { icon:"&#x23F0;", title:"O'qish vaqti", text:"Bugun 20 sahifa o'qishni unutmang!", time:"2 soat oldin" },
     { icon:`<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>`, title:"Obuna yangilandi", text:"Pro obunangiz yana 28 kun davom etadi.", time:"3 kun oldin" },
 ];
 
-/* â”€â”€ STATE â”€â”€ */
+/* &#x2500;&#x2500; STATE &#x2500;&#x2500; */
 let currentCategory = 'all';
 let sortMode = 'new';
 let activeBook = null;
@@ -86,7 +54,7 @@ const readLater = new Set();
 let quoteIndex = 0;
 let quoteTimer = null;
 
-/* â”€â”€ ROUTING (SPA Pages) â”€â”€ */
+/* &#x2500;&#x2500; ROUTING (SPA Pages) &#x2500;&#x2500; */
 function showPage(name) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     const page = document.getElementById('page-' + name);
@@ -99,15 +67,15 @@ function showPage(name) {
         b.classList.toggle('active', b.id === 'bnav-' + name);
     });
     // Lazy-init page content
-    if (name === 'gamification') { renderLeaderboard(); renderBadges(); renderHeatmap(); }
+    
     if (name === 'profile') { updateProfilePage(); }
     if (name === 'notifications') { renderNotifications(); }
-    if (name === 'pricing') { renderPlans(); renderFaq(); }
-    if (name === 'audio') { renderAudio(); }
+    
+    
     if (name === 'catalog') { renderCatalog(); }
 }
 
-/* â”€â”€ MOBILE MENU â”€â”€ */
+/* &#x2500;&#x2500; MOBILE MENU &#x2500;&#x2500; */
 function toggleMobileMenu() {
     const drawer = document.getElementById('mobileDrawer');
     const btn = document.getElementById('hamburgerBtn');
@@ -141,11 +109,11 @@ function updateProfilePage() {
     const lvlEl = document.getElementById('profileLevel');
     if (lvlEl) {
         let title = user.level > 10 ? 'Expert Reader' : user.level > 5 ? 'Pro Reader' : 'Beginner';
-        lvlEl.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 1<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M15 9H9v4h4a2 2 0 1 1 0 4H9"/></svg>09 8.26 22 9.27 17 1<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M14 16v-8l-4 5h5"/></svg>14 18.18 21.02 12 17.77 5.82 21.02 7 1<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M14 16v-8l-4 5h5"/></svg>14 2 9.27 8.91 8.26 12 2"></polygon></svg> ${title} (Level ${user.level || 1})`;
+        lvlEl.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> ${title} (Level ${user.level || 1})`;
     }
     const streakEl = document.getElementById('profileStreak');
     if (streakEl) {
-        streakEl.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 1<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M14 16v-8l-4 5h5"/></svg>5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M14 16v-8l-4 5h5"/></svg>054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg> ${user.streak || 0} Kun Streak`;
+        streakEl.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg> ${user.streak || 0} Kun Streak`;
     }
     const xpEl = document.getElementById('profileXp');
     if (xpEl) {
@@ -153,7 +121,7 @@ function updateProfilePage() {
     }
 }
 
-/* â”€â”€ QUOTE ROTATOR â”€â”€ */
+/* &#x2500;&#x2500; QUOTE ROTATOR &#x2500;&#x2500; */
 function initQuotes() {
     const dotsEl = document.getElementById('quoteDots');
     dotsEl.innerHTML = QUOTES.map((_, i) => `<div class="quote-dot${i===0?' active':''}" onclick="goQuote(${i})"></div>`).join('');
@@ -168,7 +136,7 @@ function showQuote(i) {
 }
 function goQuote(i) { clearInterval(quoteTimer); showQuote(i); quoteTimer = setInterval(() => { quoteIndex = (quoteIndex+1)%QUOTES.length; showQuote(quoteIndex); }, 4500); }
 
-/* â”€â”€ COUNTER ANIMATION â”€â”€ */
+/* &#x2500;&#x2500; COUNTER ANIMATION &#x2500;&#x2500; */
 function animCount(id, target, suffix='') {
     let start = 0; const step = target / 60;
     const el = document.getElementById(id);
@@ -178,14 +146,14 @@ function animCount(id, target, suffix='') {
     }, 25);
 }
 
-/* â”€â”€ BOOK CARD HTML â”€â”€ */
+/* &#x2500;&#x2500; BOOK CARD HTML &#x2500;&#x2500; */
 function bookCardHTML(book) {
     return `
     <div class="book-card" id="bcard-${book.id}">
-        <button class="fav-btn ${favorites.has(book.id)?'active':''}" onclick="toggleFav(event,${book.id})" title="Sevimlilarga qo'shish">â™¥</button>
+        <button class="fav-btn ${favorites.has(book.id)?'active':''}" onclick="toggleFav(event,${book.id})" title="Sevimlilarga qo'shish">&#x2665;</button>
         <div class="cover-wrap" onclick="openBookModal(${book.id})">
             ${book.category ? `<span class="cat-badge">${book.category}</span>` : ''}
-            ${book.trend ? `<span class="trend-badge"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M8.5 1<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M14 16v-8l-4 5h5"/></svg>5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M14 16v-8l-4 5h5"/></svg>054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg> Trend</span>` : ''}
+            ${book.trend ? `<span class="trend-badge"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg> Trend</span>` : ''}
             <img src="${book.cover}" alt="${book.title}" loading="lazy">
         </div>
         <div onclick="openBookModal(${book.id})">
@@ -197,19 +165,19 @@ function bookCardHTML(book) {
             </div>
         </div>
         <div class="book-footer">
-            <div class="rating"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><polygon points="12 2 1<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M15 9H9v4h4a2 2 0 1 1 0 4H9"/></svg>09 8.26 22 9.27 17 1<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M14 16v-8l-4 5h5"/></svg>14 18.18 21.02 12 17.77 5.82 21.02 7 1<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M14 16v-8l-4 5h5"/></svg>14 2 9.27 8.91 8.26 12 2"></polygon></svg> ${book.rating}</div>
-            <button class="read-btn" onclick="openBookModal(${book.id})">O'qish →</button>
+            <div class="rating"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> ${book.rating}</div>
+            <button class="read-btn" onclick="openBookModal(${book.id})">O'qish &rarr;</button>
         </div>
     </div>`;
 }
 
-/* â”€â”€ HOME TRENDING â”€â”€ */
+/* &#x2500;&#x2500; HOME TRENDING &#x2500;&#x2500; */
 function renderTrending() {
     const trend = BOOKS.filter(b => b.trend).slice(0, 3);
     document.getElementById('trendingGrid').innerHTML = trend.map(bookCardHTML).join('');
 }
 
-/* â”€â”€ CATALOG â”€â”€ */
+/* &#x2500;&#x2500; CATALOG &#x2500;&#x2500; */
 function renderCatalog() {
     const search = (document.getElementById('catalogSearch')?.value || '').toLowerCase();
     let list = [...BOOKS];
@@ -239,50 +207,10 @@ function handleHomeSearch() {
     if (q.length > 1) { showPage('catalog'); setTimeout(() => { const ci = document.getElementById('catalogSearch'); if(ci) ci.value = q; renderCatalog(); }, 100); }
 }
 
-/* â”€â”€ AUDIO â”€â”€ */
-function renderAudio() {
-    const grid = document.getElementById('audioGrid');
-    if (!grid) return;
-    grid.innerHTML = AUDIO_BOOKS.map(a => `
-    <div class="audio-card">
-        <button class="play-btn" onclick="playAudio('${a.title}')">${a.cover}</button>
-        <div class="audio-info">
-            <h4>${a.title}</h4>
-            <div class="audio-meta">${a.author}</div>
-            <div class="audio-dur">â±⏱ ${a.dur}</div>
-        </div>
-    </div>`).join('');
-}
-function playAudio(title) { showToast(`â–¶ "${title}" ijro etilmoqda... <svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>`); }
-
-/* â”€â”€ LEADERBOARD â”€â”€ */
-function renderLeaderboard() {
-    const el = document.getElementById('lbList');
-    if (!el) return;
-    el.innerHTML = LEADERBOARD.map(l => `
-    <div class="lb-item">
-        <div class="lb-left">
-            <span class="lb-rank">${l.rank}</span>
-            <div><div class="lb-name">${l.name}</div><div style="font-size:.76rem;color:var(--muted);">${l.level} • <svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M8.5 1<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M14 16v-8l-4 5h5"/></svg>5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M14 16v-8l-4 5h5"/></svg>054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg> ${l.streak} kun streak</div></div>
-        </div>
-        <span class="lb-pts">${l.pts.toLocaleString()} ball</span>
-    </div>`).join('');
-}
-
-/* â”€â”€ BADGES â”€â”€ */
-function renderBadges() {
-    const el = document.getElementById('badgesGrid');
-    if (!el) return;
-    el.innerHTML = BADGES.map(b => `
-    <div class="badge-box" style="${b.earned?'border-color:var(--blue);background:rgba(41,151,255,.08);':'opacity:.5;'}" onclick="showToast('${b.earned?'ðŸŽ– '+b.nm+' badge olingan!':'ðŸ”’ Hali olinmagan: '+b.ds}')">
-        <div class="badge-ico">${b.ico}</div>
-        <div class="badge-nm">${b.nm}</div>
-        <div class="badge-ds">${b.ds}</div>
-        ${b.earned?'<div style="font-size:.7rem;color:var(--green);font-weight:800;margin-top:4px;">âœ“ Olingan</div>':''}
-    </div>`).join('');
-}
-
-/* â”€â”€ HEATMAP â”€â”€ */
+/* &#x2500;&#x2500; AUDIO &#x2500;&#x2500; */
+/* &#x2500;&#x2500; LEADERBOARD &#x2500;&#x2500; */
+/* &#x2500;&#x2500; BADGES &#x2500;&#x2500; */
+/* &#x2500;&#x2500; HEATMAP &#x2500;&#x2500; */
 function renderHeatmap() {
     const el = document.getElementById('heatmapGrid');
     if (!el) return;
@@ -299,7 +227,7 @@ function renderHeatmap() {
     el.innerHTML = html;
 }
 
-/* â”€â”€ PROFILE â”€â”€ */
+/* &#x2500;&#x2500; PROFILE &#x2500;&#x2500; */
 function updateProfilePage() {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     const name = user.fullName || user.username || 'Mehmon Foydalanuvchi';
@@ -311,16 +239,16 @@ function updateProfilePage() {
     const favEl = document.getElementById('favList');
     if (favEl) {
         if (favorites.size === 0) { favEl.innerHTML = '<div style="color:var(--muted);font-size:.9rem;">Hali sevimlilar ro\'yxatiga kitob qo\'shilmagan.</div>'; }
-        else { favEl.innerHTML = [...favorites].map(id => { const b = BOOKS.find(x => x.id === id); return b ? `<div style="font-weight:700;padding:10px 14px;background:rgba(255,255,255,.04);border-radius:14px;border:1px solid var(--border);">â¤ï¸ ${b.title} â€” ${b.author}</div>` : ''; }).join(''); }
+        else { favEl.innerHTML = [...favorites].map(id => { const b = BOOKS.find(x => x.id === id); return b ? `<div style="font-weight:700;padding:10px 14px;background:rgba(255,255,255,.04);border-radius:14px;border:1px solid var(--border);">&#x2764;&#xFE0F; ${b.title} \u2014 ${b.author}</div>` : ''; }).join(''); }
     }
     const rlEl = document.getElementById('readLaterList');
     if (rlEl) {
         if (readLater.size === 0) { rlEl.innerHTML = '<div style="color:var(--muted);font-size:.9rem;">"Keyin o\'qiyman" ro\'yxatingiz bo\'sh.</div>'; }
-        else { rlEl.innerHTML = [...readLater].map(id => { const b = BOOKS.find(x => x.id === id); return b ? `<div style="font-weight:700;padding:10px 14px;background:rgba(255,255,255,.04);border-radius:14px;border:1px solid var(--border);">ðŸ“‘ ${b.title} â€” ${b.author}</div>` : ''; }).join(''); }
+        else { rlEl.innerHTML = [...readLater].map(id => { const b = BOOKS.find(x => x.id === id); return b ? `<div style="font-weight:700;padding:10px 14px;background:rgba(255,255,255,.04);border-radius:14px;border:1px solid var(--border);"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> ${b.title} \u2014 ${b.author}</div>` : ''; }).join(''); }
     }
 }
 
-/* â”€â”€ NOTIFICATIONS â”€â”€ */
+/* &#x2500;&#x2500; NOTIFICATIONS &#x2500;&#x2500; */
 function renderNotifications() {
     const el = document.getElementById('notifList');
     if (!el) return;
@@ -336,86 +264,68 @@ function renderNotifications() {
     </div>`).join('');
 }
 
-/* â”€â”€ PLANS & FAQ â”€â”€ */
-function renderPlans() {
-    const el = document.getElementById('plansGrid');
-    if (!el) return;
-    el.innerHTML = PLANS.map(p => `
-    <div class="plan-card ${p.popular?'popular':''}">
-        ${p.popular?'<span class="popular-badge"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><polygon points="12 2 1<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M15 9H9v4h4a2 2 0 1 1 0 4H9"/></svg>09 8.26 22 9.27 17 1<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M14 16v-8l-4 5h5"/></svg>14 18.18 21.02 12 17.77 5.82 21.02 7 1<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M14 16v-8l-4 5h5"/></svg>14 2 9.27 8.91 8.26 12 2"></polygon></svg> Eng Mashhur</span>':''}
-        <div class="plan-name">${p.name}</div>
-        <div class="plan-price">${p.price} <small>${p.period}</small></div>
-        <ul class="plan-features">
-            ${p.features.map(f => `<li><span class="ck">âœ“</span>${f}</li>`).join('')}
-        </ul>
-        <button class="plan-btn" onclick="subscribe('${p.id}','${p.name}')">${p.id==='free'?'Joriy Tarif':'Ulanish →'}</button>
-    </div>`).join('');
-}
-function subscribe(id, name) {
-    if (id === 'free') return showToast('Siz hozir bepul tariffdasiz!');
-    showToast(`<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg> "${name}" tarifiga ulanish boshlandi...`);
-}
+/* &#x2500;&#x2500; PLANS & FAQ &#x2500;&#x2500; */
 function renderFaq() {
     const el = document.getElementById('faqList');
     if (!el) return;
     el.innerHTML = FAQS.map(f => `
     <div class="faq-item" onclick="this.classList.toggle('open')">
-        <div class="faq-q"><span>${f.q}</span><span class="faq-arr">â–¼</span></div>
+        <div class="faq-q"><span>${f.q}</span><span class="faq-arr">&#x25BC;</span></div>
         <div class="faq-a">${f.a}</div>
     </div>`).join('');
 }
 
-/* â”€â”€ BOOK MODAL â”€â”€ */
+/* &#x2500;&#x2500; BOOK MODAL &#x2500;&#x2500; */
 function openBookModal(id) {
     activeBook = BOOKS.find(b => b.id === id);
     if (!activeBook) return;
     document.getElementById('modalTitle').textContent = activeBook.title;
-    document.getElementById('modalAuthor').textContent = activeBook.author + ' • ' + activeBook.category;
+    document.getElementById('modalAuthor').textContent = activeBook.author + ' &#x2022; ' + activeBook.category;
     document.getElementById('modalDesc').textContent = activeBook.desc;
     document.getElementById('modalCover').src = activeBook.cover;
-    document.getElementById('modalTags').innerHTML = `<span class="modal-tag">${activeBook.category}</span><span class="modal-tag"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><polygon points="12 2 1<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M15 9H9v4h4a2 2 0 1 1 0 4H9"/></svg>09 8.26 22 9.27 17 1<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M14 16v-8l-4 5h5"/></svg>14 18.18 21.02 12 17.77 5.82 21.02 7 1<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M14 16v-8l-4 5h5"/></svg>14 2 9.27 8.91 8.26 12 2"></polygon></svg> ${activeBook.rating}</span>`;
+    document.getElementById('modalTags').innerHTML = `<span class="modal-tag">${activeBook.category}</span><span class="modal-tag"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> ${activeBook.rating}</span>`;
     const qrEl = document.getElementById('qrcode');
     qrEl.innerHTML = '';
     try { new QRCode(qrEl, { text: window.location.origin + '/#book-' + id, width:52, height:52 }); } catch(e) {}
     document.getElementById('bookModal').classList.add('open');
 }
 function closeBookModal() { document.getElementById('bookModal').classList.remove('open'); }
-function setModalRating(r) { document.querySelectorAll('.modal-stars .star').forEach((s,i) => s.classList.toggle('active', i < r)); showToast(`<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><polygon points="12 2 1<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M15 9H9v4h4a2 2 0 1 1 0 4H9"/></svg>09 8.26 22 9.27 17 1<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M14 16v-8l-4 5h5"/></svg>14 18.18 21.02 12 17.77 5.82 21.02 7 1<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M14 16v-8l-4 5h5"/></svg>14 2 9.27 8.91 8.26 12 2"></polygon></svg> ${r} yulduz berildi!`); }
+function setModalRating(r) { document.querySelectorAll('.modal-stars .star').forEach((s,i) => s.classList.toggle('active', i < r)); showToast(`<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> ${r} yulduz berildi!`); }
 function readOnline() { if(activeBook) showToast(`<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg> "${activeBook.title}" PDF viewerda ochilmoqda...`); }
 function addFavorite() {
     if (!activeBook) return;
-    if (favorites.has(activeBook.id)) { favorites.delete(activeBook.id); showToast('ðŸ’”♥ Sevimlilardan olib tashlandi'); }
-    else { favorites.add(activeBook.id); showToast('â¤♥♥♥ Sevimlilarga qo\'shildi!'); }
+    if (favorites.has(activeBook.id)) { favorites.delete(activeBook.id); showToast('<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/><line x1="12" y1="14" x2="12" y2="10"/></svg>&#x2665; Sevimlilardan olib tashlandi'); }
+    else { favorites.add(activeBook.id); showToast('\u2764\uFE0F Sevimlilarga qo\'shildi!'); }
     document.querySelectorAll('.fav-btn').forEach(b => { const id = parseInt(b.closest('.book-card')?.id?.split('-')[1]); if (id) b.classList.toggle('active', favorites.has(id)); });
 }
 function addReadLater() {
     if (!activeBook) return;
     readLater.add(activeBook.id);
-    showToast(`ðŸ“‘ "${activeBook.title}" "Keyin o'qiyman" ro'yxatiga qo'shildi!`);
+    showToast(`<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg> "${activeBook.title}" "Keyin o'qiyman" ro'yxatiga qo'shildi!`);
 }
-function reserveBook() { if(activeBook) showToast(`ðŸ“… "${activeBook.title}" bo'yicha navbatga yozildingiz! Kitob bo'shagach Telegram va Email orqali xabar olasiz.`); }
+function reserveBook() { if(activeBook) showToast(`<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> "${activeBook.title}" bo'yicha navbatga yozildingiz! Kitob bo'shagach Telegram va Email orqali xabar olasiz.`); }
 function submitComment() {
     const txt = document.getElementById('commentInput').value.trim();
     if (!txt) return showToast('Iltimos sharh yozing!');
-    showToast('âœ… Sharhingiz qabul qilindi!');
+    showToast('&#x2705; Sharhingiz qabul qilindi!');
     document.getElementById('commentInput').value = '';
 }
 
-/* â”€â”€ FAV TOGGLE (card btn) â”€â”€ */
+/* &#x2500;&#x2500; FAV TOGGLE (card btn) &#x2500;&#x2500; */
 function toggleFav(e, id) {
     e.stopPropagation();
-    if (favorites.has(id)) { favorites.delete(id); showToast('ðŸ’”♥ Sevimlilardan olib tashlandi'); }
-    else { favorites.add(id); showToast('â¤♥♥♥ Sevimlilarga qo\'shildi!'); }
+    if (favorites.has(id)) { favorites.delete(id); showToast('<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/><line x1="12" y1="14" x2="12" y2="10"/></svg>&#x2665; Sevimlilardan olib tashlandi'); }
+    else { favorites.add(id); showToast('\u2764\uFE0F Sevimlilarga qo\'shildi!'); }
     e.currentTarget.classList.toggle('active', favorites.has(id));
 }
 
-/* â”€â”€ REMINDER â”€â”€ */
+/* &#x2500;&#x2500; REMINDER &#x2500;&#x2500; */
 function setReminder() {
     const t = document.getElementById('reminderTime').value;
-    showToast(`⏰⏰ Kunlik eslatma ${t} uchun belgilandi! "Bugun o'qishni unutmang" <svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>`);
+    showToast(`&#x23F0;&#x23F0; Kunlik eslatma ${t} uchun belgilandi! "Bugun o'qishni unutmang" <svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>`);
 }
 
-/* â”€â”€ AI CHAT â”€â”€ */
+/* &#x2500;&#x2500; AI CHAT &#x2500;&#x2500; */
 const aiReplies = [
     b => `"${b}" mavzusida siz uchun "Deep Work" va "Atomic Habits" kitoblarini tavsiya qilaman! <svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>`,
     b => `"${b}" bo'yicha eng yaxshi tanlov: Clean Code yoki Algoritmlar qo'llanmasi!`,
@@ -442,7 +352,7 @@ function sendAi() {
     }, 1200);
 }
 
-/* â”€â”€ TOAST â”€â”€ */
+/* &#x2500;&#x2500; TOAST &#x2500;&#x2500; */
 function showToast(msg) {
     const stack = document.getElementById('toastStack');
     const t = document.createElement('div');
@@ -452,14 +362,14 @@ function showToast(msg) {
     setTimeout(() => t.remove(), 3500);
 }
 
-/* â”€â”€ AUTH â”€â”€ */
+/* &#x2500;&#x2500; AUTH &#x2500;&#x2500; */
 function checkUserAuth() {
     const container = document.getElementById('userInfoContainer');
     const user = JSON.parse(localStorage.getItem('user') || 'null');
     if (user) {
         const init = (user.fullName || user.username || 'U').charAt(0).toUpperCase();
         const name = user.fullName || user.username || '';
-        container.innerHTML = `<div class="user-badge"><div class="avatar">${init}</div><span class="user-name">${name}</span><button class="logout-link" onclick="logout()">âœ•</button></div>`;
+        container.innerHTML = `<div class="user-badge"><div class="avatar">${init}</div><span class="user-name">${name}</span><button class="logout-link" onclick="logout()">&#x2715;</button></div>`;
     } else {
         // Desktop: full text button | Mobile: icon-only circle button
         container.innerHTML = `
@@ -469,15 +379,15 @@ function checkUserAuth() {
 }
 function logout() { localStorage.removeItem('token'); localStorage.removeItem('user'); checkUserAuth(); showToast('<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg> Tizimdan chiqildi.'); }
 
-/* â”€â”€ THEME â”€â”€ */
+/* &#x2500;&#x2500; THEME &#x2500;&#x2500; */
 function toggleTheme() {
     const t = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
     document.documentElement.setAttribute('data-theme', t);
-    document.getElementById('themeIcon').innerHTML = t === 'light' ? '<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>' : '<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M15 9H9v4h4a2 2 0 1 1 0 4H9"/></svg>64" y2="<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M15 9H9v4h4a2 2 0 1 1 0 4H9"/></svg>64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M15 9H9v4h4a2 2 0 1 1 0 4H9"/></svg>64" y2="18.36"></line><line x1="18.36" y1="<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M15 9H9v4h4a2 2 0 1 1 0 4H9"/></svg>64" x2="19.78" y2="4.22"></line></svg>';
+    document.getElementById('themeIcon').innerHTML = t === 'light' ? '<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>' : '<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
     localStorage.setItem('theme', t);
 }
 
-/* â”€â”€ CANVAS PARTICLES â”€â”€ */
+/* &#x2500;&#x2500; CANVAS PARTICLES &#x2500;&#x2500; */
 const canvas = document.getElementById('particle-canvas');
 const ctx = canvas.getContext('2d');
 let pts = [];
@@ -493,7 +403,7 @@ function drawParticles() {
 }
 window.addEventListener('resize', resizeCanvas);
 
-/* â”€â”€ TELEGRAM POPUP â”€â”€ */
+/* &#x2500;&#x2500; TELEGRAM POPUP &#x2500;&#x2500; */
 function closeTgPopup() {
     const p = document.getElementById('tgPopup');
     if(p) {
@@ -503,11 +413,11 @@ function closeTgPopup() {
     localStorage.setItem('tgPopupSeen', 'true');
 }
 
-/* â”€â”€ INIT â”€â”€ */
+/* &#x2500;&#x2500; INIT &#x2500;&#x2500; */
 window.addEventListener('load', () => {
     const t = localStorage.getItem('theme') || 'dark';
     document.documentElement.setAttribute('data-theme', t);
-    document.getElementById('themeIcon').innerHTML = t === 'light' ? '<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>' : '<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M15 9H9v4h4a2 2 0 1 1 0 4H9"/></svg>64" y2="<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M15 9H9v4h4a2 2 0 1 1 0 4H9"/></svg>64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M15 9H9v4h4a2 2 0 1 1 0 4H9"/></svg>64" y2="18.36"></line><line x1="18.36" y1="<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M15 9H9v4h4a2 2 0 1 1 0 4H9"/></svg>64" x2="19.78" y2="4.22"></line></svg>';
+    document.getElementById('themeIcon').innerHTML = t === 'light' ? '<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>' : '<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
     checkUserAuth();
     initQuotes();
     animCount('cnt1', 1450, '+');
