@@ -539,13 +539,6 @@ img{display:block;}
     .audio-grid{grid-template-columns:1fr;gap:14px;}
     .audio-card{padding:16px;}
 
-    /* GAMIFICATION */
-    .gami-grid{grid-template-columns:1fr;gap:18px;}
-    .gami-card{padding:20px;}
-    .gami-card-title{font-size:1.05rem;flex-direction:column;align-items:flex-start;gap:4px;}
-    .badges-grid{grid-template-columns:repeat(2,1fr);gap:10px;}
-    .badge-box{padding:12px 8px;}
-
     /* PROFILE */
     .profile-hero{grid-template-columns:1fr;text-align:center;padding:24px 20px;gap:16px;}
     .profile-avatar{margin:0 auto;}
@@ -574,13 +567,7 @@ img{display:block;}
     .recom-banner{flex-direction:column;align-items:flex-start;padding:20px;}
     .recom-banner .btn-primary{width:100%;text-align:center;}
 
-    /* LEADERBOARD */
-    .lb-item{padding:10px 12px;}
-    .lb-name{font-size:.82rem;}
-    .lb-pts{font-size:.88rem;}
-}
-
-/* &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;
+    /* &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;
    RESPONSIVE \u2014 MOBILE (&#x2264;600px)
 &#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500; */
 @media(max-width:600px){
@@ -629,15 +616,6 @@ img{display:block;}
     .audio-card{padding:14px;border-radius:18px;gap:12px;}
     .play-btn{width:44px;height:44px;font-size:1rem;}
     .audio-info h4{font-size:.95rem;}
-
-    /* GAMIFICATION */
-    .gami-card{padding:16px;border-radius:20px;}
-    .badges-grid{grid-template-columns:repeat(2,1fr);gap:8px;}
-    .badge-box{padding:10px 6px;border-radius:14px;}
-    .badge-ico{font-size:1.6rem;}
-    .badge-nm{font-size:.76rem;}
-    .badge-ds{font-size:.64rem;}
-    .hcell{width:11px;height:11px;}
 
     /* PROFILE */
     .profile-hero{padding:20px 16px;border-radius:20px;}
@@ -1062,11 +1040,9 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:46px
     <ul class="nav-links">
         <li><a href="javascript:void(0)" onclick="showPage('home')"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg> Bosh Sahifa</a></li>
         <li><a href="javascript:void(0)" onclick="showPage('catalog')"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg> Katalog</a></li>
-        <li><a href="javascript:void(0)" onclick="showPage('audio')"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg> Audio</a></li>
-        <li><a href="javascript:void(0)" onclick="showPage('gamification')"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg> Reyting</a></li>
+        <li><a href="https://t.me/kutubxona_bot" target="_blank"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg> Audio</a></li>
         <li><a href="javascript:void(0)" onclick="showPage('profile')"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Profil</a></li>
-        <li><a href="javascript:void(0)" onclick="showPage('pricing')"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg> Tariflar</a></li>
-    </ul>
+        </ul>
     <div class="nav-right">
         <div class="streak-pill"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg> <span id="streakNum">12</span> Kun</div>
         <button class="icon-btn" onclick="showPage('notifications')" title="Bildirishnomalar"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></button>
@@ -1084,10 +1060,8 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:46px
     <div class="mobile-drawer-panel">
         <button class="drawer-link" onclick="navTo('home')"><span class="di"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></span> Bosh Sahifa</button>
         <button class="drawer-link" onclick="navTo('catalog')"><span class="di"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></span> Kitoblar Katalogi</button>
-        <button class="drawer-link" onclick="navTo('audio')"><span class="di"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg></span> Audio Kitoblar</button>
-        <button class="drawer-link" onclick="navTo('gamification')"><span class="di"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg></span> Reyting & Badgelar</button>
+        <button class="drawer-link" onclick="window.open(\'https://t.me/kutubxona_bot\', \'_blank\')"><span class="di"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg></span> Audio Kitoblar</button>
         <button class="drawer-link" onclick="navTo('profile')"><span class="di"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span> Mening Profilim</button>
-        <button class="drawer-link" onclick="navTo('pricing')"><span class="di"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg></span> Obuna Tariflari</button>
         <button class="drawer-link" onclick="navTo('notifications')"><span class="di"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg></span> Bildirishnomalar</button>
         <div class="drawer-divider"></div>
         <button class="drawer-link" onclick="toggleTheme();closeMobileMenu()"><span class="di" id="drawerThemeIco"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span> Tema almashtirish</button>
@@ -1100,8 +1074,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:46px
     <div class="bottom-nav-inner">
         <button class="bnav-btn active" id="bnav-home" onclick="showPage('home')"><span class="bnav-ico"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></span><span class="bnav-lbl">Bosh</span></button>
         <button class="bnav-btn" id="bnav-catalog" onclick="showPage('catalog')"><span class="bnav-ico"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></span><span class="bnav-lbl">Katalog</span></button>
-        <button class="bnav-btn" id="bnav-audio" onclick="showPage('audio')"><span class="bnav-ico"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg></span><span class="bnav-lbl">Audio</span></button>
-        <button class="bnav-btn" id="bnav-gamification" onclick="showPage('gamification')"><span class="bnav-ico"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg></span><span class="bnav-lbl">Reyting</span></button>
+        <button class="bnav-btn" onclick="window.open(\'https://t.me/kutubxona_bot\', \'_blank\')"><span class="bnav-ico"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg></span><span class="bnav-lbl">Audio</span></button>
         <button class="bnav-btn" id="bnav-profile" onclick="showPage('profile')"><span class="bnav-ico"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span><span class="bnav-lbl">Profil</span></button>
     </div>
 </div>
@@ -1130,7 +1103,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:46px
         <!-- STATS -->
         <div class="hero-stats">
             <div class="stat-chip"><div class="stat-num" id="cnt1">0</div><div class="stat-lbl">Elektron Kitoblar</div></div>
-            <div class="stat-chip"><div class="stat-num" id="cnt2">0</div><div class="stat-lbl">Audio Kitoblar</div></div>
+            
             <div class="stat-chip"><div class="stat-num" id="cnt3">0</div><div class="stat-lbl">Aktiv Kitobxonlar</div></div>
             <div class="stat-chip"><div class="stat-num" id="cnt4">0</div><div class="stat-lbl">Yuklab Olishlar</div></div>
         </div>
@@ -1235,6 +1208,41 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:46px
         </div>
     </section>
 
+<!-- SOCIAL SECTION - before footer -->
+<section class="section" style="padding-top:0;padding-bottom:40px;">
+    <div class="section-inner">
+        <div class="social-banner">
+            <div class="social-banner-left">
+                <div style="font-size:.8rem;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">&#x1F4E1; Bizni Kuzating</div>
+                <div class="social-title">Ijtimoiy Tarmoqlarda<br>Kutubxona Bilan Boring!</div>
+                <div class="social-sub">Yangi kitoblar, qiziqarli postlar va foydali ma'lumotlar \u2014 har kuni yangilanib turadi. Hamjamiyatimizga qo'shiling!</div>
+            </div>
+            <div class="social-links">
+                <a href="https://t.me/kutubxona_kanal" target="_blank" class="slink slink-tg">
+                    <div class="slink-ico"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></div>
+                    <div class="slink-info">
+                        <div class="slink-name">Telegram Kanal</div>
+                        <div class="slink-handle">@kutubxona_kanal</div>
+                    </div>
+                    <div class="slink-arr">&rarr;</div>
+                </a>
+                <div class="slink slink-soon">
+                    <div class="slink-ico"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+                    <div class="slink-info">
+                        <div class="slink-name">Instagram</div>
+                        <div class="slink-handle">Tez kunda...</div>
+                    </div>
+                    <div class="slink-tag">Breve</div>
+                </div>
+                <div class="slink slink-soon">
+                    <div class="slink-ico"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></div>
+                    <div class="slink-info">
+                        <div class="slink-name">YouTube</div>
+                        <div class="slink-handle">Tez kunda...</div>
+                    </div>
+                    <div class="slink-tag">Breve</div>
+                </div>
+            </div>
 </div><!-- /page-home -->
 
      <!-- PAGE: CATALOG -->
@@ -1278,76 +1286,9 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:46px
     </section>
 </div><!-- /page-catalog -->
 
-     <!-- PAGE: AUDIO KITOBLAR -->
-<div class="page" id="page-audio">
-    <section class="section" style="padding-top:calc(var(--nav-h) + 50px);">
-        <div class="section-inner">
-            <div class="section-head">
-                <div>
-                    <div class="section-title"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg> Audio Kutubxona</div>
-                    <div class="section-sub">350+ audio kitob \u2014 O'zbek va Jahon tillarida</div>
-                </div>
-            </div>
-            <div class="audio-grid" id="audioGrid"></div>
+     
 
-            <!-- READING REMINDER -->
-            <div style="margin-top:40px;">
-                <div class="section-title" style="font-size:1.4rem;margin-bottom:20px;">&#x23F0;<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Kunlik O'qish Eslatmasi</div>
-                <div class="reminder-card">
-                    <div>
-                        <h3 style="font-weight:800;margin-bottom:6px;">Har kuni o'qish vaqtini belgilang</h3>
-                        <p style="color:var(--muted);font-size:.88rem;">"Bugun 20 sahifa o'qishni unutmang!" degan eslatma vaqtingizga yuboriladi.</p>
-                        <input type="time" class="reminder-input" id="reminderTime" value="21:00">
-                    </div>
-                    <button class="btn-primary" onclick="setReminder()">&#x23F0;&#x23F0; Eslatmani Yoqish</button>
-                </div>
-            </div>
-        </div>
-    </section>
-</div><!-- /page-audio -->
-
-     <!-- PAGE: GAMIFICATION -->
-<div class="page" id="page-gamification">
-    <section class="section" style="padding-top:calc(var(--nav-h) + 50px);">
-        <div class="section-inner">
-            <div class="section-title" style="margin-bottom:28px;"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg> Gamifikatsiya va Reyting Tizimi</div>
-            <div class="gami-grid">
-
-                <!-- LEADERBOARD -->
-                <div class="gami-card">
-                    <div class="gami-card-title">
-                        <span><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg> Oylik Peshqadamlar (Leaderboard)</span>
-                        <span style="font-size:.8rem;color:var(--blue);">Iyul 2026</span>
-                    </div>
-                    <div class="lb-list" id="lbList"></div>
-
-                    <!-- HEATMAP -->
-                    <div class="heatmap-wrap">
-                        <div class="heatmap-lbl"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> Kunlik O'qish Taqvimi (GitHub Style)</div>
-                        <div class="heatmap" id="heatmapGrid"></div>
-                    </div>
-                </div>
-
-                <!-- BADGES -->
-                <div class="gami-card">
-                    <div class="gami-card-title">
-                        <span><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg> Yutuq va Badgelar</span>
-                        <span style="font-size:.8rem;color:var(--blue);">4 / 12 Olingan</span>
-                    </div>
-                    <div class="badges-grid" id="badgesGrid"></div>
-
-                    <!-- READING GOAL MINI -->
-                    <div style="margin-top:20px;padding-top:18px;border-top:1px solid var(--border);">
-                        <div style="font-size:.82rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:10px;">Yillik Maqsad (2026)</div>
-                        <div style="display:flex;justify-content:space-between;font-weight:800;font-size:.9rem;margin-bottom:6px;"><span>O'qilgan: <span style="color:var(--green);">32 ta</span></span><span>Maqsad: 50 ta</span></div>
-                        <div class="goal-bar-wrap"><div class="goal-bar" style="width:64%"></div></div>
-                        <div style="font-size:.78rem;color:var(--muted);margin-top:5px;">64% bajarildi \u2014 Maqsadga 18 ta kitob qoldi!</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-</div><!-- /page-gamification -->
+     
 
      <!-- PAGE: PROFILE -->
 <div class="page" id="page-profile">
@@ -1367,12 +1308,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:46px
             </div>
 
             <!-- PROFILE STATS -->
-            <div class="profile-stats">
-                <div class="pstat-box"><div class="pstat-num">32</div><div class="pstat-lbl">O'qilgan Kitoblar</div></div>
-                <div class="pstat-box"><div class="pstat-num">12</div><div class="pstat-lbl">Kunlik Streak</div></div>
-                <div class="pstat-box"><div class="pstat-num">47</div><div class="pstat-lbl">Yozilgan Sharhlar</div></div>
-                <div class="pstat-box"><div class="pstat-num">8</div><div class="pstat-lbl">Sevimli Kitoblar</div></div>
-            </div>
+            
 
             <!-- READING GOAL -->
             <div class="goal-section" style="margin-top:22px;">
@@ -1426,24 +1362,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:46px
     </section>
 </div><!-- /page-notifications -->
 
-     <!-- PAGE: PRICING -->
-<div class="page" id="page-pricing">
-    <section class="section" style="padding-top:calc(var(--nav-h) + 50px);">
-        <div class="section-inner">
-            <div style="text-align:center;margin-bottom:40px;">
-                <div class="section-title"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg> Obuna Tariflari</div>
-                <p style="color:var(--muted);margin-top:10px;font-size:.95rem;">O'zingizga mos paketni tanlang va cheksiz imkoniyatlarga ega bo'ling.</p>
-            </div>
-            <div class="plans-grid" id="plansGrid"></div>
-
-            <!-- FAQ -->
-            <div style="margin-top:60px;">
-                <div class="section-title" style="text-align:center;margin-bottom:28px;">&#xE2;&#x201C;&#x2753; Ko'p Beriladigan Savollar</div>
-                <div class="faq-list" id="faqList"></div>
-            </div>
-        </div>
-    </section>
-</div><!-- /page-pricing -->
+     
 
      BOOK DETAIL MODAL
 <div class="modal-overlay" id="bookModal">
@@ -1505,47 +1424,19 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:46px
     </div>
 </div>
 
-<!-- SOCIAL SECTION - before footer -->
-<section class="section" style="padding-top:0;padding-bottom:40px;">
-    <div class="section-inner">
-        <div class="social-banner">
-            <div class="social-banner-left">
-                <div style="font-size:.8rem;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">&#x1F4E1; Bizni Kuzating</div>
-                <div class="social-title">Ijtimoiy Tarmoqlarda<br>Kutubxona Bilan Boring!</div>
-                <div class="social-sub">Yangi kitoblar, qiziqarli postlar va foydali ma'lumotlar \u2014 har kuni yangilanib turadi. Hamjamiyatimizga qo'shiling!</div>
-            </div>
-            <div class="social-links">
-                <a href="https://t.me/kutubxona_kanal" target="_blank" class="slink slink-tg">
-                    <div class="slink-ico"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg></div>
-                    <div class="slink-info">
-                        <div class="slink-name">Telegram Kanal</div>
-                        <div class="slink-handle">@kutubxona_kanal</div>
-                    </div>
-                    <div class="slink-arr">&rarr;</div>
-                </a>
-                <div class="slink slink-soon">
-                    <div class="slink-ico"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
-                    <div class="slink-info">
-                        <div class="slink-name">Instagram</div>
-                        <div class="slink-handle">Tez kunda...</div>
-                    </div>
-                    <div class="slink-tag">Breve</div>
-                </div>
-                <div class="slink slink-soon">
-                    <div class="slink-ico"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></div>
-                    <div class="slink-info">
-                        <div class="slink-name">YouTube</div>
-                        <div class="slink-handle">Tez kunda...</div>
-                    </div>
-                    <div class="slink-tag">Breve</div>
-                </div>
-            </div>
+
         </div>
     </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
+
+    <div style="text-align: center; padding: 20px;">
+        <button onclick="toggleFooter()" id="footerToggleBtn" style="background:var(--blue); color:white; border:none; border-radius:30px; font-weight:600; padding:12px 24px; cursor:pointer;">Sayt ma'lumotlarini ko'rsatish</button>
+    </div>
+    <div id="footerContent" style="max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out;">
+        
     <div class="footer-inner">
         <div>
             <div class="footer-logo">Kutubxona <span style="color:var(--blue)">Beta</span></div>
@@ -1555,12 +1446,12 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:46px
             <h4>Sahifalar</h4>
             <a href="javascript:void(0)" onclick="showPage('home')">Bosh Sahifa</a>
             <a href="javascript:void(0)" onclick="showPage('catalog')">Kitoblar Katalogi</a>
-            <a href="javascript:void(0)" onclick="showPage('audio')">Audio Kitoblar</a>
-            <a href="javascript:void(0)" onclick="showPage('gamification')">Reyting & Badges</a>
+            <a href="https://t.me/kutubxona_bot" target="_blank">Audio Kitoblar</a>
+            
         </div>
         <div class="footer-col">
             <h4>Xizmatlar</h4>
-            <a href="javascript:void(0)" onclick="showPage('pricing')">Obuna Tariflari</a>
+            
             <a href="javascript:void(0)" onclick="showPage('profile')">Mening Profilim</a>
             <a href="javascript:void(0)" onclick="showPage('notifications')">Bildirishnomalar</a>
             <a href="login/index.html">Tizimga Kirish</a>
@@ -1577,6 +1468,9 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:46px
         <span>&copy; 2026 Kutubxona. Barcha huquqlar himoyalangan.</span>
         <span>Bilim chegarasiz \u2014 Kitob o'qing, dunyo o'zgaring. <svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></span>
     </div>
+
+    </div>
+
 </footer>
 
      JAVASCRIPT
@@ -1593,14 +1487,7 @@ const BOOKS = [
     { id:8, title:"Ikigai: Yaponcha Baxtning Siri", author:"H&eacute;ctor Garc&iacute;a", category:"Psixologiya", rating:4.75, progress:0, trend:true, isNew:false, cover:"https://images.unsplash.com/photo-1507838153414-b4b713384a76?auto=format&fit=crop&w=600&q=80", desc:"Hayotdan zavq olish va o'z maqsadingizni topish haqidagi yapon falsafasi." },
 ];
 
-const AUDIO_BOOKS = [
-    { id:1, title:"Atom Odatlari (Audio)", author:"James Clear &#x2022;&#x2022; O'zbek tilida", dur:"5 soat 40 daqiqa", cover:"[Audio]" },
-    { id:2, title:"Boy Ota, Kambag'al Ota (Audio)", author:"Robert Kiyosaki &#x2022; O'zbek tarjimasi", dur:"4 soat 15 daqiqa", cover:'<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>' },
-    { id:3, title:"O'tkan Kunlar (Radiospektakl)", author:"Abdulla Qodiriy &#x2022;&#x2022; Professional Ovoz", dur:"8 soat 20 daqiqa", cover:"[Audio]" },
-    { id:4, title:"Deep Work (Audio Darslik)", author:"Cal Newport &#x2022;&#x2022; Ingliz tilida", dur:"6 soat 05 daqiqa", cover:"[Audio]" },
-    { id:5, title:"Ikigai (Audio Kitob)", author:"H&eacute;ctor Garc&iacute;a &#x2022;&#x2022; O'zbek tilida", dur:"3 soat 45 daqiqa", cover:"[Audio]" },
-    { id:6, title:"Clean Code (Audio)", author:"Robert C. Martin &#x2022;&#x2022; Ingliz tilida", dur:"7 soat 15 daqiqa", cover:"[Audio]" },
-];
+
 
 const QUOTES = [
     { text:"Kitoblar eng yaxshi do'stlar. Ular seni hech qachon aldamaydi, hech qachon tark etmaydi.", author:"\u2014 Vladimir Lenin" },
@@ -1612,36 +1499,11 @@ const QUOTES = [
     { text:"Bitta kitob hayotingizni butunlay o'zgartirishi mumkin. O'shing.", author:"\u2014 Kutubxona" },
 ];
 
-const LEADERBOARD = [
-    { rank:`<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M12 8v8"/><path d="M10 10l2-2"/></svg>`, name:"Ali Valiyev", level:"Expert Reader", pts:3200, streak:12 },
-    { rank:`<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M9 10a3 3 0 1 1 6 0c0 2.5-3 4-3 4v2h6"/></svg>`, name:"Vali Jasurov", level:"Intermediate", pts:2800, streak:8 },
-    { rank:`<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M9 9a3 3 0 1 1 6 0c0 1.5-2 2-2 2v1c2 0 3 1.5 3 3a3 3 0 1 1-6 0"/></svg>`, name:"Hasan Umarov", level:"Pro Reader", pts:2500, streak:15 },
-    { rank:`<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M14 16v-8l-4 5h5"/></svg>`, name:"Nodira Qosimova", level:"Advanced", pts:2200, streak:5 },
-    { rank:`<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="12" r="10"/><path d="M15 9H9v4h4a2 2 0 1 1 0 4H9"/></svg>`, name:"Sardor Toshmatov", level:"Beginner", pts:1900, streak:3 },
-];
 
-const BADGES = [
-    { ico:`<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>`, nm:"Birinchi Qadam", ds:"1-kitobni bitirish", earned:true },
-    { ico:'<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>', nm:"Kutubxonachi", ds:"10 ta kitob o'qish", earned:true },
-    { ico:'<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg>', nm:"Matonatli", ds:"30 kun streak", earned:false },
-    { ico:'<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>', nm:"Sharh Ustasi", ds:"100 ta sharh yozish", earned:false },
-    { ico:'<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>', nm:"Top Reader", ds:"Top 3 talikka kirish", earned:true },
-    { ico:'<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>', nm:"Kechgi O'quvchi", ds:"Kechasi 50 sahifa", earned:true },
-    { ico:'<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M13.5 2.5a8.7 8.7 0 0 1 8 8c0 6-8 11-8 11s-8-5-8-11a8.7 8.7 0 0 1 8-8z"></path><circle cx="13.5" cy="10.5" r="2.5"></circle></svg>', nm:"Tezkor", ds:"1 kunda 100 sahifa", earned:false },
-    { ico:`<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`, nm:"Premium", ds:"VIP a'zolik", earned:false },
-];
 
-const PLANS = [
-    { id:"free", name:"Bepul", price:"0", period:"so'm / oy", color:"", features:[
-        "5 ta elektron kitob o'qish","Kuniga 3 ta AI savol","Standart qidiruv","Asosiy statistika"
-    ], popular:false },
-    { id:"pro", name:"Pro Obuna", price:"29,000", period:"so'm / oy", color:"var(--blue)", features:[
-        "Cheksiz kitob va PDF yuklash","Cheksiz audio kitoblar","Kuniga 50 ta AI tavsiyasi","Reklamasiz tajriba","Badges va Leaderboard","Telegram bildirishnomalar"
-    ], popular:true },
-    { id:"vip", name:"VIP Unlimited", price:"49,000", period:"so'm / oy", color:"var(--purple)", features:[
-        "Cheksiz BARCHA imkoniyatlar","Shaxsiy AI Repetitor & Tutor","VIP Telegram yopiq guruh","Prioritet qo'llab-quvvatlash","Eksklyuziv yangi kitoblar","PDF Export va offline mode"
-    ], popular:false },
-];
+
+
+
 
 const FAQS = [
     { q:"Kitoblarni yuklab olish bepulmi?", a:"Ha! Bepul tarifdagi foydalanuvchilar 5 ta kitobni bepul o'qishi mumkin. Pro va VIP obunachilari esa cheksiz yuklab olish imkoniyatiga ega bo'ladi." },
@@ -1681,11 +1543,11 @@ function showPage(name) {
         b.classList.toggle('active', b.id === 'bnav-' + name);
     });
     // Lazy-init page content
-    if (name === 'gamification') { renderLeaderboard(); renderBadges(); renderHeatmap(); }
+    
     if (name === 'profile') { updateProfilePage(); }
     if (name === 'notifications') { renderNotifications(); }
-    if (name === 'pricing') { renderPlans(); renderFaq(); }
-    if (name === 'audio') { renderAudio(); }
+    
+    
     if (name === 'catalog') { renderCatalog(); }
 }
 
@@ -1822,48 +1684,8 @@ function handleHomeSearch() {
 }
 
 /* &#x2500;&#x2500; AUDIO &#x2500;&#x2500; */
-function renderAudio() {
-    const grid = document.getElementById('audioGrid');
-    if (!grid) return;
-    grid.innerHTML = AUDIO_BOOKS.map(a => `
-    <div class="audio-card">
-        <button class="play-btn" onclick="playAudio('${a.title}')">${a.cover}</button>
-        <div class="audio-info">
-            <h4>${a.title}</h4>
-            <div class="audio-meta">${a.author}</div>
-            <div class="audio-dur">&#xE2;&#xB1;&#x23F1; ${a.dur}</div>
-        </div>
-    </div>`).join('');
-}
-function playAudio(title) { showToast(`&#x25B6; "${title}" ijro etilmoqda... <svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>`); }
-
 /* &#x2500;&#x2500; LEADERBOARD &#x2500;&#x2500; */
-function renderLeaderboard() {
-    const el = document.getElementById('lbList');
-    if (!el) return;
-    el.innerHTML = LEADERBOARD.map(l => `
-    <div class="lb-item">
-        <div class="lb-left">
-            <span class="lb-rank">${l.rank}</span>
-            <div><div class="lb-name">${l.name}</div><div style="font-size:.76rem;color:var(--muted);">${l.level} &#x2022; <svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path></svg> ${l.streak} kun streak</div></div>
-        </div>
-        <span class="lb-pts">${l.pts.toLocaleString()} ball</span>
-    </div>`).join('');
-}
-
 /* &#x2500;&#x2500; BADGES &#x2500;&#x2500; */
-function renderBadges() {
-    const el = document.getElementById('badgesGrid');
-    if (!el) return;
-    el.innerHTML = BADGES.map(b => `
-    <div class="badge-box" style="${b.earned?'border-color:var(--blue);background:rgba(41,151,255,.08);':'opacity:.5;'}" onclick="showToast('${b.earned?'<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg> '+b.nm+' badge olingan!':'<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.125em"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Hali olinmagan: '+b.ds}')">
-        <div class="badge-ico">${b.ico}</div>
-        <div class="badge-nm">${b.nm}</div>
-        <div class="badge-ds">${b.ds}</div>
-        ${b.earned?'<div style="font-size:.7rem;color:var(--green);font-weight:800;margin-top:4px;">&#x2713; Olingan</div>':''}
-    </div>`).join('');
-}
-
 /* &#x2500;&#x2500; HEATMAP &#x2500;&#x2500; */
 function renderHeatmap() {
     const el = document.getElementById('heatmapGrid');
@@ -1919,24 +1741,6 @@ function renderNotifications() {
 }
 
 /* &#x2500;&#x2500; PLANS & FAQ &#x2500;&#x2500; */
-function renderPlans() {
-    const el = document.getElementById('plansGrid');
-    if (!el) return;
-    el.innerHTML = PLANS.map(p => `
-    <div class="plan-card ${p.popular?'popular':''}">
-        ${p.popular?'<span class="popular-badge"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> Eng Mashhur</span>':''}
-        <div class="plan-name">${p.name}</div>
-        <div class="plan-price">${p.price} <small>${p.period}</small></div>
-        <ul class="plan-features">
-            ${p.features.map(f => `<li><span class="ck">&#x2713;</span>${f}</li>`).join('')}
-        </ul>
-        <button class="plan-btn" onclick="subscribe('${p.id}','${p.name}')">${p.id==='free'?'Joriy Tarif':'Ulanish &rarr;'}</button>
-    </div>`).join('');
-}
-function subscribe(id, name) {
-    if (id === 'free') return showToast('Siz hozir bepul tariffdasiz!');
-    showToast(`<svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -0.125em;"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg> "${name}" tarifiga ulanish boshlandi...`);
-}
 function renderFaq() {
     const el = document.getElementById('faqList');
     if (!el) return;
